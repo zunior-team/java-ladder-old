@@ -1,4 +1,4 @@
-public class result {
+public class Result {
     public static void main(String [] args){
         Ladder ladder = new Ladder();
         LadderInput input = new LadderInput();

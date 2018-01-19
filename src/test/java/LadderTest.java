@@ -18,13 +18,13 @@ public class LadderTest {
 
     @Test
     public void peopleInput() {
-        int people = ladder.peopleInput("3");
+        int people = input.peopleInput("3");
         assertEquals(3, people);
     }
 
     @Test
     public void ladderInput() {
-        int height = ladder.peopleInput("5");
+        int height = input.peopleInput("5");
         assertEquals(5, height);
     }
 
