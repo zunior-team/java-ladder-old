@@ -1,47 +1,30 @@
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Scanner;
 
 class Ladder {
-    private static final Logger logger = LoggerFactory.getLogger(Ladder.class);
-    ArrayList<String> results = new ArrayList<String>();
-
-    public String peoplePrint(int people){
-        String result = "";
-        for(int i = 0; i < (2 * people) - 1; i++){
-            result = checkOdd(i, result);
-        }
-        return result;
-    }
-
-    public String add(int randomNumber){
-        if (randomNumber >= 6)
-            return "-";
-        return " ";
-
-    }
-
-    public String checkOdd(int i, String result){
+    public ArrayList<Line> createLines(int people, int height){
+        ArrayList<Line> lines = new ArrayList<Line>();
         Random rnd = new Random();
-        int randomNumber = rnd.nextInt(10);
-        if (i % 2 == 0) {
-            return result + "|";
+        for(int j =0; j < height; j++){
+            createLine(people, lines, rnd);
         }
-        return result + add(randomNumber);
+        return lines;
     }
 
-    public void process(int people, int height){
-        for (int i = 0; i < height; i++) {
-            results.add(peoplePrint(people));
+    private void createLine(int people, ArrayList<Line> lines, Random rnd) {
+        Line line = new Line();
+        for(int i = 0; i < people; i++){
+            int randomNumber = rnd.nextInt(10);
+            line.addTrueFalse(returnAdd(randomNumber));
         }
+        lines.add(line);
     }
 
-    public void heightPrint(){
-        for (String result:results) {
-            System.out.println(result);
-        }
+    private boolean returnAdd(int randomNumber) {
+        if (randomNumber >= 6)
+            return true;
+        return false;
     }
+
 }
+
