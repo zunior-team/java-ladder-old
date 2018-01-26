@@ -12,10 +12,13 @@ public class Line {
             setValue(i);
         }
     }
-    public void setValue(int i){
+
+    public Boolean setValue(int i){
         if (points.get(i).booleanValue() == true && i != points.size() -1){
             points.set(i + 1, false);
+            return points.get(i + 1);
         }
+        return points.get(i);
     }
 
     public int sizeLine(){
@@ -27,13 +30,6 @@ public class Line {
         if (points.get(i).booleanValue() == true && i != points.size() -1)
             return "-----";
         return "     ";
-    }
-
-    public String printTrueFalse(int i){
-        checkNext();
-        if (points.get(i).booleanValue() == true)
-            return "true";
-        return "false";
     }
 
 //    @Override

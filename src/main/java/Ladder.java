@@ -20,7 +20,7 @@ class Ladder {
         lines.add(line);
     }
 
-    private boolean returnAdd(int randomNumber) {
+    public boolean returnAdd(int randomNumber) {
         if (randomNumber >= 6)
             return true;
         return false;

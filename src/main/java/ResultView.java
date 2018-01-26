@@ -2,15 +2,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ResultView {
+
     public static void printLadder(ArrayList<Line> lines) {
         for (Line line : lines) {
-            for (int i = 0; i < line.sizeLine(); i++) {
-
-                line.checkNext();
-                printBar();
-                check(line, i);
-            }
+            printLayer(line);
             System.out.println();
+        }
+    }
+
+    public static void printLayer(Line line){
+        for(int i = 0; i < line.sizeLine(); i++){
+            line.checkNext();
+            printBar();
+            check(line, i);
         }
     }
 
