@@ -1,17 +1,16 @@
 package ladder;
 
 public class LadderGame {
+
 	public static void main(String[] args) {
 
-		UserInput input = new UserInput();
-		int joinUser = input.joinUser();
-		int height = input.maxLadder();
-
+		PrintManager prManager = new PrintManager();
 		LadderManager ldManager = new LadderManager();
-		String[][] ladderInfo = ldManager.makeLadder(height, joinUser);
+		int joinUser = prManager.joinUser();
+		int maxLadder = prManager.maxLadder();
 
-		GameOutput gameOutput = new GameOutput(ladderInfo);
-		gameOutput.printLadder(ladderInfo);
-
+		ldManager.makeLadder(joinUser, maxLadder);
+		ldManager.addMatchBranch(maxLadder);
+		prManager.printLadder(ldManager.sortLadder());
 	}
 }

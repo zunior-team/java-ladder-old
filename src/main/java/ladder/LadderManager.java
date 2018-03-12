@@ -1,30 +1,83 @@
 package ladder;
+
+import java.util.ArrayList;
 import java.util.Random;
 
 public class LadderManager {
 
-	private String[][] ladderInfo;
+	private ArrayList<Branch> branch;
+	private ArrayList<ArrayList<Branch>> branchArr;
 
-	public String[][] makeLadder(int height, int joinUser) {
-		ladderInfo = new String[height][joinUser];
-		for (int k = 0; k < height; k++) {
-			makeBranch(k);
-		}
-		return ladderInfo;
+	public LadderManager() {
+		branch = new ArrayList<Branch>();
+		branchArr = new ArrayList<ArrayList<Branch>>();
 	}
 
-	public void makeBranch(int k) {
-		for (int i = 0; i < ladderInfo[0].length; i++) {
-			ladderInfo[k][i] = makeBranch(k, i);
+	public void makeLadder(int joinUser, int height) {
+		for (int i = 0; i < height; i++) {
+			makeLadderCol(i, joinUser);
 		}
 	}
 
-	public String makeBranch(int k, int i) {
+	public void makeLadderCol(int i, int joinUser) {
+		for (int k = 0; k < joinUser - 1; k++) {
+			makeBranch(i, k);
+		}
+	}
+
+	public void makeBranch(int i, int k) {
 		Random rand = new Random();
-		if (rand.nextInt(2) == 1) {
-			return "-";
+		int rn = rand.nextInt(10);
+		if (rn < 5) {
+			branch.add(new Branch(i, k));
 		}
-		return " ";
+	}
+
+	public void addMatchBranch(int height) {
+		for (int b = 0; b < height; b++) {
+			addCheckedBranch(chkMatchBranch(b, new ArrayList<Branch>()));
+		}
+	}
+
+	public ArrayList<Branch> chkMatchBranch(int b, ArrayList<Branch> rowMatchedBranch) {
+		for (int c = 0; c < branch.size(); c++) {
+			chkRowMatchBranch(b, c, rowMatchedBranch);
+		}
+		return rowMatchedBranch;
+	}
+
+	public void chkRowMatchBranch(int b, int c, ArrayList<Branch> rowMatchedBranch) {
+		if (branch.get(c).getRow() == b) {
+			rowMatchedBranch.add(branch.get(c));
+		}
+	}
+
+	public void addCheckedBranch(ArrayList<Branch> rowMatchedBranch) {
+		if (rowMatchedBranch != null) {
+			branchArr.add(rowMatchedBranch);
+		}
+	}
+
+	public ArrayList<ArrayList<Branch>> sortLadder() {
+		for (int i = 0; i < branchArr.size() - 1; i++) {
+			sortLadder(i);
+		}
+		return branchArr;
+	}
+
+	public void sortLadder(int i) {
+		for (int j = 0; j < branchArr.get(i).size() - 1; j++) {
+			sortLadder(i, j);
+		}
+	}
+
+	public void sortLadder(int i, int j) {
+		Branch temp = new Branch(0, 0);
+		if (branchArr.get(i).get(j).getCol() > branchArr.get(i).get(j + 1).getCol()) {
+			temp = branchArr.get(i).get(j);
+			branchArr.get(i).set(i, branchArr.get(i).get(j + 1));
+			branchArr.get(i).set(i + 1, temp);
+		}
 	}
 
 }
