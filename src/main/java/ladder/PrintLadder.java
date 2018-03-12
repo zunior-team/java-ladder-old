@@ -1,17 +1,18 @@
 package ladder;
 
 public class PrintLadder {
-	public void printOneLadder(boolean[][] ladder, int i) {
-		for (int j = 0; j < ladder[i].length; j++) {
-			System.out.print("ㅣ");
-			isTruePrint(ladder[i][j]);
+	public void printOneLadder(LadderLine ladder) {
+		boolean[] laprint = ladder.getLine();
+		for (int j = 0; j < laprint.length; j++) {
+			System.out.print("|");
+			isTruePrint(laprint[j]);
 		}
-		System.out.println("ㅣ");
+		System.out.println("|");
 	}
 
-	public void printLadder(boolean[][] ladder) {
+	public void printLadder(LadderLine[] ladder) {
 		for (int i = 0; i < ladder.length; i++) {
-			printOneLadder(ladder, i);
+			printOneLadder(ladder[i]);
 		}
 	}
 
@@ -20,6 +21,6 @@ public class PrintLadder {
 			System.out.print("-");
 			return;
 		}
-		System.out.print("  ");
+		System.out.print(" ");
 	}
 }

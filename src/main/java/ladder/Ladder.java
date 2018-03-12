@@ -8,7 +8,7 @@ public class Ladder {
 		int ladderNum = ImpormationLadder.getLadderNum();
 
 		LadderRiding ride = new LadderRiding(ladderNum, manNum);
-		boolean[][] ladder = ride.makeAllLadder(ladderNum, manNum);
+		LadderLine[] ladder = ride.ladderComplete();
 		draw.printLadder(ladder);
 	}
 }
