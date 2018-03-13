@@ -1,23 +1,32 @@
 package codesquad.ladder;
 
+import java.util.ArrayList;
+
 public class Ladder {
 
-    private Line[] ladderForm;
+    private ArrayList<Line> ladderForm;
 
-    public Ladder(int numPeople, int sizeLadder) {
+    private int lineHorizonLength;
+
+    public Ladder(int numPeople, int sizeLadder, int lineHorizonLength) {
         int numHorizonLine = numPeople - 1;
         this.ladderForm = makeLadderForm(numHorizonLine, sizeLadder);
+        this.lineHorizonLength = lineHorizonLength;
     }
 
-    private Line[] makeLadderForm(int numHorizonLine, int sizeLadder) {
-        Line[] ladderForm = new Line[sizeLadder];
+    private ArrayList<Line> makeLadderForm(int numHorizonLine, int sizeLadder) {
+        ArrayList<Line> ladderForm = new ArrayList<Line>(sizeLadder);
         for (int i = 0; i < sizeLadder; i++) {
-            ladderForm[i] = new Line(numHorizonLine);
+            ladderForm.add(new Line(numHorizonLine));
         }
         return ladderForm;
     }
 
-    public Line[] getLadderForm() {
+    public ArrayList<Line> getLadderForm() {
         return this.ladderForm;
+    }
+
+    public int getLineHorizonLength() {
+        return this.lineHorizonLength;
     }
 }
