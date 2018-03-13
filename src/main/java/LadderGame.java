@@ -1,67 +1,21 @@
-import java.util.Random;
-
 public class LadderGame {
-    private char[][] ladderBase;
+    private LadderLine[] ladderLine;
+    // width, height 인스턴스 변수를 만들어야 할까?
+    // 만약 LadderGame 코드 중에서 width, height를 쓸 일이 많이 늘면 고려하기.
 
     public LadderGame(int peopleCount, int height) {
-        int row = height;
-        int column = peopleCount + (peopleCount - 1);
-        this.ladderBase = new char[row][column];
+        int width = peopleCount + (peopleCount - 1);
+        this.ladderLine = new LadderLine[width];
+        getLines(width, height);
     }
 
-    public void drawLadderLine() {
-        int columnCount = getColumns();
-        for (int i = 1; i < columnCount; i += 2) {
-            inputDash(i);
-        }
-
-        for (int i = 0; i <= columnCount; i += 2) {
-            inputPipe(i);
+    public void getLines(int width, int height) {
+        for (int i = 0; i < height; i++) {
+            this.ladderLine[i] = new LadderLine(width);
         }
     }
 
-    public char[][] getLadderBase() {
-        return this.ladderBase;
-    }
-
-    public void inputDash(int colIndex) {
-        int rowCount = getRows();
-        for (int j = 0; j < rowCount; j++) {
-            ladderBase[j][colIndex] = getDash(j, colIndex);
-        }
-    }
-
-    public void inputPipe(int colIndex) {
-        int rowCount = getRows();
-        for (int j = 0; j < rowCount; j++) {
-            ladderBase[j][colIndex] = '|';
-        }
-    }
-
-    public boolean isOverlap(int row, int col) {
-        if (!(col == 1) && ladderBase[row][col - 2] == '-') {
-            return true;
-        }
-        return false;
-    }
-
-    public char getDash(int row, int col) {
-        if (!isOverlap(row, col) && getRandomNo() == 1) {
-            return '-';
-        }
-        return ' ';
-    }
-
-    public int getRandomNo() {
-        Random random = new Random();
-        return random.nextInt(2);
-    }
-
-    public int getColumns() {
-        return ladderBase[0].length;
-    }
-
-    public int getRows() {
-        return ladderBase.length;
+    public LadderLine[] getLadderLine() {
+        return this.ladderLine;
     }
 }
