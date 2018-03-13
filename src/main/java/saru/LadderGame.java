@@ -1,60 +1,75 @@
 package saru;
 
 public class LadderGame {
-    private String[][] ladderArr;
+    private Line[] ladderLines;
 
     public LadderGame() {
     }
 
-    void initLadder(int ladderHeight, int realColumnNum) {
-        ladderArr = new String[ladderHeight][realColumnNum];
-        initLadderRowProc();
-    }
-
-    String[][] getLadderArr() {
-        return ladderArr;
-    }
-
-    private void initLadderColumnProc(String[] colArr) {
-        for (int i = 0; i < colArr.length; i++) {
-            drawLineProc(colArr, i);
-        }
-    }
-
-    private void initLadderRowProc() {
-        for (int i = 0; i < ladderArr.length; i++) {
-            initLadderColumnProc(ladderArr[i]);
-        }
-    }
-
-    private void drawLineProc(String[] colArr, int index) {
-        if (index % 2 == 1) {
-            drawRowLine(colArr, index);
-            return;
-        }
-
-        colArr[index] = "|";
-    }
-
-    private void drawRowLine(String[] colArr, int index) {
-        if (LadderGameUtil.getRand(2) == 1) {
-            colArr[index] = "-";
-            return;
-        }
-
-        colArr[index] = " ";
-        return;
-    }
-
     public static void main(String[] args) {
         LadderGame ladderGame = new LadderGame();
+        ladderGame.recursiveProc();
+    }
 
+    void recursiveProc() {
         int userNum = InputUtil.getUserNum();
         int height = InputUtil.getHeight();
 
-        int columnNum = InputUtil.getRealColumnNum(userNum);
-        ladderGame.initLadder(height, columnNum);
+        if (!InputUtil.checkValid(userNum, height)) {
+            recursiveProc();
+            return;
+        }
 
-        OutputUtil.printRowArrays(ladderGame.getLadderArr(), height, columnNum);
+        int columnNum = InputUtil.getRealColumnNum(userNum);
+        this.initLadder(height, columnNum);
+
+        OutputUtil.printWholeArray(this.getLadderLines());
+    }
+
+    Line[] getLadderLines() {
+        return ladderLines;
+    }
+
+    void initLadder(int ladderHeight, int realColumnNum) {
+        ladderLines = new Line[ladderHeight];
+
+        for (int i = 0; i < ladderHeight; i++) {
+            ladderLines[i] = new Line(realColumnNum);
+        }
+
+        initLadderRowProc();
+    }
+
+    void initLadderRowProc() {
+        for (Line ladderLine : ladderLines) {
+            initLadderColumnProc(ladderLine);
+        }
+    }
+
+    void initLadderColumnProc(Line colLine) {
+        for (int i = 0; i < colLine.getPointsLength(); i++) {
+            drawLineProc(colLine, i);
+        }
+    }
+
+    void drawLineProc(Line colLine, int index) {
+
+        if (index % 2 == 1) {
+            drawRowLine(colLine, index);
+            return;
+        }
+
+        //colLine.drawPoint(index, false);
+    }
+    // 가로 선
+
+    void drawRowLine(Line colLine, int index) {
+        int randNum = LadderGameUtil.getRand(2);
+        if (colLine.canDrawLine(randNum)) {
+            colLine.drawPoint(index, true);
+            return;
+        }
+
+        colLine.drawPoint(index, false);
     }
 }
