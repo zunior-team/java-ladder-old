@@ -1,9 +1,8 @@
-package domain.ladder.util;
+package view;
 
 import java.util.Arrays;
 
-public class LadderFormat {
-
+public class LadderViewFormat {
     public static String formatName(String name, int maxNameLength) {
         return fillNameToArea(name.toCharArray(), maxNameLength);
     }

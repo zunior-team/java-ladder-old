@@ -1,6 +1,6 @@
 package view;
 
-import domain.ladder.Ladder;
+import domain.Ladder;
 
 public class Viewer {
     public static void viewMessage(String message) {
@@ -8,6 +8,6 @@ public class Viewer {
     }
 
     public static void viewLadder(Ladder ladder, int maxNameLength) {
-        System.out.println(ladder.buildLadder(maxNameLength));
+        System.out.println(ladder.buildViewMode(maxNameLength));
     }
 }

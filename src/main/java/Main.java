@@ -1,6 +1,6 @@
+import domain.Ladder;
 import view.Input;
 import view.Viewer;
-import domain.ladder.Ladder;
 
 public class Main {
     private static final int MIN_PLAYER_NUM = 2;
@@ -17,14 +17,14 @@ public class Main {
     }
 
     private static String[] getPlayersName() {
-        Viewer.viewMessage("참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요)");
+        String printMessage = "참여할 사람 이름을 입력하세요. (" + MIN_PLAYER_NUM + "명 이상 이름 입력, 이름은 쉼표(,)로 구분, 최대 " + MAX_NAME_LENGTH + "자까지 입력가능)";
+        Viewer.viewMessage(printMessage);
 
         String[] names = dividePlayersName(Input.getPlayerNames());
         while (isInvalidNames(names)) {
-            Viewer.viewMessage("플레이어 이름을 잘못 입력하였습니다(2명 이상 입력, 1명 당 이름 " + MAX_NAME_LENGTH + "자 이하)\n참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요)");
+            Viewer.viewMessage("플레이어 이름을 잘못 입력하였습니다\n" + printMessage);
             names = dividePlayersName(Input.getPlayerNames());
         }
-
         return names;
     }
 
@@ -58,10 +58,9 @@ public class Main {
     private static int getMaxHeight() {
         int maxHeight = -1;
         while (isInvalidHeight(maxHeight)) {
-            Viewer.viewMessage("최대 사다리 높이는 몇 개인가요 (1이상, 잘못된 입력 시 재입력)");
+            Viewer.viewMessage("최대 사다리 높이는 몇 개인가요 (" + MIN_HEIGHT + "이상, 잘못된 입력 시 재입력)");
             maxHeight = Input.getNumber();
         }
-
         return maxHeight;
     }
 

@@ -1,9 +1,8 @@
-package domain.ladder.util;
+package domain;
 
 import java.util.Random;
 
 public class LadderUtils {
-
     public static boolean isEvenNumPos(int pos) {
         return pos % 2 == 0;
     }
@@ -20,6 +19,6 @@ public class LadderUtils {
     public static int calcPointNumOfLine(int playerNum) {
         int allPointNum = playerNum * 2;
         int extraSpaceNum = 1;
-        return allPointNum- extraSpaceNum;
+        return allPointNum - extraSpaceNum;
     }
 }

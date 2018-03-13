@@ -1,8 +1,6 @@
-package domain.ladder;
+package domain;
 
-import domain.ladder.util.LadderBuilder;
-import domain.ladder.util.LadderUtils;
-import domain.ladder.util.LineBuilder;
+import view.LadderViewBuilder;
 
 import java.util.ArrayList;
 
@@ -17,11 +15,19 @@ public class Ladder {
 
     private void setLadder(int height, int pointNum) {
         for (int h = 0; h < height; h++) {
-            ladder.add(new Line(LineBuilder.build(pointNum)));
+            ladder.add(new Line(LineCreator.create(pointNum)));
         }
     }
 
-    public String buildLadder(int maxNameLength) {
-        return LadderBuilder.build(ladder, names, maxNameLength);
+    public Line getLine(int height) {
+        return ladder.get(height);
+    }
+
+    public int getHeight() {
+        return ladder.size();
+    }
+
+    public String buildViewMode(int maxNameLength) {
+        return LadderViewBuilder.build(this, names, maxNameLength);
     }
 }

@@ -1,9 +1,8 @@
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class MainTest {
-
     @Test
     public void 플레이어_3명_올바르지않은가() {
         assertEquals(false, Main.isInvalidPlayerNum(3));

@@ -1,18 +1,20 @@
-package domain.ladder.util;
+package view;
 
-import domain.ladder.Line;
-import domain.ladder.Names;
+import domain.Ladder;
+import domain.LadderUtils;
+import domain.Line;
+import domain.Names;
 
 import java.util.ArrayList;
 
-public class LadderBuilder {
-    public static String build(ArrayList<Line> ladder, Names names, int maxNameLength) {
+public class LadderViewBuilder {
+    public static String build(Ladder ladder, Names names, int maxNameLength) {
         StringBuilder builder = new StringBuilder();
         builder.append(buildNameTab(names, maxNameLength));
         builder.append("\n");
 
-        for (int i = 0; i < ladder.size(); i++) {
-            builder.append(buildLine(ladder.get(i), LadderUtils.calcPointNumOfLine(names.getPlayerNumber()), maxNameLength));
+        for (int i = 0; i < ladder.getHeight(); i++) {
+            builder.append(buildLine(ladder.getLine(i), LadderUtils.calcPointNumOfLine(names.getPlayerNumber()), maxNameLength));
             builder.append("\n");
         }
         return builder.toString();
@@ -22,7 +24,7 @@ public class LadderBuilder {
         int playerNum = names.getPlayerNumber();
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < playerNum; i++) {
-            builder.append(LadderFormat.formatName(names.getPlayerName(i), maxNameLength));
+            builder.append(LadderViewFormat.formatName(names.getPlayerName(i), maxNameLength));
         }
         return builder.toString();
     }
@@ -34,7 +36,7 @@ public class LadderBuilder {
             boolean canDraw = line.isDrawPosition(position);
             builder.append(buildLadderLetter(canDraw, position, maxNameLength));
         }
-        return LadderFormat.formatLine(builder.toString(), maxNameLength);
+        return LadderViewFormat.formatLine(builder.toString(), maxNameLength);
     }
 
     static String buildLadderLetter(boolean canDraw, int position, int maxNameLength) {
@@ -45,7 +47,6 @@ public class LadderBuilder {
         if (canDraw) {
             return repeatLadderLetter('-', maxNameLength);
         }
-
         return repeatLadderLetter(' ', maxNameLength);
     }
 
