@@ -1,26 +1,38 @@
 package ladder;
 
+import java.util.ArrayList;
+
 public class PrintLadder {
-	public void printOneLadder(LadderLine ladder) {
-		boolean[] laprint = ladder.getLine();
-		for (int j = 0; j < laprint.length; j++) {
+
+	public void printNames(ArrayList<String> names, ArrayList<Line> ladder) { // 이름을 출력한다.
+		for (String name : names) {
+			System.out.printf("%5s ", name);
+		}
+		System.out.println();
+		printLadder(ladder);
+	}
+
+	public void printOneLadder(Line ladder) { // Ladder Line 하나를 출력한다.
+		ArrayList<Boolean> allLadder = ladder.getLine();
+		for (int j = 0; j < allLadder.size(); j++) {
 			System.out.print("|");
-			isTruePrint(laprint[j]);
+			isTruePrint(allLadder.get(j));
 		}
 		System.out.println("|");
 	}
 
-	public void printLadder(LadderLine[] ladder) {
-		for (int i = 0; i < ladder.length; i++) {
-			printOneLadder(ladder[i]);
+	public void printLadder(ArrayList<Line> ladder) { // Ladder Line 전부를 출력한다.
+		for (Line ladderLine : ladder) {
+			System.out.print("  ");
+			printOneLadder(ladderLine);
 		}
 	}
 
-	public void isTruePrint(boolean ladder) { // true면 "-" false면 " "모양을 출력한다.
+	public void isTruePrint(boolean ladder) { // true면 "-----" false면 " "모양을 출력한다.
 		if (ladder) {
-			System.out.print("-");
+			System.out.print("-----");
 			return;
 		}
-		System.out.print(" ");
+		System.out.print("     ");
 	}
 }
