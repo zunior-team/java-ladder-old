@@ -1,62 +1,33 @@
 package ladder;
 
 import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.List;
 
 public class PrintManager {
-	Scanner sc = new Scanner(System.in);
-	private int height;
-	private int joinUser;
-	private ArrayList<ArrayList<Branch>> branchArr;
 
-	public int joinUser() {
-		System.out.println("참여할 사람은 몇 명인가요");
-		this.joinUser = sc.nextInt();
-		return joinUser;
+	ArrayList<BranchLine> branchArr;
+
+	public void printUser(List<String> joinUser) {
+		for (int i = 0; i < joinUser.size(); i++) {
+			Util.print(joinUser.get(i) + "     ");
+		}
+		Util.print("\n");
 	}
 
-	public int maxLadder() {
-		System.out.println("최대 사다리 높이는 몇 개인가요?");
-		this.height = sc.nextInt();
-		return height;
-	}
-
-	public void printLadder(ArrayList<ArrayList<Branch>> branchArr) {
+	public void printLadder(ArrayList<BranchLine> branchArr) {
 		this.branchArr = branchArr;
-		
-		for (int i = 0; i < height; i++) {
+		for (int i = 0; i < branchArr.size(); i++) {
+			Util.print("|");
 			printLadder(i);
-			System.out.print("|\n");
+			Util.print("\n");
 		}
 	}
 
 	public void printLadder(int i) {
-		int col = 0;
-		for (int j = 0; j < joinUser - 1; j++) {
-			col = printBranch(i, j, col);
+		for (int j = 0; j < branchArr.get(i).getLength() - 1; j++) {
+			Util.print(DataProcess.checkBranch(i, j, branchArr));
+			Util.print("|");
 		}
 	}
 
-	public int printBranch(int i, int j, int col) {
-		System.out.print("|");
-		System.out.print(chkIsBranch(i, col, j));
-		if (chkIsBranch(i, col, j) == "-") {
-			col = colUp(col, i);
-		}
-		return col;
-	}
-
-	public String chkIsBranch(int i, int col, int j) {
-		if (branchArr.get(i).size() != 0 && branchArr.get(i).get(col).getCol() == j) {
-			return "-";
-		}
-		return " ";
-	}
-
-	public int colUp(int col, int i) {
-		if (col < branchArr.get(i).size() - 1) {
-			col++;
-		}
-		return col;
-	}
 }
