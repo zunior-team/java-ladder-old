@@ -1,7 +1,10 @@
-package ladder;
+package ladder.view;
 
 import java.util.Arrays;
 import java.util.List;
+
+import ladder.domain.DataProcess;
+import ladder.domain.Util;
 
 public class InputManager {
 
@@ -18,7 +21,7 @@ public class InputManager {
 	}
 
 	public static int maxLadder() {
-		Util.print("\n최대 사다리 높이는 몇 개인가요?");
+		System.out.print("\n최대 사다리 높이는 몇 개인가요?");
 		return Util.sc.nextInt();
 	}
 }

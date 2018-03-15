@@ -1,4 +1,4 @@
-package ladder;
+package ladder.domain;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +23,7 @@ public class DataProcess {
 
 	public static int checkNamesLength(List<String> names, int i, int flag) {
 		if (names.get(i).length() > MAXNAMELEGTH) {
-			Util.print("최대 5글자 까지만 입력가능합니다." + (i + 1) + "번째 이름 길이초과\n");
+			System.out.print("최대 5글자 까지만 입력가능합니다." + (i + 1) + "번째 이름 길이초과\n");
 			flag++;
 		}
 		return flag;
@@ -36,11 +36,11 @@ public class DataProcess {
 		return "     ";
 	}
 
-	public static Boolean getRandomBoolean(int randNum) {
+	public static Boolean getQuarter(int randNum) {
 		if (randNum > RANDOMMIN) {
 			return true;
 		}
 		return false;
 	}
-
+	
 }

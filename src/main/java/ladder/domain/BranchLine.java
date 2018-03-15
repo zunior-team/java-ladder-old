@@ -1,4 +1,4 @@
-package ladder;
+package ladder.domain;
 
 import java.util.ArrayList;
 
@@ -9,15 +9,19 @@ public class BranchLine {
 		this.oneBranchSet = new ArrayList<>();
 	}
 
-	public void add(int j, Boolean branch) {
-		oneBranchSet.add(check(branch, j));
+	public void add(int j) {
+		oneBranchSet.add(check(j, Util.RAND.nextInt(DataProcess.RANDOMRANGE)));
 	}
 
-	public boolean check(Boolean branch, int j) {
+	public void add(Boolean check) {
+		oneBranchSet.add(check);
+	}
+
+	public boolean check(int j, int rand) {
 		if (j != 0 && oneBranchSet.get(j - 1)) {
 			return false;
 		}
-		return DataProcess.getRandomBoolean(Util.RAND.nextInt(DataProcess.RANDOMRANGE));
+		return DataProcess.getQuarter(rand);
 	}
 
 	public boolean getPoint(int b) {

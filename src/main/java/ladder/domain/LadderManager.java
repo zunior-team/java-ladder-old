@@ -1,22 +1,22 @@
-package ladder;
+package ladder.domain;
 
 import java.util.ArrayList;
 
 public class LadderManager {
 
 	public static ArrayList<BranchLine> makeLadder(int joinUser, int height) {
-		ArrayList<BranchLine> BranchLineArr = new ArrayList<>();
+		ArrayList<BranchLine> branchLines = new ArrayList<>();
 		for (int i = 0; i < height; i++) {
-			BranchLineArr.add(addBranchLine(joinUser));
+			branchLines.add(addBranchLine(joinUser));
 		}
-		return BranchLineArr;
+		return branchLines;
 	}
 
 	public static BranchLine addBranchLine(int joinUser) {
 		BranchLine branchLine = new BranchLine();
 
 		for (int j = 0; j < joinUser; j++) {
-			branchLine.add(j, DataProcess.getRandomBoolean(Util.RAND.nextInt(DataProcess.RANDOMRANGE)));
+			branchLine.add(j);
 		}
 		return branchLine;
 	}

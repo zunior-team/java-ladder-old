@@ -1,6 +1,9 @@
-package ladder;
+package ladder.domain;
 
 import java.util.List;
+
+import ladder.view.InputManager;
+import ladder.view.PrintManager;
 
 public class GameController {
 	public static void gameStart() {
