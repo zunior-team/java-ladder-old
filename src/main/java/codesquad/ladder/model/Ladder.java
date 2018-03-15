@@ -1,4 +1,4 @@
-package codesquad.ladder;
+package codesquad.ladder.model;
 
 import java.util.ArrayList;
 
@@ -6,14 +6,13 @@ public class Ladder {
 
     private ArrayList<Line> ladderForm;
 
-    private int lineHorizonLength;
-
-    public Ladder(int numPeople, int sizeLadder, int lineHorizonLength) {
+    // 생성자
+    public Ladder(int numPeople, int sizeLadder) {
         int numHorizonLine = numPeople - 1;
         this.ladderForm = makeLadderForm(numHorizonLine, sizeLadder);
-        this.lineHorizonLength = lineHorizonLength;
     }
 
+    // 사다리 크기 인자 받아서 라인 ArrayList 반환
     private ArrayList<Line> makeLadderForm(int numHorizonLine, int sizeLadder) {
         ArrayList<Line> ladderForm = new ArrayList<Line>(sizeLadder);
         for (int i = 0; i < sizeLadder; i++) {
@@ -24,9 +23,5 @@ public class Ladder {
 
     public ArrayList<Line> getLadderForm() {
         return this.ladderForm;
-    }
-
-    public int getLineHorizonLength() {
-        return this.lineHorizonLength;
     }
 }

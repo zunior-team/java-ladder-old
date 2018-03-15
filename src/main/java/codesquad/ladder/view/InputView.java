@@ -1,4 +1,4 @@
-package codesquad.ladder;
+package codesquad.ladder.view;
 
 import java.util.*;
 
@@ -15,7 +15,6 @@ public class InputView {
             return getNumber();
         }
     }
-
 
     public static String[] getString() {
         try {
