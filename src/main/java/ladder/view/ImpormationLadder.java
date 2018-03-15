@@ -1,9 +1,11 @@
-package ladder;
+package ladder.view;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
+import ladder.domain.CheckData;
 
 public class ImpormationLadder {
 
@@ -13,9 +15,9 @@ public class ImpormationLadder {
 		System.out.println("참여할 사람이름을 적어주세요. (이름은 쉼표(,)로 구분하세요)");
 		try {
 			String inputName = input.nextLine();
-			return new ArrayList<String>(Arrays.asList(inputName.split(",")));
-		} catch (InputMismatchException ime) {
-			System.out.println("문자열만 입력해주세요");
+			ArrayList<String> names = new ArrayList<>(Arrays.asList(inputName.split(",")));
+			return CheckData.checkFinalNames(names);
+		} catch (RuntimeException e) {
 			return getNames();
 		}
 	}

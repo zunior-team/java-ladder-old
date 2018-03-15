@@ -1,6 +1,8 @@
-package ladder;
+package ladder.view;
 
 import java.util.ArrayList;
+
+import ladder.domain.Line;
 
 public class PrintLadder {
 
@@ -16,7 +18,7 @@ public class PrintLadder {
 		ArrayList<Boolean> allLadder = ladder.getLine();
 		for (int j = 0; j < allLadder.size(); j++) {
 			System.out.print("|");
-			isTruePrint(allLadder.get(j));
+			System.out.print(isTruePrint(allLadder.get(j)));
 		}
 		System.out.println("|");
 	}
@@ -28,11 +30,10 @@ public class PrintLadder {
 		}
 	}
 
-	public void isTruePrint(boolean ladder) { // true면 "-----" false면 " "모양을 출력한다.
+	public String isTruePrint(boolean ladder) { // true면 "-----" false면 " "모양을 출력한다.
 		if (ladder) {
-			System.out.print("-----");
-			return;
+			return "-----";
 		}
-		System.out.print("     ");
+		return "     ";
 	}
 }
