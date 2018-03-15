@@ -6,7 +6,7 @@ public class LadderSetting {
 
     LadderSetting(int row, int column) {
         ladder = new boolean[row][column];
-        setRowLadder(row,column);
+        setRowLadder(row, column);
     }
 
     boolean randomGenerator() {
@@ -21,16 +21,16 @@ public class LadderSetting {
     }
 
     void setColumnLadder(int i, int column) {
-        for (int j = 0; j < column-2; j++) {
+        for (int j = 0; j < column - 2; j++) {
             ladder[i][j] = randomGenerator();
             sameResultStopper(i, j);
         }
     }
 
     void sameResultStopper(int i, int j) {
-        if (ladder[i][j] == ladder[i][j+2]) {
+        if (ladder[i][j] == ladder[i][j + 2]) {
             boolean makeOppValue = ladder[i][j];
-            ladder[i][j+2] = !makeOppValue;
+            ladder[i][j + 2] = !makeOppValue;
         }
     }
 

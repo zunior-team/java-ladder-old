@@ -8,15 +8,19 @@ public class OutputView {
 
     void drawLadder(boolean[][] ladder, int i) {
         for (int j = 0; j < ladder[i].length; j++) {
-            if ( j % 2 == 0 && j != 1) {
-                System.out.print(" | ");
-            }
-
-            if ( j % 2 == 1 ) {
-                isTrue(ladder[i][j]);
-            }
+            colLineController(ladder, i, j);
         }
         System.out.println();
+    }
+
+    void colLineController(boolean[][] ladder, int i, int j) {
+        if (j % 2 == 0 && j != 1) {
+            System.out.print(" | ");
+        }
+
+        if (j % 2 == 1) {
+            isTrue(ladder[i][j]);
+        }
     }
 
     void isTrue(boolean ladder) {
