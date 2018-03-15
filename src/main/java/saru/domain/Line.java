@@ -1,9 +1,9 @@
-package saru;
+package saru.domain;
 
 import java.util.ArrayList;
 
 public class Line {
-    private ArrayList<Boolean> points;
+    private final ArrayList<Boolean> points;
 
     public Line(int columnNum) {
         points = new ArrayList<>(columnNum);
@@ -12,32 +12,12 @@ public class Line {
         }
     }
 
-    ArrayList<Boolean> getPoints() {
+    public ArrayList<Boolean> getPoints() {
         return points;
     }
 
-    int getPointsLength() {
-        return points.size();
-    }
-
-    boolean canDrawLine(int randNum) {
-        if (randNum == 1) {
-            return true;
-        }
-        return false;
-    }
-
-    void drawPoint(int index, boolean isLine) {
-        // 범위가 잘못 되었거나 왼쪽에 선이 이미 있을 경우 그냥 return
-        if (!checkPointHasInterLine(index)) {
-            return;
-        }
-
-        points.set(index, isLine);
-    }
-
     // 오른쪽 방향으로 진행하면서 왼쪽에 없으면 생성하도록
-    boolean checkPointHasInterLine(int index) {
+    public boolean checkPointHasInterLine(int index) {
         if (index < 2) {
             // 1은 무조건 만들 수 있음
             return true;
@@ -52,5 +32,22 @@ public class Line {
 
         // 범위에 맞지 않으면 false
         return false;
+    }
+
+    int getPointsLength() {
+        return points.size();
+    }
+
+    boolean canDrawLine(int randNum) {
+        return randNum == 1;
+    }
+
+    void drawPoint(int index, boolean isLine) {
+        // 범위가 잘못 되었거나 왼쪽에 선이 이미 있을 경우 그냥 return
+        if (!checkPointHasInterLine(index)) {
+            return;
+        }
+
+        points.set(index, isLine);
     }
 }

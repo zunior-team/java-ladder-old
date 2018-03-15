@@ -1,4 +1,6 @@
-package saru;
+package saru.view;
+
+import saru.domain.*;
 
 import java.util.ArrayList;
 
@@ -6,26 +8,26 @@ public class LadderOutput {
     public LadderOutput() {
     }
 
-    void printLadderAndNames(ArrayList<String> names, ArrayList<Line> lines) {
-        printNames(names);
-        printLadder(lines);
+    public void sendOutputObject(LadderGame ladderGame) {
+        printNames(ladderGame.getNames());
+        printLadder(ladderGame.getLadderLines());
     }
 
-    void printNames(ArrayList<String> names) {
+    private void printNames(ArrayList<String> names) {
         for (String name : names) {
             System.out.printf("%-6s", name);
         }
         System.out.println();
     }
 
-    void printLadder(ArrayList<Line> lines) {
+    private void printLadder(ArrayList<Line> lines) {
         for (Line line : lines) {
             printMultiLines(line.getPoints());
         }
         System.out.println();
     }
 
-    void printMultiLines(ArrayList<Boolean> arr) {
+    private void printMultiLines(ArrayList<Boolean> arr) {
         for (int i = 0; i < arr.size(); i++) {
             printIndividualLine(arr, i);
         }
@@ -33,7 +35,7 @@ public class LadderOutput {
         System.out.println();
     }
 
-    void printIndividualLine(ArrayList<Boolean> arr, int index) {
+    private void printIndividualLine(ArrayList<Boolean> arr, int index) {
         if (index % 2 == 1) {
             printInterPoint(arr.get(index));
             return;
@@ -42,7 +44,7 @@ public class LadderOutput {
         System.out.print("|");
     }
 
-    void printInterPoint(boolean isTrue) {
+    private void printInterPoint(boolean isTrue) {
         if (isTrue) {
             System.out.print("-----");
             return;
