@@ -51,7 +51,7 @@ public class DirectionTest {
 
     @Test
     public void last() {
-        Direction last = Direction.last(TRUE);
+        Direction last = Direction.first(TRUE).last();
         assertThat(last, is(Direction.of(TRUE, FALSE)));
     }
 }

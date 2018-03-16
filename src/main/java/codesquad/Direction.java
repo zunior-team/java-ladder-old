@@ -46,8 +46,8 @@ public class Direction {
         return of(FALSE, right);
     }
 
-    public static Direction last(boolean firstStatus) {
-        return of(firstStatus, FALSE);
+    public Direction last() {
+        return of(this.right, FALSE);
     }
 
     @Override
