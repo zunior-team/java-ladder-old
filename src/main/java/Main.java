@@ -1,80 +1,91 @@
-import domain.Ladder;
+import domain.*;
 import view.Input;
 import view.Viewer;
 
 public class Main {
-    private static final int MIN_PLAYER_NUM = 2;
-    private static final int MIN_HEIGHT = 2;
-    private static final int MAX_NAME_LENGTH = 5;
+    private static final String EXIT_KEY = "-1";
 
     public static void main(String[] args) {
         Main.start();
     }
 
     public static void start() {
-        Ladder ladder = new Ladder(getPlayersName(), getMaxHeight());
-        Viewer.viewLadder(ladder, MAX_NAME_LENGTH);
+        Names playersName = getPlayersName();
+        Rewards rewards = getReward(playersName.getPlayerNumber());
+        Ladder ladder = setLadder(playersName.getPlayerNumber());
+        showLadder(ladder, playersName, rewards);
+
+        Results allResult = LadderMatcher.match(ladder, playersName, rewards);
+        showResult(allResult, playersName);
     }
 
-    private static String[] getPlayersName() {
-        String printMessage = "참여할 사람 이름을 입력하세요. (" + MIN_PLAYER_NUM + "명 이상 이름 입력, 이름은 쉼표(,)로 구분, 최대 " + MAX_NAME_LENGTH + "자까지 입력가능)";
-        Viewer.viewMessage(printMessage);
+    private static void showLadder(Ladder ladder, Names playerNames, Rewards rewards) {
+        Viewer.viewLadder(ladder, playerNames, rewards);
+    }
 
-        String[] names = dividePlayersName(Input.getPlayerNames());
-        while (isInvalidNames(names)) {
-            Viewer.viewMessage("플레이어 이름을 잘못 입력하였습니다\n" + printMessage);
-            names = dividePlayersName(Input.getPlayerNames());
+    private static void showResult(Results allResult, Names playersName) {
+        String searchName = getResultName(playersName);
+        while (!isFinishKey(searchName)) {
+            Name wrapName = new Name(searchName);
+            Viewer.viewResult(allResult, wrapName);
+            searchName = getResultName(playersName);
         }
-        return names;
+        Viewer.viewMessage("게임 종료");
     }
 
-    private static boolean isInvalidNames(String[] names) {
-        return names == null || isInvalidPlayerNum(names.length) || isIncludeInvalidName(names);
+    private static boolean isFinishKey(String userInput) {
+        return EXIT_KEY.equals(userInput);
     }
 
-    static boolean isInvalidPlayerNum(int playerNum) {
-        return playerNum < MIN_PLAYER_NUM;
-    }
-
-    private static boolean isIncludeInvalidName(String[] names) {
-        int playerNum = names.length;
-        int checkCount = 0;
-
-        while (!isFinishCheck(playerNum, checkCount) && isValidNameLength(names[checkCount])) {
-            checkCount++;
+    private static Names getPlayersName() {
+        String[] names = Input.getPlayerNames("참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요)");
+        Names playerNames = null;
+        try {
+            playerNames = new Names(names);
+        } catch (IllegalArgumentException e) {
+            Viewer.viewMessage(e.getMessage());
+            playerNames = getPlayersName();
         }
-
-        return !isFinishCheck(playerNum, checkCount);
+        return playerNames;
     }
 
-    private static boolean isFinishCheck(int playerNum, int checkCount) {
-        return playerNum == checkCount;
-    }
-
-    static boolean isValidNameLength(String name) {
-        return name.length() <= MAX_NAME_LENGTH;
-    }
-
-    private static int getMaxHeight() {
-        int maxHeight = -1;
-        while (isInvalidHeight(maxHeight)) {
-            Viewer.viewMessage("최대 사다리 높이는 몇 개인가요 (" + MIN_HEIGHT + "이상, 잘못된 입력 시 재입력)");
-            maxHeight = Input.getNumber();
+    private static Rewards getReward(int playerNum) {
+        String[] rewards = Input.getRewards("실행 결과를 입력하세요. (결과는 쉼표(,)로 구분)");
+        Rewards playerRewards = null;
+        try {
+            playerRewards = new Rewards(rewards, playerNum);
+        } catch (IllegalArgumentException e) {
+            Viewer.viewMessage(e.getMessage());
+            playerRewards = getReward(playerNum);
         }
-        return maxHeight;
+        return playerRewards;
     }
 
-    static boolean isInvalidHeight(int height) {
-        return height < MIN_HEIGHT;
+    private static Ladder setLadder(int playerNum) {
+        Ladder ladder = null;
+        int height = getHeight();
+        try {
+            ladder = new Ladder(playerNum, height);
+        } catch (IllegalArgumentException e) {
+            Viewer.viewMessage(e.getMessage());
+            ladder = setLadder(playerNum);
+        }
+        return ladder;
     }
 
-    static String[] dividePlayersName(String playersName) {
-        String removedPlayersName = removeEmptySpace(playersName);
-        String delimiter = ",";
-        return removedPlayersName.split(delimiter);
+    private static int getHeight() {
+        int height = -1;
+        try {
+            height = Input.getHeight("최대 사다리 높이는 몇 개인가요");
+        } catch (NumberFormatException e) {
+            Viewer.viewMessage(e.getMessage());
+            height = getHeight();
+        }
+        return height;
     }
 
-    static String removeEmptySpace(String playersName) {
-        return playersName.replace(" ", "");
+    private static String getResultName(Names names) {
+        Viewer.viewMessage("결과를 보고 싶은 사람은? (종료 방법 : " + EXIT_KEY + " 입력)");
+        return Input.getResultName(names, EXIT_KEY);
     }
 }
