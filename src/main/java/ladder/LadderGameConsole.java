@@ -1,47 +1,43 @@
 package ladder;
 
-import ladder.domain.GameUtils;
 import ladder.domain.LadderGame;
+import ladder.domain.UserPrompt;
 import ladder.view.Input;
 import ladder.view.Output;
+
+import java.util.Map;
 
 public class LadderGameConsole {
 
     public static void main(String[] args) {
-        startGame();
+        LadderGame ladderGame = startGame();
+
+        Map<String, String> result = ladderGame.generateResult();
+
+        showResult(result);
     }
 
-    private static void startGame() {
-        String playerNames = promptUserForNames();
-        int ladderHeight = promptUserForLadderHeight();
-        LadderGame ladderGame = new LadderGame(playerNames, ladderHeight);
+    private static LadderGame startGame() {
+        String[] names = UserPrompt.promptUserForNames();
+        String[] prizes = UserPrompt.promptUserForPrizes(names);
+        int ladderHeight = UserPrompt.promptUserForLadderHeight();
 
-        String ladderString = ladderGame.startBuild();
-        ladderGame.displayLadder(ladderString);
+        //initialize game
+        LadderGame ladderGame = new LadderGame(names, prizes, ladderHeight); //static factory method??
+
+        Output.printLadder(ladderGame);
+
+        return ladderGame;
     }
 
-    private static String promptUserForNames() {
-        Output.askForPlayerNames();
-        String names = Input.takeNames();
-
-        if (GameUtils.isNotEnoughNames(names)) {
-            Output.printNotEnoughNames();
-            return promptUserForNames();
+    private static void showResult(Map<String, String> result) {
+        String name = "";
+        while (!UserPrompt.isExit(name)) {
+            name = UserPrompt.promptUserForResultName(result);
+            Output.printSelectedResult(result, name);
         }
-        if (GameUtils.isOverCharLimit(names)) {
-            Output.printOverMaxChars();
-            return promptUserForNames();
+        if (name.equals("all")) {
+            Output.printAllResult(result);
         }
-        return names;
-    }
-
-    private static int promptUserForLadderHeight() {
-        Output.askForLadderHeight();
-        int ladderHeight = Input.takeHeight();
-        if (GameUtils.isUnderMinHeight(ladderHeight)) {
-            Output.printUnderMinHeight();
-            return promptUserForLadderHeight();
-        }
-        return ladderHeight;
     }
 }

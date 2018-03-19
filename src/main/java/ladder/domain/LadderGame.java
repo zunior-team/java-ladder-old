@@ -1,30 +1,38 @@
 package ladder.domain;
 
-import ladder.view.Output;
+import ladder.view.LadderBuilder;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class LadderGame {
-    LadderDTO dto = new LadderDTO();
+    private List<Row> ladder = new ArrayList<>();
+    private List<Player> players = new ArrayList<>();
+    private List<Prize> prizes = new ArrayList<>();
 
-    public LadderGame(String names, int ladderHeight) {
-        String[] playerNames = names.split(",");
-        ArrayList<Row> ladder = new ArrayList<>();
+    public LadderGame(String[] names, String[] inputPrizes, int ladderHeight) {
+        for (int i = 0; i < names.length; i++) {
+            players.add(new Player(names[i], i));
+        }
 
-        dto.setPlayerNames(playerNames);
+        for (String item : inputPrizes) {
+            prizes.add(new Prize(item));
+        }
 
         for (int i = 0; i < ladderHeight; i++) {
-            Row row = new Row(playerNames.length);
-            ladder.add(row);
+            ladder.add(new Row(names.length));
         }
-        dto.setLadder(ladder);
     }
 
-    public String startBuild() {
-        return LadderBuilder.buildLadder(dto);
+    public String startConversion() {
+        LadderBuilder ladderBuilder = new LadderBuilder();
+
+        return ladderBuilder.buildLadder(ladder, players, prizes);
     }
 
-    public void displayLadder(String ladder) {
-        Output.printLadder(ladder);
+    public Map<String, String> generateResult() {
+        Result result = new Result(); // static factory method?
+        return result.drawResult(ladder, players, prizes);
     }
 }

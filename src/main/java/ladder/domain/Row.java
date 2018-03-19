@@ -1,15 +1,20 @@
 package ladder.domain;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Row {
-    private ArrayList<Boolean> rowOfRandomBools = new ArrayList<>();
+    private List<Boolean> rowOfSteps = new ArrayList<>();
+    private List<Point> rowOfPoints = new ArrayList<>();
 
     Row(int numberOfPeople) {
         Boolean bool = false;
         for (int i = 0; i < numberOfPeople - 1; i++) {
             bool = assignRandomBool(bool);
-            rowOfRandomBools.add(bool);
+            rowOfSteps.add(bool);
+        }
+        for (int i = 0; i < numberOfPeople; i++) {
+            rowOfPoints.add(new Point(rowOfSteps, i));
         }
     }
 
@@ -20,11 +25,15 @@ public class Row {
         return GameUtils.generateRandomBools();
     }
 
-    boolean isStep(int booleanPosition) {
-        return rowOfRandomBools.get(booleanPosition);
+    public Point onPoint(int column) {
+        return rowOfPoints.get(column);
     }
 
-    ArrayList<Boolean> getRow() {
-        return rowOfRandomBools;
+    public int getRowLength() {
+        return rowOfSteps.size();
+    }
+
+    public boolean isStep(int booleanPosition) {
+        return rowOfSteps.get(booleanPosition);
     }
 }
