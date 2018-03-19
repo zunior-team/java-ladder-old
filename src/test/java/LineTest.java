@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import ladder.domain.CheckData;
 import ladder.domain.Line;
+import ladder.domain.ResultLine;
 import ladder.view.ImpormationLadder;
 import ladder.view.PrintLadder;
 
@@ -15,7 +16,7 @@ public class LineTest {
 	@Test
 	public void checkLineZeroTest() {
 		Line test = new Line(0);
-		
+
 		assertEquals(false, test.checkLine(0, false));
 	}
 
@@ -23,7 +24,7 @@ public class LineTest {
 	public void checkLineBeforeindexTrueTest() {
 		// 전 인덱스에 사다리가 있으면 false가 나와야한다.
 		Line test2 = new Line(true);
-		
+
 		assertEquals(false, test2.checkLine(1, true));
 	}
 
@@ -69,4 +70,41 @@ public class LineTest {
 
 		CheckData.checkFinalNames(test);
 	}
+
+	@Test
+	public void resultLineTest() {
+		Line line = new Line(false); // Boolean 값이 false인 사다리를 만든다
+		ArrayList<String> test = new ArrayList<String>(Arrays.asList("river", "pobi"));
+		ResultLine result = new ResultLine(line, test);
+		// false이므로 river pobi가 그대로여야한다.
+		assertEquals(test, result.getResultLine());
+	}
+
+	@Test
+	public void resultLinefalseTest() {
+		Line line = new Line(true); // Boolean 값이 true인 사다리를 만든다
+		ArrayList<String> test = new ArrayList<String>(Arrays.asList("river", "pobi"));
+		ArrayList<String> test2 = new ArrayList<String>(Arrays.asList("pobi", "river"));
+		ResultLine result = new ResultLine(line, test);
+		assertEquals(test2, result.getResultLine()); // true이므로 자리가 바뀌어야 한다.
+	}
+
+	@Test
+	public void getLocationTest() {
+		Line line = new Line(false);
+		ArrayList<String> test = new ArrayList<String>(Arrays.asList("river", "pobi"));
+		ResultLine result = new ResultLine(line, test);
+
+		assertEquals(0, result.getLocation(0, line)); // point가 false이고 i=0이므로 그대로
+	}
+
+	@Test
+	public void getLocationTest2() {
+		Line line = new Line(true);
+		ArrayList<String> test = new ArrayList<String>(Arrays.asList("river", "pobi"));
+		ResultLine result = new ResultLine(line, test);
+
+		assertEquals(1, result.getLocation(0, line)); // point가 true이고 i=0이므로 i+1
+	}
+
 }
