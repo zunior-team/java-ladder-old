@@ -2,35 +2,54 @@ package saru.domain;
 
 import java.util.*;
 
-// TODO 각각의 역할에 맞도록 패키지를 분리하고 접근 제어자를 적절히 사용하도록 리팩토링한다.
-
 public class LadderGame {
     private static final int LIMIT = 4;
 
-    private ArrayList<Line> ladderLines;
-    private final ArrayList<String> names = new ArrayList<>();
+    private final ArrayList<User> users = new ArrayList<>();
+    private final ArrayList<String> destinations = new ArrayList<>();
+    private final ArrayList<Line> ladderLines = new ArrayList<>();
+    private ArrayList<Integer> result;
 
-    public LadderGame(int ladderHeight, String[] nameArray) {
+    public LadderGame(int ladderHeight, String[] destination, String[] nameArray) {
         inputNames(nameArray);
+        inputDestination(destination);
         initLadder(ladderHeight, nameArray.length);
+        run();
     }
 
-    public ArrayList<String> getNames() {
-        return names;
+    private void run() {
+        result = new Ladder(ladderLines).climbLadder();
+    }
+
+    public ArrayList<User> getUsers() {
+        return users;
+    }
+
+    public ArrayList<String> getDestinations() {
+        return destinations;
     }
 
     public ArrayList<Line> getLadderLines() {
         return ladderLines;
     }
 
+    public ArrayList<Integer> getResult() {
+        return result;
+    }
+
     private void inputNames(String[] nameArr) {
-        Collections.addAll(names, nameArr);
+        // TODO User 객체 생성
+        for (int i = 0; i < nameArr.length; i++) {
+            users.add(new User(nameArr[i]));
+        }
+    }
+
+    private void inputDestination(String[] destination) {
+        Collections.addAll(destinations, destination);
     }
 
     private void initLadder(int ladderHeight, int columnNum) {
-        ladderLines = new ArrayList<>(ladderHeight);
         int realColumnNum = getRealColumnNum(columnNum);
-
         for (int i = 0; i < ladderHeight; i++) {
             ladderLines.add(new Line(realColumnNum));
         }
