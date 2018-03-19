@@ -6,7 +6,12 @@ public class Ladder {
 
     private ArrayList<Line> ladderForm;
 
-    // 생성자
+    // 생성자1
+    public Ladder(ArrayList<Line> ladderForm) {
+        this.ladderForm = ladderForm;
+    }
+
+    // 생성자2
     public Ladder(int numPeople, int sizeLadder) {
         int numHorizonLine = numPeople - 1;
         this.ladderForm = makeLadderForm(numHorizonLine, sizeLadder);
@@ -23,5 +28,13 @@ public class Ladder {
 
     public ArrayList<Line> getLadderForm() {
         return this.ladderForm;
+    }
+
+    public int trace(int col) {
+        Tracker tracker = new Tracker(col);
+        for (Line line : this.ladderForm) {
+            tracker = tracker.nextTrack(line);
+        }
+        return tracker.getCol();
     }
 }

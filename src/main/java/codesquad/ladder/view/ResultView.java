@@ -3,8 +3,10 @@ package codesquad.ladder.view;
 import codesquad.ladder.controller.LadderController;
 import codesquad.ladder.model.Ladder;
 import codesquad.ladder.model.Player;
+import codesquad.ladder.model.Prize;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -31,6 +33,8 @@ public class ResultView {
             printString(makeLadderHorizontalLine(ladder.getLadderForm().get(i).getPoints()));
             System.out.println();
         }
+        printString(makePrizeNames(ladderController.getPrizes()));
+        System.out.println();
     }
 
     // 플레이어 이름 스트링 반환
@@ -39,6 +43,16 @@ public class ResultView {
         String printNameSize = "%-" + Integer.toString(LADDER_HORIZONTAL_LINE_UNIT + NAME_SIZE_CORRECTION) + "s"; // %-6s
         for (Player player : players) {
             playerNames.append(String.format(printNameSize, player.getName()));
+        }
+        return playerNames.toString();
+    }
+
+    // 플레이어 이름 스트링 반환
+    static String makePrizeNames(ArrayList<Prize> prizes) {
+        StringBuilder playerNames = new StringBuilder();
+        String printNameSize = "%-" + Integer.toString(LADDER_HORIZONTAL_LINE_UNIT + NAME_SIZE_CORRECTION) + "s"; // %-6s
+        for (Prize prize : prizes) {
+            playerNames.append(String.format(printNameSize, prize.getName()));
         }
         return playerNames.toString();
     }
@@ -59,6 +73,43 @@ public class ResultView {
     // 스트링 출력 메소드
     private static void printString(String str) { System.out.printf(str); }
 
+    public static void printResults(LadderController ladderController) {
+        System.out.println("What result you want to see? (exit = q)");
+        String resultName = InputView.getString();
+        switch (resultName) {
+            case "all":
+                viewAllResult(ladderController);
+                break;
+            case "q":
+                System.out.println("Bye~");
+                System.exit(0);
+            default:
+                findResult(resultName, ladderController);
+                break;
+        }
+    }
+
+    private static void viewAllResult(LadderController ladderController) {
+        System.out.println("All Results");
+        Iterator<Player> keys = ladderController.getMap().keySet().iterator();
+        while( keys.hasNext() ){
+            Player key = keys.next();
+            System.out.println(String.format("%s : %s", key.getName(), ladderController.getMap().get(key).getName()));
+        }
+        printResults(ladderController);
+    }
+
+    private static void findResult(String resultName, LadderController ladderController){
+        try{
+            Player key = new Player(resultName);
+            Prize value = ladderController.getMap().get(new Player(resultName));
+            System.out.println(String.format("%s : %s", key.getName(), value.getName()));
+            printResults(ladderController);
+        } catch (RuntimeException e){
+            System.out.println("please put the right Name. try again.");
+            printResults(ladderController);
+        }
+    }
 }
 
 

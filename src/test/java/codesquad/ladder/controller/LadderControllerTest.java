@@ -1,9 +1,11 @@
 package codesquad.ladder.controller;
 
+import codesquad.ladder.model.Ladder;
+import codesquad.ladder.model.Line;
 import codesquad.ladder.model.Player;
 import codesquad.ladder.model.exceptions.DuplicetedNameException;
 import codesquad.ladder.model.exceptions.InvalidNameSizeException;
-import codesquad.ladder.model.exceptions.InvalidPlayerNameException;
+import codesquad.ladder.model.exceptions.InvalidNamesException;
 import codesquad.ladder.model.exceptions.InvalidSizeLadderException;
 import org.junit.Test;
 import java.util.ArrayList;
@@ -14,26 +16,26 @@ import static org.junit.Assert.assertEquals;
 
 public class LadderControllerTest {
 
-    @Test(expected = InvalidPlayerNameException.class)
-    public void playerNameCheckReturnTest1() {
-        String[] playerNames = {"pobi","pobi","honux","jk"};
-        LadderController.playerNameCheckReturn(playerNames);
+    @Test(expected = InvalidNamesException.class)
+    public void nameCheckReturnTest1() {
+        String[] names = {"pobi","pobi","honux","jk"};
+        LadderController.namesCheckReturn(names);
     }
 
-    @Test(expected = InvalidPlayerNameException.class)
-    public void playerNameCheckReturnTest2() {
-        String[] playerNames = {"pobi","cronggg","honux","jk"};
-        LadderController.playerNameCheckReturn(playerNames);
+    @Test(expected = InvalidNamesException.class)
+    public void nameCheckReturnTest2() {
+        String[] names = {"pobi","cronggg","honux","jk"};
+        LadderController.namesCheckReturn(names);
     }
 
     @Test
-    public void playerNameCheckReturnTest3() {
-        String[] playerNames = {"pobi", "crong", "honux", "jk"};
-        List<String> names = Arrays.asList("pobi", "crong", "honux", "jk");
-        assertEquals(names, LadderController.playerNameCheckReturn(playerNames));
+    public void nameCheckReturnTest3() {
+        String[] names = {"pobi", "crong", "honux", "jk"};
+        List<String> playerNames = Arrays.asList("pobi", "crong", "honux", "jk");
+        assertEquals(playerNames, LadderController.namesCheckReturn(names));
     }
 
-    @Test(expected = InvalidPlayerNameException.class)
+    @Test(expected = InvalidNamesException.class)
     public void nameFinalCheckTest1() {
         ArrayList<String> names = new ArrayList<>(Arrays.asList("pobi", "honuxx", "crong"));
         LadderController.nameFinalCheck(names);
@@ -99,7 +101,26 @@ public class LadderControllerTest {
         players.add(new Player("jk")); // index 2 wrong
 
         assertEquals(false, players.get(2).getName().equals(LadderController.makePlayers(names).get(2).getName()));
+    }
 
+    @Test
+    public void makePrizesTest1() {
+        ArrayList<String> names = new ArrayList<>(Arrays.asList("sad", "happy"));
+        ArrayList<Player> prizes = new ArrayList<>(Arrays.asList(new Player("sad"), new Player("happy")));
+
+        assertEquals(true, prizes.get(0).getName().equals(LadderController.makePrizes(names).get(0).getName()));
+        assertEquals(true, prizes.get(1).getName().equals(LadderController.makePrizes(names).get(1).getName()));
+    }
+
+    @Test
+    public void makePrizesTest2() {
+        ArrayList<String> names = new ArrayList<>(Arrays.asList("happy", "sad", "hello"));
+        ArrayList<Player> prizes = new ArrayList<Player>();
+        prizes.add(new Player("happy"));
+        prizes.add(new Player("sad"));
+        prizes.add(new Player("bye")); // index 2 wrong
+
+        assertEquals(false, prizes.get(2).getName().equals(LadderController.makePrizes(names).get(2).getName()));
     }
 
     @Test(expected = InvalidSizeLadderException.class)
@@ -112,7 +133,6 @@ public class LadderControllerTest {
     public void sizeLadderValidCheckReturnTest2() {
         int sizeLadder = 1;
         assertEquals(sizeLadder, LadderController.sizeLadderValidCheckReturn(sizeLadder));
-        ;
     }
 
 }

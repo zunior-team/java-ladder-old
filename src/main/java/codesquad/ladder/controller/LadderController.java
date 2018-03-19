@@ -1,18 +1,17 @@
 package codesquad.ladder.controller;
 
+import codesquad.ladder.model.Prize;
+import codesquad.ladder.model.Tracker;
 import codesquad.ladder.model.exceptions.DuplicetedNameException;
 import codesquad.ladder.model.exceptions.InvalidNameSizeException;
-import codesquad.ladder.model.exceptions.InvalidPlayerNameException;
+import codesquad.ladder.model.exceptions.InvalidNamesException;
 import codesquad.ladder.view.InputView;
 import codesquad.ladder.model.Ladder;
 import codesquad.ladder.model.Player;
 import codesquad.ladder.model.exceptions.InvalidSizeLadderException;
-import codesquad.ladder.view.ResultView;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+
+import java.util.*;
 
 public class LadderController {
 
@@ -24,28 +23,43 @@ public class LadderController {
 
     private ArrayList<Player> players;
 
+    private ArrayList<Prize> prizes;
+
+    private HashMap<Player, Prize> map = new HashMap<>();
+
+    // 결과물 리스트 최종 반환 메소드
+    private void initPrizes() {
+        try {
+            System.out.println("Put Prizes what you want. (separator, \",\") \n>>");
+            ArrayList<String> prizeNames = new ArrayList<String>(namesCheckReturn(InputView.getString().split(",")));
+            this.prizes = makePrizes(prizeNames);
+        } catch (InvalidNamesException e) {
+            initPrizes();
+        }
+    }
+
     // player 리스트 최종 반환 메소드
     private void initPlayers() {
         try {
             System.out.println("Put player's name (separator, \",\") \n>>");
-            ArrayList<String> playerNames = new ArrayList<String>(playerNameCheckReturn(InputView.getString()));
+            ArrayList<String> playerNames = new ArrayList<String>(namesCheckReturn(InputView.getString().split(",")));
             this.players = makePlayers(playerNames);
-        } catch (InvalidPlayerNameException e) {
+        } catch (InvalidNamesException e) {
             initPlayers();
         }
     }
 
     // 문자열을 받아서 문자열 유효성 체크 하고 스트링 ArrayList 반환
-    static ArrayList<String> playerNameCheckReturn(String[] playerNames) {
+    static ArrayList<String> namesCheckReturn(String[] playerNames) {
         ArrayList<String> names = new ArrayList<String>(Arrays.asList(playerNames));
         if (!nameFinalCheck(names)) {
-            throw new InvalidPlayerNameException();
+            throw new InvalidNamesException();
         }
         return names;
     }
 
     // 사용자 이름 유효값(길이, 중복) 최종 체크
-    static boolean nameFinalCheck(ArrayList<String> names) throws InvalidPlayerNameException {
+    static boolean nameFinalCheck(ArrayList<String> names) throws InvalidNamesException {
         return nameMaxSizeCheck(names) && duplicatedNameCheck(names);
     }
 
@@ -82,6 +96,13 @@ public class LadderController {
         return players;
     }
 
+    // 문자열 받아서 prize list로 변환
+    static ArrayList<Prize> makePrizes(ArrayList<String> names) {
+        ArrayList<Prize> prizes = new ArrayList<Prize>();
+        for (String name : names) prizes.add(new Prize(name));
+        return prizes;
+    }
+
     // ladder size 최종 반환 메소드
     private int initSizeLadder() {
         try {
@@ -107,13 +128,28 @@ public class LadderController {
         return this.players;
     }
 
-    private void makeLadder(int numPeople, int sizeLadder){
+    public HashMap<Player, Prize> getMap() {
+        return this.map;
+    }
+
+    private void makeLadder(int numPeople, int sizeLadder) {
         this.ladder = new Ladder(numPeople, sizeLadder);
     }
 
     public void ladderGameStart() {
         initPlayers();
+        initPrizes();
         int ladderSize = initSizeLadder();
         makeLadder(this.players.size(), ladderSize);
+    }
+
+    public void matchTotalResult() {
+        for (int i = 0; i < this.players.size(); i++) {
+            map.put(this.players.get(i), this.prizes.get(ladder.trace(i)));
+        }
+    }
+
+    public ArrayList<Prize> getPrizes() {
+        return this.prizes;
     }
 }
