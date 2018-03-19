@@ -29,8 +29,8 @@ public class DataProcess {
 		return flag;
 	}
 
-	public static String checkBranch(int i, int j, ArrayList<BranchLine> branchArr) {
-		if (branchArr.get(i).getPoint(j)) {
+	public static String checkBranch(int i, int j, BranchLineManager branchLines) {
+		if (branchLines.getPoint(i, j)) {
 			return "-----";
 		}
 		return "     ";
@@ -42,5 +42,24 @@ public class DataProcess {
 		}
 		return false;
 	}
-	
+
+	public static int getUserArrivePosition(RewardManager rewardManager, String userName) {
+		return rewardManager.getUserArrivePosition(rewardManager, userName);
+	}
+
+	public static RewardManager getUserArriveInfo(BranchLineManager branchLines, ArrayList<User> joinUser) {
+		ResultManager resultManager = ResultManager.makeUserList(branchLines, joinUser);
+		return resultManager.getRewardManager();
+	}
+
+	public static String getRewardName(RewardManager rewardManager, Reward reward, String userName) {
+		int userResultPosition = DataProcess.getUserArrivePosition(rewardManager, userName);
+		int resultPosition = rewardManager.getUserCol(userResultPosition);
+		return reward.getReward(resultPosition);
+	}
+
+	public static String getResultName(RewardManager rewardManager, Reward reward, int i) {
+		return reward.getReward(rewardManager.getUserCol(i));
+	}
+
 }

@@ -20,5 +20,4 @@ public class LadderManager {
 		}
 		return branchLine;
 	}
-
 }

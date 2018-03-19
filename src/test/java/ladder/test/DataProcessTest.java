@@ -8,12 +8,14 @@ import java.util.List;
 import org.junit.Test;
 
 import ladder.domain.BranchLine;
+import ladder.domain.BranchLineManager;
 import ladder.domain.DataProcess;
 
 public class DataProcessTest {
 	ArrayList<BranchLine> branchLines;
 	BranchLine branchLine;
 	List<String> names;
+	BranchLineManager branchLineManager;
 
 	@Test
 	public void testCheckFlag() {
@@ -41,9 +43,10 @@ public class DataProcessTest {
 		branchLine.add(false);
 		branchLines = new ArrayList<>();
 		branchLines.add(branchLine);
+		branchLineManager = new BranchLineManager(branchLines);
 
-		assertEquals("-----", DataProcess.checkBranch(0, 0, branchLines));
-		assertEquals("     ", DataProcess.checkBranch(0, 1, branchLines));
+		assertEquals("-----", DataProcess.checkBranch(0, 0, branchLineManager));
+		assertEquals("     ", DataProcess.checkBranch(0, 1, branchLineManager));
 	}
 
 	@Test
