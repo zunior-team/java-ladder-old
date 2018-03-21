@@ -1,39 +1,54 @@
 package domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Random;
+import java.util.List;
+
+import static domain.LadderPointGenerator.generatePoint;
 
 public class LadderLine {
-    private ArrayList<Boolean> points = new ArrayList<>();
+    private final List<Point> points;
 
-    LadderLine(int countOfPersons) {
-        this.getLine(countOfPersons);
+    public LadderLine(List<Point> points) {
+        this.points = points;
     }
 
-    public ArrayList<Boolean> getLine() {
+    public static LadderLine init(int countOfPersons) {
+        List<Point> points = new ArrayList<>();
+        Point point = initFirst(points);
+        point = initBody(countOfPersons, points, point);
+        initLast(points, point);
+        return new LadderLine(points);
+    }
+
+    public List<Point> getPoints() {
         return this.points;
     }
 
-    private void getLine(int countOfPersons) {
-        Boolean prevBridge = false;
-        for (int i = 0; i < countOfPersons-1; i++) {
-            int randomValue = makeRandomValue();
-            prevBridge = addBridge(randomValue, prevBridge);
-            points.add(prevBridge);
-        }
-        System.out.println(points.toString());
+    private static void initLast(List<Point> points, Point point) {
+        point = point.last();
+        points.add(point);
     }
 
-    public Boolean addBridge(int randomValue, Boolean prevBridge) {
-        if ((randomValue == 1) && (prevBridge == false)) {
-            return true;
+    private static Point initBody(int countOfPersons, List<Point> points, Point point) {
+        for (int i = 1; i < countOfPersons - 1; i++) {
+            point = point.next();
+            points.add(point);
         }
-        return false;
+        return point;
     }
 
-    public int makeRandomValue() {
-        Random random = new Random();
-        return random.nextInt(2);
+    private static Point initFirst(List<Point> points) {
+        Point point = Point.first(generatePoint());
+        points.add(point);
+        return point;
+    }
+
+    public int move(int position) {
+        return points.get(position).move();
+    }
+
+    @Override
+    public String toString() {
+        return "LadderLine{" + "points = " + points + '}';
     }
 }

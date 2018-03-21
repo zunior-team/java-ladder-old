@@ -1,28 +1,65 @@
 package domain;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class LadderGame {
-    private LadderLine[] ladderLine;
-    private String[] namesOfPersons;
+    private ArrayList<Player> players;
+    private List<String> rewards;
+    private ArrayList<PlayerReward> playerRewards; // for all
 
-    LadderGame(String[] namesOfPersons, int height) {
-        int countOfPersons = namesOfPersons.length;
-
-        this.ladderLine = new LadderLine[height];
-        this.namesOfPersons = namesOfPersons;
-        getLines(countOfPersons, height);
+    LadderGame(String[] names, String[] rewards, int height) {
+        Ladder.makeLadderLines(names, height);
+        this.players = makePlayers(names);
+        this.rewards = Arrays.asList(rewards);
     }
 
-    public String[] getNamesOfPersons() {
-        return this.namesOfPersons;
-    }
-
-    private void getLines(int countOfPersons, int height) {
-        for (int i = 0; i < height; i++) {
-            this.ladderLine[i] = new LadderLine(countOfPersons);
+    public ArrayList<Player> makePlayers(String[] names) {
+        ArrayList<Player> players = new ArrayList<>();
+        for (int i = 0; i < names.length; i++) {
+            players.add(new Player(names[i], i));
         }
+        return players;
     }
 
-    public LadderLine[] getLadderLine() {
-        return this.ladderLine;
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }
+
+    public List<String> getRewards() {
+        return rewards;
+    }
+
+    public ArrayList<PlayerReward> getPlayerRewards() {
+        playerRewards = new ArrayList<>();
+        for (Player player : players) {
+            String reward = rewards.get(player.getIndex());
+            PlayerReward playerReward = new PlayerReward(player, reward);
+            playerRewards.add(playerReward);
+        }
+        return this.playerRewards;
+    }
+
+    public ArrayList<PlayerReward> play(String name) {
+        if (name.equals("all")) {
+            return this.playerRewards;
+        }
+        Player player = getMatchedPlayer(name);
+        PlayerReward playerReward = new PlayerReward(player, rewards.get(player.getIndex()));
+        ArrayList<PlayerReward> playerRewards = new ArrayList<>(); // for single
+        playerRewards.add(playerReward);
+        return playerRewards;
+    }
+
+    // TODO 더 나은 방법이 없는지 고민하기
+    private Player getMatchedPlayer(String name) {
+        Player result = new Player(name, 0);
+        for (Player player : players) {
+            if (player.equals(result)) {
+                return player;
+            }
+        }
+        return null;
     }
 }
