@@ -7,22 +7,30 @@ import java.util.Random;
 public class Ladder {
     private static final int RANDOM_BOUND = 2;
     private static final int ZERO = 0;
-    private static final String SPACE = " ";
-    private static final String HYPHEN = "-";
+    private static final int ONE = 1;
+
     private static Random rnd = new Random();
+    private List<Integer> lines = new ArrayList<>();;
 
-    private List<String> lines = new ArrayList<>();;
-
+    // Add line(0,1) to lines
     public void makeLine(){
-        this.lines.add(decideLine());
+        this.lines.add(this.generateValidLine());
     }
 
-    public List<String> getLines() {
+    public int generateValidLine(){
+        int size = lines.size();
+        if(size > ZERO){
+            return lines.get(size - ONE) == ONE ? ZERO : generateRandom();
+        }
+        return generateRandom();
+    }
+
+    public List<Integer> getLines() {
         return this.lines;
     }
 
-    private static String decideLine(){
-        int randomValue = rnd.nextInt(RANDOM_BOUND);
-        return (randomValue == ZERO) ? SPACE : HYPHEN;
+    // Create randomValue(0,1)
+    public static int generateRandom(){
+        return rnd.nextInt(RANDOM_BOUND);
     }
 }
