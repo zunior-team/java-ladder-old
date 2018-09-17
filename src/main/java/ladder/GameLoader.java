@@ -1,5 +1,9 @@
 package ladder;
 
+import ladder.domian.LadderGame;
+import ladder.view.InputView;
+import ladder.view.OutputView;
+
 public class GameLoader {
     public static void main(String[] args) {
         InputView inputView = new InputView(System.in);

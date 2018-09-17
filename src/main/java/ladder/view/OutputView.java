@@ -1,4 +1,7 @@
-package ladder;
+package ladder.view;
+
+import ladder.domian.Ladder;
+import ladder.domian.Line;
 
 import java.util.List;
 
@@ -20,7 +23,7 @@ public class OutputView {
         System.out.println(stringifyLines(ladder.getLines()));
     }
 
-    public static String stringifyLines(List<Line> lines) {
+    private static String stringifyLines(List<Line> lines) {
         StringBuilder sb = new StringBuilder();
         for (Line l : lines) {
             sb.append(stringifyPoints(l.getPoints()));
@@ -28,7 +31,7 @@ public class OutputView {
         return sb.toString();
     }
 
-    public static String stringifyPoints(List<Boolean> points) {
+    private static String stringifyPoints(List<Boolean> points) {
         StringBuilder sb = new StringBuilder();
         sb.append((VERTICAL_BAR));
         for (Boolean point : points) {

@@ -1,10 +1,12 @@
-package ladder;
+package ladder.domian;
+
+import ladder.util.MyRandom;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Line {
-    private ArrayList<Boolean> points;
+    private List<Boolean> points;
 
     public Line(int countOfFoothold) {
         points = new ArrayList<>();
@@ -18,8 +20,4 @@ public class Line {
     public List<Boolean> getPoints(){
         return this.points;
     }
-
-
-
 }
-
