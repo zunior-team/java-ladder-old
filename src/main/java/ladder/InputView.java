@@ -1,6 +1,8 @@
 package ladder;
 
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class InputView {
@@ -10,9 +12,9 @@ public class InputView {
         sc = new Scanner(inputStream);
     }
 
-    public int getPeopleNumber(){
-        System.out.println("참여할 사람은 몇 명 인가요?");
-        return sc.nextInt();
+    public ArrayList<String> getPeopleName(){
+        System.out.println("참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요)");
+        return new ArrayList<>(Arrays.asList(sc.nextLine().split(",")));
     }
 
     public int getLadderHeight(){

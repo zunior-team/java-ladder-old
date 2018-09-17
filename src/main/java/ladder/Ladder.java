@@ -1,44 +1,20 @@
 package ladder;
 
+import java.util.ArrayList;
+
 public class Ladder {
-    private boolean[][] ladder;
+    private ArrayList<Line> lines;
 
-    public Ladder(int ladderHeight, int numberOfFoothold) {
-        ladder = new boolean[ladderHeight][numberOfFoothold];
-    }
-
-    public int getLadderHeight() {
-        return ladder.length;
-    }
-
-    public int getNumberOfFoothold() {
-        return ladder[0].length;
-    }
-
-    public boolean isFoothold(int height, int NumberOfFoothold) {
-        return ladder[height][NumberOfFoothold];
-    }
-
-    public void makeLadder() {
-        makeFirstLineFoothold();
-        makeExtraFoothold();
-    }
-
-    private void makeFirstLineFoothold() {
-        for (int i = 0; i < ladder.length; i++) {
-            ladder[i][0] = MyRandom.get();
+    public Ladder(int ladderHeight, int countOfFoothold) {
+        lines = new ArrayList<>();
+        for (int i = 0; i < ladderHeight; i++) {
+            lines.add(new Line(countOfFoothold));
         }
     }
 
-    private void makeExtraFoothold() {
-        for (int w = 1; w < ladder[0].length; w++) {
-            makeAFoothold(w);
-        }
+    public ArrayList<Line> getLines(){
+        return this.lines;
     }
 
-    private void makeAFoothold(int w) {
-        for (int h = 0; h < ladder.length; h++) {
-            ladder[h][w] = !ladder[h][w - 1] && MyRandom.get();
-        }
-    }
+
 }
