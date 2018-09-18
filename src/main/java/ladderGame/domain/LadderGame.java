@@ -1,4 +1,6 @@
-package ladderGame;
+package ladderGame.domain;
+
+import ladderGame.view.ResultView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,9 +29,5 @@ public class LadderGame {
         for(int i = 0; i < numberOfPlayer - 1; i++){
             ladder.makeLine();
         }
-    }
-
-    public static void main(String[] args) {
-        LadderGame.goGame(InputView.inputNamesOfPlayer(), InputView.inputHeightOfLadder());
     }
 }

@@ -1,6 +1,4 @@
-package ladderGame;
-
-import com.sun.org.apache.bcel.internal.generic.ARRAYLENGTH;
+package ladderGame.view;
 
 import java.util.ArrayList;
 import java.util.Arrays;

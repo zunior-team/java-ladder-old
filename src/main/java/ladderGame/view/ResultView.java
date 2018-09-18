@@ -1,4 +1,6 @@
-package ladderGame;
+package ladderGame.view;
+
+import ladderGame.domain.Ladder;
 
 import java.util.List;
 
@@ -6,6 +8,8 @@ public class ResultView {
     private static final String WALL = "|";
     private static final String SPACE = " ";
     private static final String HYPHEN = "-";
+    private static final String RESULT = "실행결과";
+    private static final String STRING_FORMAT_FIVE = "%5s";
     private static final int ZERO = 0;
     private static final int INIT_SPACE_LENGTH = 4;
     private static final int MAX_NAME_LENGTH = 5;
@@ -13,7 +17,7 @@ public class ResultView {
     private static StringBuilder sb = new StringBuilder();
 
     public static void showResult(List<String> names, List<Ladder> laddersOfGame){
-        System.out.println("실행결과");
+        System.out.println(RESULT);
         System.out.println(generateNameUI(names));
         for(Ladder ladder : laddersOfGame){
             System.out.println(generateLineUI(ladder.getLines()));
@@ -25,7 +29,7 @@ public class ResultView {
         if(word.length() > MAX_NAME_LENGTH){
             return word.substring(ZERO,MAX_NAME_LENGTH);
         }
-        return String.format("%5s", word);
+        return String.format(STRING_FORMAT_FIVE, word);
     }
 
     // Create name line for result UI

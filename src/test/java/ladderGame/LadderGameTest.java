@@ -2,9 +2,13 @@ package ladderGame;
 
 import static org.junit.Assert.*;
 import static org.assertj.core.api.Assertions.assertThat;
+
+import ladderGame.domain.Ladder;
+import ladderGame.domain.LadderGame;
+import ladderGame.view.InputView;
+import ladderGame.view.ResultView;
 import org.junit.Test;
 
-import javax.xml.transform.Result;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,6 +77,12 @@ public class LadderGameTest {
         int j = 0;
         assertThat(ResultView.decideLineUI(i)).isEqualTo("-----");
         assertThat(ResultView.decideLineUI(j)).isEqualTo("     ");
+    }
+
+    @Test
+    public void generateMultipleWord(){
+        String s = "ab";
+        assertThat(ResultView.generateMultipleWord(s,3)).isEqualTo("ababab");
     }
 
 }
