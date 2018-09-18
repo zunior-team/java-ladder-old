@@ -17,6 +17,7 @@ public class Ladder {
         this.lines.add(this.generateValidLine());
     }
 
+    // Don't overlap with line
     public int generateValidLine(){
         int size = lines.size();
         if(size > ZERO){

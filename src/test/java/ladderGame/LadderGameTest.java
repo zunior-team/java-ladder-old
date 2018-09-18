@@ -1,8 +1,10 @@
 package ladderGame;
 
 import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Test;
 
+import javax.xml.transform.Result;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +23,7 @@ public class LadderGameTest {
     public void generateRandom(){
         assertTrue(Ladder.generateRandom() == 0 || Ladder.generateRandom() == 1);
     }
+
 
     @Test
     public void generateLineUI(){
@@ -44,6 +47,32 @@ public class LadderGameTest {
                 }
             }
         }
+    }
+
+    @Test
+    public void makeNames(){
+        String s = "choising,seungmin,osing";
+        List<String> list = InputView.makeNames(s);
+        assertEquals(3, list.size());
+        assertThat(list.get(0)).isEqualTo("choising");
+        assertThat(list.get(1)).isEqualTo("seungmin");
+        assertThat(list.get(2)).isEqualTo("osing");
+    }
+
+    @Test
+    public void cutFiveLength(){
+        String s1 = "ssssssssssssssssssss";
+        assertEquals(5, ResultView.cutFiveLength(s1).length());
+        String s2 = "S";
+        assertEquals(5, ResultView.cutFiveLength(s2).length());
+    }
+
+    @Test
+    public void decideLineUI(){
+        int i = 1;
+        int j = 0;
+        assertThat(ResultView.decideLineUI(i)).isEqualTo("-----");
+        assertThat(ResultView.decideLineUI(j)).isEqualTo("     ");
     }
 
 }
