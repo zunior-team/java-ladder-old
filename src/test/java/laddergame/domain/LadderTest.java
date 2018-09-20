@@ -1,4 +1,4 @@
-package laddergame;
+package laddergame.domain;
 
 import org.junit.Before;
 import org.junit.Test;

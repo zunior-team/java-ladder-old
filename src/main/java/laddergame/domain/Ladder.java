@@ -1,4 +1,4 @@
-package laddergame;
+package laddergame.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,7 +9,7 @@ public class Ladder {
     private List<Line> ladder;
 
     public Ladder(int n, int height) {
-        this.ladder = makeLadder(2 * n - 1, height);
+        this.ladder = makeLadder(n, height);
     }
 
     public List<Line> makeLadder(int length, int height) {
