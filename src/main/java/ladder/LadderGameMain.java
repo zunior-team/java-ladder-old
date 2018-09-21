@@ -7,10 +7,10 @@ import ladder.view.ResultView;
 public class LadderGameMain {
     public static void main(String[] args) {
         String[] persons = InputView.inputPerson();
-        int radderH = InputView.inputRadderHeight();
+        int ladderH = InputView.inputRadderHeight();
 
         LadderGame gamePlay = new LadderGame();
-        gamePlay.createRadder(persons.length, radderH);
-        ResultView.print(gamePlay, persons, radderH);
+        gamePlay.createRadder(persons.length, ladderH);
+        ResultView.print(gamePlay, persons, ladderH);
     }
 }
