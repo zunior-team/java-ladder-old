@@ -23,9 +23,9 @@ public class Ladder {
 
     private boolean isMakeLine(int i, boolean preResult) {
         boolean result = false;
-        int r = generateRandomNumber();
+        int randomNumber = generateRandomNumber();
 
-        if ((r % 2 == 0) && (preResult != true)) {
+        if ((randomNumber % 2 == 0) && (preResult != true)) {
             result = true;
         }
         lines[i] = result;
