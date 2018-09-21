@@ -1,4 +1,4 @@
-package laddergame;
+package laddergame.domain;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -10,10 +10,10 @@ public class Line {
     private ArrayList<Boolean> point;
 
     public Line(int countOfPerson) {
-        this.point = getLine(countOfPerson);
+        this.point = makeLine(countOfPerson);
     }
 
-    public static ArrayList<Boolean> getLine(int person) {
+    public static ArrayList<Boolean> makeLine(int person) {
         ArrayList<Boolean> line = new ArrayList<>();
         boolean exception = false;
         for (int i = 0; i < person - 1; i++) {
@@ -42,6 +42,4 @@ public class Line {
     public ArrayList<Boolean> getLine() {
         return this.point;
     }
-
-
 }

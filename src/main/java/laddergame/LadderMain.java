@@ -1,5 +1,8 @@
 package laddergame;
 
+import laddergame.domain.LadderGame;
+import laddergame.view.*;
+
 public class LadderMain {
     public static void main(String[] args) {
         String person = InputView.getName();
