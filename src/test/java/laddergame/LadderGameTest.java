@@ -8,18 +8,45 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LadderGameTest {
+
+
+    @Test
+    public void ladderMainTest() {
+        String person = "qwe,asd,zxcs,we,qee";
+        int height = 5;
+        LadderGame ladderGame = new LadderGame(person, height);
+        ladderGame.run();
+        ResultView.printResult(ladderGame);
+    }
+
+
+    @Test
+    public void userTest() {
+        User user = new User("pobi", 1);
+        assertThat(user.getName()).isEqualTo("pobi");
+    }
+
+    /*   @Test
+       public void posittionTest() {
+           // x,y = 0,1;
+           User user = new User("pobi",1);
+           //user 포지션과 대응하는  ladder  값이 ture 그럼 포지션 값은 y좌표 1증가.
+           user.isMovePosition(true);
+           assertThat(user.getYPosition()).isEqualTo(1);
+       }
+   */
     @Test
     public void isTrue() {
         for (int i = 0; i < 5; i++) {
-            boolean random = Ladder.isTrue();
+            boolean random = Line.isTrue();
             System.out.println(random);
         }
     }
 
     @Test
     public void makeLine() {
-        ArrayList<Boolean> line  = Ladder.getOneLine(5);
-        for (int i=0; i < line.size(); i++) {
+        ArrayList<Boolean> line = Line.getLine(5);
+        for (int i = 0; i < line.size(); i++) {
             System.out.println(line.get(i));
         }
         assertThat(line.get(0)).isEqualTo(true);
@@ -38,33 +65,11 @@ public class LadderGameTest {
 
         assertThat(line).isEqualTo("-");
     }
+
     @Test
     public void isBlank() {
         String line = ResultView.lineOrBlank(false);
 
         assertThat(line).isEqualTo(" ");
-    }
-
-    @Test
-    public void ladder() {
-        ArrayList<Boolean> line  = Ladder.getOneLine(5);
-        ResultView.toStringLadder(line);
-    }
-
-    @Test
-    public void getHeight() {
-        Ladder.getHeight(3,4);
-    }
-
-    @Test
-    public void display() {
-        List<ArrayList> ladders = Ladder.getHeight(3,4);
-        ResultView.displayLadder(ladders);
-
-    }
-
-    @Test
-    public void makeLadder() {
-
     }
 }
