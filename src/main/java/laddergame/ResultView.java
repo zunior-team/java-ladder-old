@@ -4,22 +4,25 @@ import java.util.ArrayList;
 
 public class ResultView {
     private static final String VERTICAL_BAR = "|";
-    private static final String DASH = "-";
-    private static final String EMPTY_SPACE = " ";
+    private static final String DASHS = "-----";
+    private static final String EMPTY_SPACE = "     ";
 
     public static void printResult(LadderGame ladderGame) {
-        ArrayList<Ladder> ladders;
-        ladders = ladderGame.getLadders();
+        ArrayList<Line> lines;
+        lines = ladderGame.getLines();
 
-        for(int i = 0; i < ladders.size(); i++) {
-            printLine(ladders.get(i).getLines());
+        System.out.println("\n실행결과\n");
+        printPlayerName(ladderGame.getPlayers());
+        for(int i = 0; i < lines.size(); i++) {
+            printLine(lines.get(i).getLines());
         }
     }
 
-    public static void printLine(boolean[] lines) {
-        for(int i = 0; i < lines.length; i++) {
+    public static void printLine(ArrayList<Boolean> line) {
+        for(int i = 0; i < line.size(); i++) {
+
             System.out.print(VERTICAL_BAR);
-            System.out.print(printDash(lines[i]));
+            System.out.print(printDash(line.get(i)));
         }
         System.out.println(VERTICAL_BAR);
     }
@@ -27,8 +30,15 @@ public class ResultView {
     public static String printDash(boolean isLine) {
         String line = EMPTY_SPACE;
         if(isLine == true) {
-            line = DASH;
+            line = DASHS;
         }
         return line;
+    }
+
+    public static void printPlayerName(String[] names) {
+        for (String name : names) {
+            System.out.print(String.format("%-6s", name));
+        }
+        System.out.println();
     }
 }
