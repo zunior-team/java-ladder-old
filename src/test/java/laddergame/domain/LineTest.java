@@ -10,21 +10,17 @@ import static org.junit.Assert.*;
 
 public class LineTest {
 
-    List<Boolean> line;
+    Line line;
 
     @Before
     public void setUp() {
-        this.line = new ArrayList<>();
-        line.add(true);
-        line.add(false);
-        line.add(false);
-//        line.add(Line.HORIZONTAL);
-//        line.add(Line.VERTICAL);
+        line = new Line();
+        line.makeLine(3, 1);
     }
 
     @Test
     public void checkHorizon() {
-        assertEquals(false, Line.checkHorizon(true, line));
+        assertEquals(1, line.move(2));
     }
 
 

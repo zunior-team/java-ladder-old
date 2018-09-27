@@ -1,39 +1,38 @@
 package laddergame.domain;
 
+import laddergame.util.RandomGenerator;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class Line {
-    public static final boolean ABLE = true;
-    public static final boolean UNABLE = false;
 
-    private List<Boolean> line;
+    private List<Position> line;
+
+    // test용 생성자
+    public Line() {
+        this.line = new ArrayList<>();
+    }
 
     public Line(int length) {
         this.line = new ArrayList<>();
-        makeLine(length);
+        makeLine(length, RandomGenerator.makeRandNum(length));
     }
 
-    public void makeLine(int length) {
-        for (int i = 0; i < length - 1; i++) {
-            this.line.add(checkHorizon(randAble(), line));
+    public void makeLine(int length, int horizonIdx) {
+        for (int i = 0; i < length; i++) {
+            this.line.add(new Position(i, horizonIdx, length));
         }
     }
 
-    public List<Boolean> getLine() {
+    public List<Position> getLine() {
         return Collections.unmodifiableList(this.line);
     }
 
-    public static boolean randAble() {
-        return (Math.random() < 0.5) ? UNABLE : ABLE;
-    }
-
-    public static boolean checkHorizon(boolean randAble, List<Boolean> line) {
-        if (randAble == ABLE && !(line.contains(true))) { // randNum이 1이고 이미 가로선을 가지고 있으면 가로를 채운다.
-            return true;
-        }
-        return false;
+    public int move(int idx) {
+        Position p = this.line.get(idx); // 포지션
+        return p.move(idx);
     }
 
 }

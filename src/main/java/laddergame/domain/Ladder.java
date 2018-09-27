@@ -24,4 +24,13 @@ public class Ladder {
     public List<Line> getLadder() {
         return Collections.unmodifiableList(this.ladder);
     }
+
+    public int runGame(int searchIdx) {
+        int resultIdx = searchIdx;
+
+        for (Line line : this.ladder) {
+            resultIdx = line.move(resultIdx);
+        }
+        return resultIdx;
+    }
 }

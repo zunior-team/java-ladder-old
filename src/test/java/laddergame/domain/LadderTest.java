@@ -13,6 +13,7 @@ public class LadderTest {
         this.ladder = new Ladder(2, 3);
     }
 
+    // get 메소드로 꺼낸 list에 값 삽입이 안되는지 확인하는 테스트
     @Test
     public void getLadder() {
         boolean exceptionThrown = false;
