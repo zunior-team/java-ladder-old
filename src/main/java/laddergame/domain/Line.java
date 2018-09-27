@@ -1,8 +1,8 @@
-package laddergame;
+package laddergame.domain;
+
+import laddergame.util.Util;
 
 import java.util.ArrayList;
-
-import static laddergame.Util.generateRandomNumber;
 
 public class Line {
     private ArrayList<Boolean> points = new ArrayList<>();
@@ -18,7 +18,7 @@ public class Line {
     public void makeLine(int countOfPerson) {
         boolean preResult = false;
 
-        for(int pos = 0; pos < countOfPerson - 1; pos++) {
+        for (int pos = 0; pos < countOfPerson - 1; pos++) {
             preResult = isMakeLine(preResult);
             points.add(preResult);
         }
@@ -26,9 +26,9 @@ public class Line {
 
     public static boolean isMakeLine(boolean preResult) {
         boolean result = false;
-        int randomNumber = generateRandomNumber();
+        int randomNumber = Util.generateRandomNumber();
 
-        if ((randomNumber % 3 != 0) && (preResult != true)) {
+        if (((randomNumber % 3) != 0) && (preResult != true)) {
             result = true;
         }
 

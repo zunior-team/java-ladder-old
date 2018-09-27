@@ -1,9 +1,10 @@
-package laddergame;
+package laddergame.util;
 
 import java.util.Random;
 
 public class Util {
-    private static final int RANGE = 9;
+    public static final int RANGE = 9;
+    public static final String COMMA = ",";
 
     public static int generateRandomNumber() {
         Random random = new Random();
