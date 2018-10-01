@@ -5,7 +5,6 @@ import java.util.*;
 public class LadderLine {
 	private int countOfPerson;
 	private List<Boolean> points;
-	private List<Pointer> pointers;
 
 	public LadderLine(int countOfPerson) {
 		this.countOfPerson = countOfPerson;
@@ -14,20 +13,12 @@ public class LadderLine {
 	public LadderLine(int countOfPerson, List<Participation> participations) {
 		this(countOfPerson);
 		this.points = new ArrayList<>();
-		initPointers(participations);
 	}
 
 	/* 테스트를 위한 생성자! */
 	public LadderLine(int countOfPerson, List<Participation> participations, List<Boolean> points) {
 		this(countOfPerson);
 		this.points = points;
-	}
-
-	private void initPointers(List<Participation> participations) {
-		pointers = new ArrayList<>();
-		for(Participation participation : participations) {
-			pointers.add(participation.getPointer());
-		}
 	}
 	
 	public void addPoint(boolean isBar) {
@@ -69,29 +60,12 @@ public class LadderLine {
 		return Collections.unmodifiableList(points);
 	}
 
-	public boolean isMoveLeft(int pointX) {
-		if(pointX == 0) {
-			/* 좌측으로 이동이 불가능할 경우 */
-			return false;
-		}
-		return points.get(pointX);
-	}
-
-	public boolean isMoveRight(int pointX) {
-		if(pointX == points.size() - 1) {
-			/* 우측으로 이동이 불가능할 경우 */
-			return false;
-		}
-		return points.get(pointX + 1);
-	}
-
-	public void moveDistance(int index, int pointX) {
-		if(isMoveLeft(pointX)) {
-			pointers.get(index).moveX(-1);
-		}
-
-		if(isMoveRight(pointX)) {
-			pointers.get(index).moveX(1);
+	public void moveDistance(Participation participation) {
+		if(participation.getPointer().isMoveLeft(points)) {
+			participation.getPointer().moveX(-1);
+		} else if(participation.getPointer().isMoveRight(points)) {
+			participation.getPointer().moveX(1);
 		}
 	}
+
 }
