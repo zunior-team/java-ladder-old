@@ -28,10 +28,13 @@ public class Line {
         boolean result = false;
         int randomNumber = Util.generateRandomNumber();
 
-        if (((randomNumber % 3) != 0) && (preResult != true)) {
+        if (((randomNumber % 3) != 0) && (!preResult)) {
             result = true;
         }
-
         return result;
+    }
+
+    public void move(Player player) {
+        player.move(points);
     }
 }

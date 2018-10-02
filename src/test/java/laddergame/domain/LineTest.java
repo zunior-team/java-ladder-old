@@ -1,6 +1,5 @@
 package laddergame.domain;
 
-import laddergame.domain.Line;
 import org.junit.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;

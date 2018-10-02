@@ -1,6 +1,5 @@
 package laddergame.view;
 
-import laddergame.view.InputView;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
