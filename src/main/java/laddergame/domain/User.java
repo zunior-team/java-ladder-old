@@ -1,26 +1,38 @@
 package laddergame.domain;
 
+import java.util.Objects;
+
 public class User {
     private String name;
-    private  int position;
 
-    public User(String name,int position) {
+    public User() {
+
+    }
+
+    public User(String name) {
         this.name = name;
-        this.position = position;
     }
 
     public String getName() {
         return this.name;
     }
-    /*
-    //오른쪽확인 있으면(y값 증가)
 
-    // 왼쪽확인 있으면 (y값 감소)
-
-    public void isMovePosition(boolean b) {
-        // true 좌우든 움직인다. 일단 y 증가 먼저 구현
-
-        //false 아래로 내려간다. ( x값 증가)
+    @Override
+    public String toString() {
+        return this.name;
     }
-*/
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(name, user.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
+    }
+
 }
