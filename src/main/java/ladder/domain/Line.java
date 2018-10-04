@@ -1,81 +1,68 @@
 package ladder.domain;
 
-import ladder.utils.GetRandomVal;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class Line {
-    private static final int RANDOM_PASS = 5;
-    private List<Integer> currentPositions = new ArrayList<>();
-    private ArrayList<Boolean> points = new ArrayList<>();
-    private int countOfPerson;
+    public List<Point> points = new ArrayList<>();
 
-    public Line(int countOfPerson, List<Integer> prevPositions) {
-        this.countOfPerson = countOfPerson;
-        initPositions(prevPositions);
+    Line(int countOfPerson) {
+        Point point = initFirst();
+        point = initMiddle(point, countOfPerson);
+        initLast(point);
     }
 
-    public void initPositions(List<Integer> prevPositions) {
-        for (int i = 0; i < countOfPerson; i++) {
-            if(prevPositions == null) {
-                currentPositions.add(i);
-                continue;
-            }
-            currentPositions.add(prevPositions.get(i));
+    private Point initFirst() {
+        Point point = Point.first();
+        points.add(point);
+        return point;
+    }
+
+    private Point initMiddle(Point point, int countOfPerson) {
+        for (int i = 1; i < countOfPerson - 1; i++) {
+            point = Point.middle(point);
+            points.add(point);
         }
+        return point;
     }
 
-    public void pointStore() {
+    private void initLast(Point point) {
+        point = Point.last(point);
+        points.add(point);
+    }
+
+    public int move(int index) {
+        return Point.move(points.get(index));
+    }
+
+    public List<Boolean> valueToDto(int countOfPerson) {
+        List<Boolean> lineValue = new ArrayList<>();
         for (int i = 0; i < countOfPerson - 1; i++) {
-            points.add(judgeEachLadder(GetRandomVal.getRandomVal(), i));
+            Boolean val = Point.showValue(points.get(i));
+            lineValue.add(val);
         }
+        return lineValue;
     }
 
-    public boolean judgeEachLadder(int randomVal, int index) {
-        if (isBeyondVal(randomVal) && hasNoPreVal(index)) {
-            return true;
-        }
-        return false;
+    @Override
+    public String toString() {
+        return "Line{" +
+                "points=" + points +
+                '}';
     }
 
-    public boolean isBeyondVal(int randomValue) {
-        return randomValue >= RANDOM_PASS;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Line line = (Line) o;
+        return Objects.equals(points, line.points);
     }
 
-    public boolean hasNoPreVal(int index) {
-        if (index != 0) {
-            return !points.get(index - 1);
-        }
-        return true;
-    }
-
-    public boolean hasLadder(int index) {
-        return points.get(index);
-    }
-
-    public void swapPositions() {
-        for (int i = 0; i < points.size(); i++) {
-            checkSwap(points.get(i), i);
-        }
-    }
-
-    public void checkSwap(boolean point, int index) {
-        if (point) {
-            swap(index);
-        }
-        return;
-    }
-
-    public void swap(int i) {
-        int temp = currentPositions.get(i);
-        currentPositions.set(i, currentPositions.get(i + 1));
-        currentPositions.set(i + 1, temp);
-    }
-
-    public List<Integer> getCurrentPositions() {
-        return currentPositions;
+    @Override
+    public int hashCode() {
+        return Objects.hash(points);
     }
 
 }
