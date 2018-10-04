@@ -19,6 +19,5 @@ public class Ladder {
         for (int i = 0; i < height; i++) {
             ladders.get(i).oneLine(people);
         }
-//        System.out.println("ladders:::" + ladders.toString());
     }
 }
