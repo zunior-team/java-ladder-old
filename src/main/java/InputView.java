@@ -3,9 +3,23 @@ import java.util.Scanner;
 public class InputView {
     static Scanner scanner = new Scanner(System.in);
 
-    public static int humans() {
-        System.out.println("참여할 사람은 몇 명 인가요?");
-        return scanner.nextInt();
+    public static String[] humans() {
+        System.out.println("이름을 적어주세요.(이름을 나눌 때 ','를 사용해주시며, 5글자 이하로 적어주세요.)");
+        String[] name = scanner.next().split(",");
+        while (namesNum(name)) {
+            System.out.println("다시 입력해주세요.");
+            name = scanner.next().split(",");
+        }
+        return name;
+    }
+
+    public static boolean namesNum(String[] names) {
+        for (int i = 0; i < names.length; i++) {
+            if (names[i].length() > 5) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static int height() {

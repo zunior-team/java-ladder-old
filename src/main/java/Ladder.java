@@ -15,9 +15,9 @@ public class Ladder {
         return ladders;
     }
 
-    public void makeLadders(int people, int height) {
+    public void makeLadders(String[] people, int height) {
         for (int i = 0; i < height; i++) {
-            ladders.get(i).oneLine(people);
+            ladders.get(i).oneLine(people.length);
         }
     }
 }
