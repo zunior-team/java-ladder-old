@@ -1,3 +1,8 @@
+package view;
+
+import ladder.Ladder;
+import ladder.Line;
+
 import java.util.List;
 
 public class PrintView {
