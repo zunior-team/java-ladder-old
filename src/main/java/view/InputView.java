@@ -28,4 +28,30 @@ public class InputView {
         System.out.println("최대 사다리 높이는 몇 개인가요?");
         return scanner.nextInt();
     }
+
+    public static String[] result(String[] names) {
+        System.out.println("결과 값을 입력해주세요.");
+        String[] result = scanner.next().split(",");
+        while (resultNum(names, result)) {
+            System.out.println("이름 값과 똑같은 갯수 만큼 만들어주세요.");
+            result = scanner.next().split(",");
+        }
+        return result;
+    }
+
+    public static boolean resultNum(String[] names, String[] result) {
+        for (int i = 0; i < names.length; i++) {
+            if (result.length == i && result[i].length() > 5) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static String showResult() {
+        System.out.println("결과를 보고 싶은 사람은?");
+        String userResult = scanner.next();
+        return userResult;
+    }
+
 }

@@ -6,13 +6,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
-
 public class LineTest {
     Line line;
 
     @Before
-    public void setup() {
-        line = new Line();
+    public void setup(int people) {
+        line = new Line(people);
     }
 
     // Line 객체에서 선을 그릴 수 있는지 여부를 판단하는 로직에 대한 단위 테스트를 반드시 추가한다.
@@ -25,7 +24,6 @@ public class LineTest {
         points.set(1, false);
         assertThat(points.get(1)).isEqualTo(false);
     }
-
 
     @After
     public void teardrop() {

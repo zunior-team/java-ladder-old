@@ -18,7 +18,16 @@ public class InputViewTest {
     public void namesNum() {
         String[] names = new String[]{"dae"};
         boolean n = input.namesNum(names);
-        assertThat(n).isEqualTo(false);
+        assertThat(n).isFalse();
+    }
+
+    // 리전트 값이 네임 값과 값이 같지 않을 경우 false
+    @Test
+    public void result() {
+        String[] result = new String[]{"a,b,c,d,e,f"};
+        String[] names = new String[]{"a,b,c,d"};
+        boolean bo = input.resultNum(result, names);
+        assertThat(bo).isFalse();
     }
 
     @After

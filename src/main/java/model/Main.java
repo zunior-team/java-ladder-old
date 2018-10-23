@@ -6,10 +6,11 @@ import view.PrintView;
 
 public class Main {
     public static void main(String[] args) {
-        String[] name = InputView.humans();
+        String[] names = InputView.humans();
         int height = InputView.height();
-        Ladder ladder = new Ladder(height);
-        ladder.makeLadders(name, height);
-        PrintView.totalPrint(ladder, name);
+        Ladder ladder = new Ladder(height, names);
+        ladder.makeLadders();
+
+        PrintView.totalPrint(ladder, names);
     }
 }
