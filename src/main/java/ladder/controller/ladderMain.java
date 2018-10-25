@@ -15,12 +15,7 @@ public class ladderMain {
 
         int temporary = iv.userInput();
         int height = iv.heightInput();
-
         ArrayList<ArrayList<Boolean>> user = new ArrayList<>(m.userRepetition(temporary, height));
-
-        System.out.println("객체확인"+user);
-        System.out.println("====================");
-
         rv.transverse(user);
     }
 }
