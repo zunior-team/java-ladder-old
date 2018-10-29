@@ -3,14 +3,14 @@ package ladder.view;
 import java.util.Scanner;
 
 public class InputView {
-    private Scanner s = new Scanner(System.in);
+    private static Scanner s = new Scanner(System.in);
 
-    public int userInput() {
-        System.out.println("참여할 사람은 몇 명 인가요?");
-        return s.nextInt();
+    public static String userInput() {
+        System.out.println("참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요)");
+        return s.next();
     }
 
-    public int heightInput() {
+    public static int heightInput() {
         System.out.println("최대 사다리 높이는 몇 개인가요?");
         return s.nextInt();
     }
