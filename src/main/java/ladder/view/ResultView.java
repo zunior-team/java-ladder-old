@@ -17,7 +17,7 @@ public class ResultView {
         System.out.println();
     }
 
-    public static void transverse(ArrayList<Ladder> user, String[] name) {
+    public static void transverse(ArrayList<Ladder> user) {
         for (int i = 0; i < user.size(); i++) {
             repeatOutput(user.get(i).getValue());
         }
@@ -27,14 +27,15 @@ public class ResultView {
         for (int j = 0; j < user.size(); j++) {
             String inputBlank = BLANK;
             System.out.print(LADDER_HEIGHT);
-            inputBlank = Process(user, j, inputBlank);
+            inputBlank = process(user.get(j));
             System.out.print(inputBlank);
         }
         System.out.println(LADDER_HEIGHT);
     }
 
-    private static String Process(ArrayList<Boolean> user, int j, String inputBlank) {
-        if (user.get(j) == true) {
+     public static String process(boolean user) {
+        String inputBlank = BLANK;
+        if (user == true) {
             inputBlank = LINK;
         }
         return inputBlank;

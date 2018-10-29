@@ -22,6 +22,6 @@ public class LadderMain {
 
         int height = InputView.heightInput();
         ResultView.nameOutput(name);
-        ResultView.transverse(m.ladderObject(height, inputName), name);
+        ResultView.transverse(m.ladderObject(height, inputName));
     }
 }

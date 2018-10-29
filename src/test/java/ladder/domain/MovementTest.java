@@ -11,6 +11,11 @@ public class MovementTest {
     public void 익셉션확인() {
         String a = "a,b,cdefghi";
         mt.nameCut(a);
+
+    }  @Test
+    public void 동작확인() {
+        String a = "a,b,cde";
+        mt.nameCut(a);
     }
 
     // alt + insert
@@ -20,4 +25,6 @@ public class MovementTest {
         int b = 3;
         assertThat(mt.ladderObject(b, name).size()).isEqualTo(3);
     }
+
+
 }
