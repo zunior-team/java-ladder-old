@@ -1,4 +1,4 @@
-package model;
+package model.player;
 
 import exception.PlayersCreateException;
 
@@ -11,7 +11,7 @@ public class Players {
 
     private Players(final List<String> names){
         this.players = names.stream()
-                .map(Player::new)
+                .map(Player::create)
                 .collect(Collectors.toList());
     }
 
