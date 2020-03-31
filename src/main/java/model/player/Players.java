@@ -25,4 +25,15 @@ public class Players {
             throw new PlayersCreateException("플레이어를 생성하지 못합니다.");
         }
     }
+
+    public int getPlayerCount(){
+        return this.players.size();
+    }
+
+//    public int getMaxLengthName(){
+//        return this.players.stream()
+//                .mapToInt(Player::nameLength)
+//                .max()
+//                .orElseThrow(NoSuchElementException::new);
+//    }
 }

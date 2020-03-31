@@ -14,8 +14,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 @DisplayName("플레이어는")
 class PlayerTest {
 
-
-
     @DisplayName("생성시 에러가 발생한다.")
     @MethodSource("provideName")
     @ParameterizedTest

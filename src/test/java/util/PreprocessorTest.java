@@ -35,7 +35,6 @@ class PreprocessorTest {
     @ParameterizedTest
     @NullAndEmptySource
     void splitLineBySeparatorExceptionTest1(String line){
-
         // when & then
         assertThatThrownBy(() -> Preprocessor.splitLineBySeparator(line, Preprocessor.COMMA))
                 .isInstanceOf(PreprocessorException.class);
@@ -45,7 +44,6 @@ class PreprocessorTest {
     @ParameterizedTest
     @NullAndEmptySource
     void splitLineBySeparatorExceptionTest2(String separator){
-
         // when & then
         assertThatThrownBy(() -> Preprocessor.splitLineBySeparator("PARK, KIM, YUN, JEON", separator))
                 .isInstanceOf(PreprocessorException.class);

@@ -12,7 +12,7 @@ public class LadderGame {
                 .splitLineBySeparator(line, Preprocessor.COMMA));
 
         final int height = InputView.inputLadderHeight();
-        final Ladder ladder = Ladder.of(height);
+        final Ladder ladder = Ladder.of(players, height);
 
     }
 }
