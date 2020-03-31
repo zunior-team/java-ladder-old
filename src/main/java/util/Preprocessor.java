@@ -9,11 +9,12 @@ import java.util.List;
 public class Preprocessor {
 
     public static final String COMMA = ",";
+    private static final String WHITE_SPACE = "\\s";
 
     public static List<String> splitLineBySeparator(final String line, final String separator){
         validate(line, separator);
         return Arrays.asList(
-                line.split(separator));
+                line.replaceAll(WHITE_SPACE, "").split(separator));
     }
 
     private static void validate(String line, String separator){
