@@ -51,7 +51,7 @@ class LineTest {
 
             arguments(Players.create(Arrays.asList("KIM", "PARK", "LEE")),
                     new HashSet<String>(){{
-                        add("|-----|     ");
+                        add("|-----|     |");
                         add("|     |-----|");
                         add("|     |     |");
             }}),
