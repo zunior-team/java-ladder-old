@@ -4,12 +4,10 @@ import model.player.Players;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Line {
-
-    private static final Random random = new Random();
 
     private static final int START_POINT = 0;
     private static final int DEFAULT_INTERVAL = 5;
@@ -42,12 +40,11 @@ public class Line {
 
 
     private void createIntervalByPoint(Point.State state){
-        for(int i = 0; i < DEFAULT_INTERVAL; i++){
-            points.add(new Point(state));
-        }
+        IntStream.rangeClosed(1, DEFAULT_INTERVAL)
+                .forEach(i -> points.add(new Point(state)));
     }
 
-    public List<String> getDisplays(){
+    public List<String> toDisplays(){
         return points.stream()
                 .map(Point::getDisplay)
                 .collect(Collectors.toList());

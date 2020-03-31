@@ -1,5 +1,6 @@
 package console;
 
+import dto.LadderResultDto;
 import model.ladder.Ladder;
 import model.player.Players;
 import util.Preprocessor;
@@ -14,5 +15,6 @@ public class LadderGame {
         final int height = InputView.inputLadderHeight();
         final Ladder ladder = Ladder.of(players, height);
 
+        ResultView.printLadderResult(new LadderResultDto(players, ladder));
     }
 }

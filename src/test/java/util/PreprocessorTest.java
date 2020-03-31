@@ -20,6 +20,7 @@ class PreprocessorTest {
         "'1^2^3^4^5', '\\^', 5",
         "'1|2|3|4|5', '\\|', 5",
         "'1$2$3$4$5', '\\$', 5",
+        "'1, 2 , 3 , 4 , 5', ',', 5",
     })
     @ParameterizedTest
     void splitLineBySeparatorTest(String line, String separator, int expectedLength) {

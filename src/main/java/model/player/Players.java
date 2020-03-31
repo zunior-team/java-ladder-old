@@ -2,6 +2,7 @@ package model.player;
 
 import exception.PlayersCreateException;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,10 +31,10 @@ public class Players {
         return this.players.size();
     }
 
-//    public int getMaxLengthName(){
-//        return this.players.stream()
-//                .mapToInt(Player::nameLength)
-//                .max()
-//                .orElseThrow(NoSuchElementException::new);
-//    }
+    public List<String> toNames(){
+        return Collections.unmodifiableList(
+                players.stream()
+                .map(Player::name)
+                .collect(Collectors.toList()));
+    }
 }

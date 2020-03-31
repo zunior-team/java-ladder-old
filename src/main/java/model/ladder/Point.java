@@ -6,7 +6,7 @@ public class Point {
 
     private static final Random random = new Random();
     private static final State[] STATES = {State.LINE, State.SPACE};
-    private State state = State.SPACE;
+    private final State state;
 
     public Point(State state) {
         this.state = state;
