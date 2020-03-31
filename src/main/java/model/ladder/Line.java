@@ -17,7 +17,7 @@ public class Line {
 
     public static Line of(Players players) {
         final Line line = new Line();
-        line.createLineByPlayers(players.getPlayerCount() - 1, START_POINT);
+        line.createLineByPlayers((players.getPlayerCount() - 1), START_POINT);
         return line;
     }
 
