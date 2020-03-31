@@ -20,7 +20,6 @@ class PlayerTest {
     @MethodSource("provideName")
     @ParameterizedTest
     void createExceptionTest(String name) {
-
         // when & then
         assertThatThrownBy(() -> Player.create(name))
                 .isInstanceOf(PlayersCreateException.class);

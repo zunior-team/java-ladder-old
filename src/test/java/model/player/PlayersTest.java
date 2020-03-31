@@ -20,7 +20,6 @@ class PlayersTest {
     @ParameterizedTest
     @MethodSource("provideNames")
     void createTest(List<String> names) {
-
         // when
         Players players = Players.create(names);
 
