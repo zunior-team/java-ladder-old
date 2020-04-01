@@ -14,22 +14,20 @@ public class LadderGame {
     public static final int MINIMUM_MAX_HEIGHT = 1;
     public static final int MINIMUM_PARTICIPANTS = 2;
     private List<Line> lines;
-    private List<String> names;
 
     private LadderGame(List<String> names, int maxHeight) {
         validateInputs(names, maxHeight);
 
         final int countOfPerson = names.size();
 
-        this.names = Collections.unmodifiableList(names);
         this.lines = names.stream()
                 .map(count -> Line.of(countOfPerson))
                 .collect(collectingAndThen(toList(),
                         Collections::unmodifiableList));
     }
 
-    public Ladder ladder() {
-        return Ladder.of(names, lines);
+    public List<Line> lines() {
+        return Collections.unmodifiableList(lines);
     }
 
     private void validateInputs(List<String> names, int maxHeight) {

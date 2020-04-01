@@ -55,7 +55,7 @@ class LadderGameTest {
     }
 
     @Test
-    @DisplayName("사다리 게임으로부 사다리를 받아올 수 있다.")
+    @DisplayName("사다리 게임으로부터 사다리를 받아올 수 있다.")
     void getLadderTest() {
         //given
         List<String> names = Lists.newArrayList("junwoo", "wonoh", "changoo", "sungdong");
@@ -63,9 +63,10 @@ class LadderGameTest {
         final LadderGame ladderGame = LadderGame.of(names, maxHeight);
 
         //when
-        final Ladder ladder = ladderGame.ladder();
+        final List<Line> lines = ladderGame.lines();
 
         //then
-        assertThat(ladder).isNotNull();
+        assertThat(lines).isNotNull()
+                .hasSize(maxHeight-1);
     }
 }

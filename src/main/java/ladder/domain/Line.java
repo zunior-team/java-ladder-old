@@ -9,12 +9,13 @@ import static ladder.domain.LadderGame.MINIMUM_PARTICIPANTS;
 
 public class Line {
     private List<Boolean> points = new ArrayList<>();
-    private Random random = new Random(System.currentTimeMillis());
+    private Random random = new Random(System.nanoTime());
 
     private Line(int countOfPerson) {
+        random.setSeed(System.nanoTime());
         validateCountOfPerson(countOfPerson);
         points.add(random.nextBoolean());
-        while (points.size() != countOfPerson) {
+        while (points.size() != countOfPerson - 1) {
             addRandomValue();
         }
     }
