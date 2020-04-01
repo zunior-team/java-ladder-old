@@ -29,7 +29,7 @@ class LadderGameTest {
     @Test
     @DisplayName("참여자는 두명 이상이어야 한다")
     void constructParticipantsTest() {
-        //given
+        //givens
         List<String> names = Lists.newArrayList("junwoo");
         int maxHeight = 5;
 
@@ -45,7 +45,7 @@ class LadderGameTest {
     void constructMaxHeightTest() {
         //given
         List<String> names = Lists.newArrayList("junwoo", "wonoh", "changoo", "sungdong");
-        int maxHeight = 1;
+        int maxHeight = 0;
 
 
         //then
