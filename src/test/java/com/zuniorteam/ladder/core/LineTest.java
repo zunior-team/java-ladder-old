@@ -24,6 +24,20 @@ class LineTest {
         assertThrows(AssertionError.class, () -> new Line(null));
     }
 
+    @DisplayName("생성, 실패, 이어지는 bridge가 있는 경우")
+    @Test
+    void testNewInstance03(){
+        //given
+        final List<Boolean> points = new ArrayList<>();
+        points.add(true);
+        points.add(true);
+        points.add(true);
+        points.add(false);
+
+        //when, then
+        assertThrows(IllegalArgumentException.class, () -> new Line(points));
+    }
+
     @DisplayName("getLength()")
     @Test
     void testGetLength(){

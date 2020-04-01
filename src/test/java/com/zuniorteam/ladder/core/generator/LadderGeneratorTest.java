@@ -1,13 +1,12 @@
 package com.zuniorteam.ladder.core.generator;
 
 import com.zuniorteam.ladder.core.Line;
-import org.assertj.core.api.Condition;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.util.List;
-import java.util.function.Predicate;
+import java.util.Random;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -33,7 +32,7 @@ class LadderGeneratorTest {
         //given
         final int height = 4;
         final int lineLength = 5;
-        final LadderGenerator ladderGenerator = new LadderGenerator(new LineGenerator());
+        final LadderGenerator ladderGenerator = new LadderGenerator(new LineGenerator(new Random()));
 
         //when
         final List<Line> ladder = ladderGenerator.generate(lineLength, height);

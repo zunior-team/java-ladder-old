@@ -13,10 +13,13 @@ public class StringUtils {
         return Objects.isNull(str) || str.trim().isEmpty();
     }
 
-    public static String fillRest(String base, char token, int length) {
+    public static String fill(Character token, int length) {
+        return StringUtils.fill("", token, length);
+    }
+
+    public static String fill(String base, Character token, int length) {
         return base + IntStream.range(base.length(), length)
-                .mapToObj(i -> token)
-                .map(String::valueOf)
+                .mapToObj(i -> token.toString())
                 .collect(Collectors.joining(""));
     }
 }

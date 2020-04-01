@@ -7,8 +7,10 @@ import com.zuniorteam.ladder.core.generator.LineGenerator;
 import com.zuniorteam.ladder.view.InputRender;
 import com.zuniorteam.ladder.view.console.InputConsole;
 import com.zuniorteam.ladder.view.console.OutputConsole;
+import com.zuniorteam.ladder.view.console.OutputDrawer;
 
 import java.util.List;
+import java.util.Random;
 
 public class GameBoard {
 
@@ -16,25 +18,16 @@ public class GameBoard {
     private final OutputConsole outputConsole = new OutputConsole();
 
     public void playGame() {
-        final List<User> users = getUsers(inputConsole);
-        final int height = getHeight(inputConsole);
+        final List<User> users = InputRender.getUsers(inputConsole.readUsernames());
+        final int ladderHeight = InputRender.getLadderHeight(inputConsole.readLadderHeight());
 
-        final LadderGenerator ladderGenerator = new LadderGenerator(new LineGenerator());
+        final LadderGenerator ladderGenerator = new LadderGenerator(new LineGenerator(new Random()));
+        final List<Line> ladder = ladderGenerator.generate(users.size(), ladderHeight);
 
-        final List<Line> ladder = ladderGenerator.generate(users.size(), height);
+        final String drawUser = OutputDrawer.drawUsers(users, User.MAX_USERNAME_LENGTH);
+        final String drawLadder = OutputDrawer.drawLadder(ladder, User.MAX_USERNAME_LENGTH);
 
-        outputConsole.drawResult(users, ladder);
-
-
+        outputConsole.writeResult(drawUser, drawLadder);
     }
-
-    private List<User> getUsers(InputConsole inputConsole) {
-        return InputRender.getUsers(inputConsole.getUsernames());
-    }
-
-    private int getHeight(InputConsole inputConsole) {
-        return InputRender.getHeight(inputConsole.getHeight());
-    }
-
 
 }

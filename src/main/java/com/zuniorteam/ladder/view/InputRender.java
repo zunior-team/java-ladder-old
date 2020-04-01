@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 public class InputRender {
 
-    public static final String USERNAME_SPLIT_TOKEN = ",";
+    private static final String USERNAME_SPLIT_TOKEN = ",";
 
     public static List<User> getUsers(String usernames) {
         return Arrays.stream(usernames.split(USERNAME_SPLIT_TOKEN))
@@ -16,8 +16,8 @@ public class InputRender {
                 .collect(Collectors.toList());
     }
 
-    public static int getHeight(int height){
-        if(height < 0){
+    public static int getLadderHeight(int height) {
+        if (height < 0) {
             throw new IllegalArgumentException("사다리 높이는 0보다 작을 수 없습니다.");
         }
 

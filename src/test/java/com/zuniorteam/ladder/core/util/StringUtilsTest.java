@@ -25,11 +25,11 @@ class StringUtilsTest {
         assertThat(StringUtils.isEmpty(str)).isFalse();
     }
 
-    @DisplayName("fillRest()")
+    @DisplayName("fill Test")
     @ParameterizedTest
     @CsvSource(value = {"a, @, 5, a@@@@", "abc, #, 5, abc##", "abcde, #, 5, abcde"})
     void testFillRest(String base, char token, int length, String expected){
-        assertThat(StringUtils.fillRest(base,token,length)).isEqualTo(expected);
+        assertThat(StringUtils.fill(base,token,length)).isEqualTo(expected);
     }
 
 

@@ -4,12 +4,13 @@ import com.zuniorteam.ladder.core.util.StringUtils;
 
 public class User {
 
-    private static final int MAX_USERNAME_LENGTH = 5;
+    public static final int MAX_USERNAME_LENGTH = 5;
 
     private final String username;
 
     public User(String username) {
         validate(username);
+
         this.username = username;
     }
 

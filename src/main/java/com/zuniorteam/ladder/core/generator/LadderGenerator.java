@@ -18,7 +18,7 @@ public class LadderGenerator {
 
     public List<Line> generate(int lineLength, int height) {
         return IntStream.range(0, height)
-                .mapToObj(i -> lineGenerator.newLine(lineLength))
+                .mapToObj(i -> lineGenerator.generate(lineLength))
                 .collect(Collectors.toList());
     }
 
