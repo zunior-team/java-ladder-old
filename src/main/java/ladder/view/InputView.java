@@ -5,6 +5,8 @@ import com.google.common.collect.Lists;
 import java.util.List;
 import java.util.Scanner;
 
+import static java.lang.Integer.*;
+
 public class InputView {
 
     public static final String COMMA = ",";
@@ -17,7 +19,7 @@ public class InputView {
 
     public int inputMaxHeight() {
         System.out.println("최대 사다리 높이는 몇 개인가요?");
-        return scanner.nextInt();
+        return parseInt(inputLine());
     }
 
     private String inputLine() {
