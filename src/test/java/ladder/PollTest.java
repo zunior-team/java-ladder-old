@@ -17,7 +17,7 @@ class PollTest {
         Poll poll = Poll.init(pollCreateStrategy);
 
         assertThat(poll).isNotNull();
-        assertThat(poll.isExist()).isEqualTo(pollCreateStrategy.returnCreateOrNo());
+        assertThat(poll.isExist()).isEqualTo(pollCreateStrategy.decideCreateOrNot());
     }
 
     private static Stream initTest() {

@@ -10,7 +10,7 @@ public class Poll {
     public static Poll init(PollCreateStrategy pollCreateStrategy) {
         Poll poll = new Poll();
 
-        poll.exist = pollCreateStrategy.returnCreateOrNo();
+        poll.exist = pollCreateStrategy.decideCreateOrNot();
 
         return poll;
     }
