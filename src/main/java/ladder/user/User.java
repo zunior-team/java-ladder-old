@@ -2,5 +2,8 @@ package ladder.user;
 
 public class User {
     private String name;
-    private int position;
+
+    public User(String name) {
+        this.name = name;
+    }
 }
