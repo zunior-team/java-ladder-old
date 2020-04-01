@@ -1,6 +1,7 @@
 package ladder.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -16,6 +17,10 @@ public class Line {
         while (points.size() != countOfPerson) {
             addRandomValue();
         }
+    }
+
+    public List<Boolean> points() {
+        return Collections.unmodifiableList(points);
     }
 
     private void validateCountOfPerson(int countOfPerson) {

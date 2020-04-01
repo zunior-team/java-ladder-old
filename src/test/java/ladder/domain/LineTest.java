@@ -3,11 +3,12 @@ package ladder.domain;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @DisplayName("라인 객체 테스")
 class LineTest {
@@ -33,5 +34,17 @@ class LineTest {
         assertThrows(IllegalArgumentException.class,
                 //when
                 () -> Line.of(countOfPerson));
+    }
+
+    @ParameterizedTest
+    @DisplayName("라인의 이웃하는 포인트가 연속으로 true 일수는 없다")
+    @ValueSource(ints = {3, 4, 5})
+    void testPoint(int countOfPerson) {
+        //when
+        final Line line = Line.of(countOfPerson);
+
+        //then
+        final List<Boolean> points = line.points();
+        assertThat(points).doesNotContainSequence(true, true);
     }
 }
