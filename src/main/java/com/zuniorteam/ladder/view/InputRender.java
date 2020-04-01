@@ -16,11 +16,11 @@ public class InputRender {
                 .collect(Collectors.toList());
     }
 
-    public static int getLadderHeight(int height) {
-        if (height < 0) {
+    public static int getLadderHeight(int ladderHeight) {
+        if (ladderHeight < 0) {
             throw new IllegalArgumentException("사다리 높이는 0보다 작을 수 없습니다.");
         }
 
-        return height;
+        return ladderHeight;
     }
 }

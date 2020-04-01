@@ -14,15 +14,16 @@ public class OutputDrawer {
     private static final String NEW_LINE = "\n";
 
     private static final Character BRIDGE_TOKEN = '-';
-    private static final Character UNBRIDGE_TOKEN = ' ';
+    private static final Character BLANK_TOKEN = ' ';
     private static final Character BORDER_TOKEN = '|';
 
     public static String drawUsers(List<User> users, int bridgeLength) {
-        return StringUtils.fill(UNBRIDGE_TOKEN, bridgeLength)
-                + users.stream()
+        final String drawUsers = users.stream()
                 .map(User::getUsername)
-                .map(username -> StringUtils.fill(username, UNBRIDGE_TOKEN, bridgeLength))
-                .collect(joining(UNBRIDGE_TOKEN.toString()));
+                .map(username -> StringUtils.fill(username, BLANK_TOKEN, bridgeLength))
+                .collect(joining(BLANK_TOKEN.toString()));
+
+        return StringUtils.fill(BLANK_TOKEN, bridgeLength) + drawUsers;
     }
 
     public static String drawLadder(List<Line> ladder, int bridgeLength) {
@@ -44,6 +45,6 @@ public class OutputDrawer {
             return StringUtils.fill(BRIDGE_TOKEN, bridgeLength);
         }
 
-        return StringUtils.fill(UNBRIDGE_TOKEN, bridgeLength);
+        return StringUtils.fill(BLANK_TOKEN, bridgeLength);
     }
 }
