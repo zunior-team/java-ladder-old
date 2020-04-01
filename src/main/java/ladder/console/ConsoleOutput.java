@@ -26,10 +26,9 @@ public class ConsoleOutput {
                 .map(BlockDto::getPolls)
                 .forEachOrdered(booleans -> {
                     stringBuilder.append(PADDING);
-                    booleans.forEach(bool -> {
-                            stringBuilder.append(FRAME)
-                                    .append(bool ? POLL : PADDING);
-                        });
+                    booleans.forEach(bool -> stringBuilder.append(FRAME)
+                            .append(bool ? POLL : PADDING)
+                    );
                     stringBuilder.append(FRAME)
                             .append(NEW_LINE);
                 });
@@ -39,9 +38,7 @@ public class ConsoleOutput {
 
     private static void appendUsers(LadderResult result, StringBuilder stringBuilder) {
         result.getUserNames()
-                .forEach(userName -> {
-                    stringBuilder.append(String.format("%6s", userName));
-                });
+                .forEach(userName -> stringBuilder.append(String.format("%6s", userName)));
         stringBuilder.append('\n');
     }
 

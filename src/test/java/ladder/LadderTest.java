@@ -1,6 +1,0 @@
-package ladder;
-
-
-class LadderTest {
-
-}

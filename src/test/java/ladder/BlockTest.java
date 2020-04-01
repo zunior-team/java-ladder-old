@@ -15,7 +15,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class BlockTest {
 
-
     @ParameterizedTest
     @MethodSource
     void constructorTest(List<String> users, PollCreateStrategy pollCreateStrategy, boolean evenExpected, boolean oddExpected) {
