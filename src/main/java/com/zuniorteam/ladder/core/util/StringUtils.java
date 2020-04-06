@@ -18,8 +18,8 @@ public class StringUtils {
     }
 
     public static String fill(String base, Character token, int length) {
-        return base + IntStream.rangeClosed(base.length(), length)
+        return base + IntStream.range(base.length(), length)
                 .mapToObj(i -> token.toString())
-                .collect(Collectors.joining(""));
+                .collect(Collectors.joining());
     }
 }

@@ -35,9 +35,9 @@ public class OutputDrawer {
     private static String drawLine(Line line, int bridgeLength) {
         final String drawLine = IntStream.range(0, line.getLength())
                 .mapToObj(index -> drawBridge(line, index, bridgeLength))
-                .collect(joining(BORDER_TOKEN.toString()));
+                .collect(joining(BORDER_TOKEN.toString(), BORDER_TOKEN.toString(), BORDER_TOKEN.toString()));
 
-        return drawLine + BORDER_TOKEN;
+        return StringUtils.fill(BLANK_TOKEN, bridgeLength) + drawLine;
     }
 
     private static String drawBridge(Line line, int index, int bridgeLength) {
