@@ -1,5 +1,7 @@
 package com.zuniorteam.ladder.core;
 
+import com.zuniorteam.ladder.core.util.CollectionUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -22,12 +24,11 @@ public class Line {
     }
 
     private void validateContinuesBridge(List<Boolean> bridges, int index) {
-        if (index < 1) {
+        if (CollectionUtils.isFirstIndex(index)) {
             return;
         }
 
-        if (bridges.get(index)
-                && bridges.get(index - 1)) {
+        if (bridges.get(index) && CollectionUtils.getBefore(bridges, index)) {
             throw new IllegalArgumentException("이어지는 bridge를 만들 수 없습니다.");
         }
     }
@@ -37,6 +38,10 @@ public class Line {
     }
 
     public Boolean hasBridge(int index) {
+        if(index < 0){
+            throw new IllegalArgumentException("bridge 위치는 0보다 작을 수 없습니다.");
+        }
+
         return this.bridges.get(index);
     }
 }

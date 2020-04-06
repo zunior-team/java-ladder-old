@@ -6,6 +6,8 @@ import java.util.stream.IntStream;
 
 public class StringUtils {
 
+    private static final String EMPTY = "";
+
     private StringUtils() {
     }
 
@@ -14,7 +16,7 @@ public class StringUtils {
     }
 
     public static String fill(Character token, int length) {
-        return StringUtils.fill("", token, length);
+        return StringUtils.fill(EMPTY, token, length);
     }
 
     public static String fill(String base, Character token, int length) {

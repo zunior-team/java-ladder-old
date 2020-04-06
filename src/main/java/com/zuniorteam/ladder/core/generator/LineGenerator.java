@@ -1,6 +1,7 @@
 package com.zuniorteam.ladder.core.generator;
 
 import com.zuniorteam.ladder.core.Line;
+import com.zuniorteam.ladder.core.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,19 +20,19 @@ public class LineGenerator {
         this.random = random;
     }
 
-    public Line generate(int numberOfBridges) {
-        final List<Boolean> randomBridges = getRandomBridges(numberOfBridges);
+    public Line generate(int numberOfPoints) {
+        final List<Boolean> randomBridge = getRandomBridges(numberOfPoints);
 
-        return new Line(fixBridges(randomBridges));
+        return new Line(fixBridges(randomBridge));
     }
 
-    private List<Boolean> getRandomBridges(int lineLength) {
-        final List<Boolean> randomBridges = IntStream.range(0, lineLength)
+    private List<Boolean> getRandomBridges(int numberOfPoints) {
+        final List<Boolean> randomPoints = IntStream.range(0, numberOfPoints)
                 .mapToObj(i -> random.nextBoolean())
                 .collect(toList());
 
-        return IntStream.range(1, randomBridges.size())
-                .mapToObj(i -> randomBridges.get(i - 1) && randomBridges.get(i))
+        return IntStream.range(1, randomPoints.size())
+                .mapToObj(i -> CollectionUtils.getBefore(randomPoints, i) && randomPoints.get(i))
                 .collect(toList());
     }
 
@@ -45,11 +46,11 @@ public class LineGenerator {
     }
 
     private boolean fixBridge(List<Boolean> bridges, int index) {
-        if (index < 1) {
+        if (CollectionUtils.isFirstIndex(index)) {
             return bridges.get(index);
         }
 
-        if (bridges.get(index) && bridges.get(index - 1)) {
+        if (bridges.get(index) && CollectionUtils.getBefore(bridges, index)) {
             return false;
         }
 

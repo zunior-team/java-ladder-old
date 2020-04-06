@@ -26,7 +26,7 @@ class LineTest {
 
     @DisplayName("생성, 실패, 이어지는 bridge가 있는 경우")
     @Test
-    void testNewInstance03(){
+    void testNewInstance03() {
         //given
         final List<Boolean> bridges = new ArrayList<>();
         bridges.add(true);
@@ -40,7 +40,7 @@ class LineTest {
 
     @DisplayName("getLength()")
     @Test
-    void testGetLength(){
+    void testGetLength() {
         final List<Boolean> bridges = new ArrayList<>();
         bridges.add(true);
         bridges.add(false);
@@ -52,9 +52,22 @@ class LineTest {
     }
 
 
-    @DisplayName("hasBridge()")
+    @DisplayName("hasBridge, index 0보다 작을 때")
     @Test
-    void testHasBridge02(){
+    void testHasBridge01() {
+        //given
+        final List<Boolean> bridges = new ArrayList<>();
+        bridges.add(true);
+
+        //when
+        final Line line = new Line(bridges);
+
+        assertThrows(IllegalArgumentException.class, () -> line.hasBridge(-1));
+    }
+
+    @DisplayName("hasBridge")
+    @Test
+    void testHasBridge02() {
         //given
         final List<Boolean> bridges = new ArrayList<>();
         bridges.add(true);
