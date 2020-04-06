@@ -12,8 +12,10 @@ public class Line {
     private Random random = new Random(System.nanoTime());
 
     private Line(int countOfPerson) {
-        random.setSeed(System.nanoTime());
         validateCountOfPerson(countOfPerson);
+
+        random.setSeed(System.nanoTime());
+
         points.add(random.nextBoolean());
         while (points.size() != countOfPerson - 1) {
             addRandomValue();
