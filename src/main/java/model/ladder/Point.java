@@ -4,31 +4,23 @@ import java.util.Random;
 
 public class Point {
 
+    public static final PointState[] STATES = {PointState.DASH, PointState.SPACE};
     private static final Random random = new Random();
-    private static final State[] STATES = {State.LINE, State.SPACE};
-    private final State state;
+    private final PointState state;
 
-    public Point(State state) {
+    public Point(PointState state) {
         this.state = state;
     }
 
-    enum State{
-        BAR("|"), LINE("-"), SPACE(" ");
-        private String display;
-        State(String display){
-            this.display = display;
-        }
-    }
-
-    public boolean isLine(){
-        return (state == State.LINE);
+    public boolean isDash(){
+        return (state == PointState.DASH);
     }
 
     public String getDisplay(){
-        return state.display;
+        return state.display();
     }
 
-    public static State generateStateByRandom(){
-        return STATES[random.nextInt(2)];
+    public static PointState generateStateByRandom(){
+        return Point.STATES[random.nextInt(STATES.length)];
     }
 }

@@ -20,8 +20,6 @@ public class ResultView {
     }
 
     private static void printLadder(List<List<String>> lines){
-        for(List<String> line : lines){
-            System.out.println(String.join(NONE_SPACE, line));
-        }
+        lines.forEach(line -> System.out.println(String.join(NONE_SPACE, line)));
     }
 }

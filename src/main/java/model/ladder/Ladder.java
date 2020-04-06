@@ -5,6 +5,7 @@ import model.player.Players;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -14,13 +15,13 @@ public class Ladder {
     private final List<Line> lines;
 
     private Ladder(Players players, int height){
+        validate(players, height);
         this.lines = IntStream.rangeClosed(1, height)
                 .mapToObj(i -> Line.of(players))
                 .collect(Collectors.toList());
     }
 
     public static Ladder of(Players players, int height) {
-        validate(players, height);
         return new Ladder(players, height);
     }
 

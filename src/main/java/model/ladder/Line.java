@@ -20,26 +20,24 @@ public class Line {
     }
 
     private void createLineByPlayers(final int totalPoint, final int currentPoint){
+        points.add(new Point(PointState.BAR));
 
         if(totalPoint == currentPoint){
-            points.add(new Point(Point.State.BAR));
             return;
         }
 
-        points.add(new Point(Point.State.BAR));
+        PointState currentPointState = Point.generateStateByRandom();
 
         if(isBeforeLine()){
-            createIntervalByPoint(Point.State.SPACE);
-            createLineByPlayers(totalPoint, (currentPoint + 1));
-            return;
+            currentPointState = PointState.SPACE;
         }
 
-        createIntervalByPoint(Point.generateStateByRandom());
+        createIntervalByPoint(currentPointState);
         createLineByPlayers(totalPoint, (currentPoint + 1));
     }
 
 
-    private void createIntervalByPoint(Point.State state){
+    private void createIntervalByPoint(PointState state){
         IntStream.rangeClosed(1, DEFAULT_INTERVAL)
                 .forEach(i -> points.add(new Point(state)));
     }
@@ -56,6 +54,6 @@ public class Line {
         }
 
         return points.get(points.size() - 2)
-                .isLine();
+                .isDash();
     }
 }

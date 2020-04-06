@@ -1,9 +1,11 @@
 package model.player;
 
 import exception.PlayersCreateException;
+import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class Players {
@@ -22,7 +24,7 @@ public class Players {
     }
 
     private static void validate(final List<String> names){
-        if(names == null || names.size() == 0){
+        if(CollectionUtils.isEmpty(names)) {
             throw new PlayersCreateException("플레이어를 생성하지 못합니다.");
         }
     }
