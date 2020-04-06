@@ -6,10 +6,10 @@ import java.util.List;
 
 public class ResultView {
 
-    public static final String SPACE_BETWEEN_NAMES = "    ";
-    public static final String ONE_SHORT_LINE = "|";
-    public static final String BAR_LINE = "--------";
-    public static final String EMPTY_SPACE_BETWEEN_BAR = "        ";
+    private static final String SPACE_BETWEEN_NAMES = "    ";
+    private static final String ONE_SHORT_LINE = "|";
+    private static final String BAR_LINE = "--------";
+    private static final String EMPTY_SPACE_BETWEEN_BAR = "        ";
 
     public void printResult(List<String> names, List<Line> ladder) {
         System.out.println("실행 결과");
