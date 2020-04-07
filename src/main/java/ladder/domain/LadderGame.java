@@ -2,6 +2,7 @@ package ladder.domain;
 
 import spark.utils.CollectionUtils;
 
+import java.awt.*;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -20,9 +21,9 @@ public class LadderGame {
         validateInputs(names, maxHeight);
 
         final int countOfPerson = names.size();
-
+        final PointGenerator pointGenerator = new RandomPointGenerator(new Random());
         this.lines = names.stream()
-                .map(count -> Line.of(countOfPerson, new Random()))
+                .map(count -> Line.of(countOfPerson, pointGenerator))
                 .collect(collectingAndThen(toList(),
                         Collections::unmodifiableList));
     }

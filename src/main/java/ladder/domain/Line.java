@@ -1,35 +1,22 @@
 package ladder.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 import static ladder.domain.LadderGame.MINIMUM_PARTICIPANTS;
 
 public class Line {
-    private List<Boolean> points = new ArrayList<>();
-    private Random random;
+    private List<Boolean> points;
 
-    private Line(int countOfPerson, Random random) {
-        assert random != null;
+    private Line(int countOfPerson, PointGenerator pointGenerator) {
+        Objects.requireNonNull(pointGenerator, "PointGenerator can not be null");
         validateCountOfPerson(countOfPerson);
 
-        this.random = random;
-        random.setSeed(System.nanoTime());
-
-        initPoints(countOfPerson, random);
+        points = pointGenerator.generate(countOfPerson);
     }
 
-    private void initPoints(int countOfPerson, Random random) {
-        points.add(random.nextBoolean());
-        while (points.size() != countOfPerson - 1) {
-            points.add(nextRandomValue());
-        }
-    }
 
-    public static Line of(int countOfPerson, Random random) {
-        return new Line(countOfPerson, random);
+    public static Line of(int countOfPerson, PointGenerator pointGenerator) {
+        return new Line(countOfPerson, pointGenerator);
     }
 
     public List<Boolean> points() {
@@ -42,11 +29,5 @@ public class Line {
         }
     }
 
-    private boolean nextRandomValue() {
-        final int lastIndex = points.size() - 1;
-        if (points.get(lastIndex)) {
-            return false;
-        }
-        return random.nextBoolean();
-    }
+
 }
