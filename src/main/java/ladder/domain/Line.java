@@ -2,7 +2,8 @@ package ladder.domain;
 
 import java.util.*;
 
-import static ladder.domain.LadderGame.MINIMUM_PARTICIPANTS;
+import static ladder.domain.Players.MINIMUM_PARTICIPANTS;
+
 
 public class Line {
     private List<Boolean> points;

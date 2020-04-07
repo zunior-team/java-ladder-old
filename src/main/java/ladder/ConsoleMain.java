@@ -1,6 +1,7 @@
 package ladder;
 
 import ladder.domain.LadderGame;
+import ladder.domain.Players;
 import ladder.view.InputView;
 import ladder.view.ResultView;
 
@@ -14,9 +15,9 @@ public class ConsoleMain {
         final List<String> names = inputView.inputNames();
         final int maxHeight = inputView.inputMaxHeight();
 
-        final LadderGame ladderGame = LadderGame.of(names, maxHeight);
+        final LadderGame ladderGame = LadderGame.of(Players.of(names), maxHeight);
 
-        resultView.printResult(names, ladderGame.lines());
+        resultView.printResult(Players.of(names), ladderGame.lines());
 
 
     }

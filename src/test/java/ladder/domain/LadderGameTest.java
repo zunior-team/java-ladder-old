@@ -20,7 +20,7 @@ class LadderGameTest {
         int maxHeight = 5;
 
         //when
-        final LadderGame ladderGame = LadderGame.of(names, maxHeight);
+        final LadderGame ladderGame = LadderGame.of(Players.of(names), maxHeight);
 
         //then
         assertThat(ladderGame).isNotNull();
@@ -37,7 +37,7 @@ class LadderGameTest {
         //then
         assertThrows(IllegalArgumentException.class,
                 //when
-                () -> LadderGame.of(names, maxHeight));
+                () -> LadderGame.of(Players.of(names), maxHeight));
     }
 
     @Test
@@ -51,7 +51,7 @@ class LadderGameTest {
         //then
         assertThrows(IllegalArgumentException.class,
                 //when
-                () -> LadderGame.of(names, maxHeight));
+                () -> LadderGame.of(Players.of(names), maxHeight));
     }
 
     @Test
@@ -60,7 +60,7 @@ class LadderGameTest {
         //given
         List<String> names = Lists.newArrayList("junwoo", "wonoh", "changoo", "sungdong");
         int maxHeight = 5;
-        final LadderGame ladderGame = LadderGame.of(names, maxHeight);
+        final LadderGame ladderGame = LadderGame.of(Players.of(names), maxHeight);
 
         //when
         final List<Line> lines = ladderGame.lines();
