@@ -18,7 +18,7 @@ public class Line {
 
         points.add(random.nextBoolean());
         while (points.size() != countOfPerson - 1) {
-            addRandomValue();
+            points.add(nextRandomValue());
         }
     }
 
@@ -32,13 +32,12 @@ public class Line {
         }
     }
 
-    private void addRandomValue() {
+    private boolean nextRandomValue() {
         final int lastIndex = points.size() - 1;
         if (points.get(lastIndex)) {
-            points.add(false);
-            return;
+            return false;
         }
-        points.add(random.nextBoolean());
+        return random.nextBoolean();
     }
 
     public static Line of(int countOfPerson) {
