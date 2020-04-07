@@ -6,6 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
+import java.util.Random;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -20,7 +21,7 @@ class LineTest {
         int countOfPerson = 5;
 
         //when
-        final Line line = Line.of(countOfPerson);
+        final Line line = Line.of(countOfPerson, new Random());
 
         //then
         assertThat(line).isNotNull();
@@ -33,7 +34,7 @@ class LineTest {
         //then
         assertThrows(IllegalArgumentException.class,
                 //when
-                () -> Line.of(countOfPerson));
+                () -> Line.of(countOfPerson, new Random()));
     }
 
     @ParameterizedTest
@@ -41,7 +42,7 @@ class LineTest {
     @ValueSource(ints = {3, 4, 5})
     void testPoint(int countOfPerson) {
         //when
-        final Line line = Line.of(countOfPerson);
+        final Line line = Line.of(countOfPerson, new Random());
 
         //then
         final List<Boolean> points = line.points();

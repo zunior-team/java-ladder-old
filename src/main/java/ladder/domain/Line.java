@@ -9,17 +9,27 @@ import static ladder.domain.LadderGame.MINIMUM_PARTICIPANTS;
 
 public class Line {
     private List<Boolean> points = new ArrayList<>();
-    private Random random = new Random(System.nanoTime());
+    private Random random;
 
-    private Line(int countOfPerson) {
+    private Line(int countOfPerson, Random random) {
+        assert random != null;
         validateCountOfPerson(countOfPerson);
 
+        this.random = random;
         random.setSeed(System.nanoTime());
 
+        initPoints(countOfPerson, random);
+    }
+
+    private void initPoints(int countOfPerson, Random random) {
         points.add(random.nextBoolean());
         while (points.size() != countOfPerson - 1) {
             points.add(nextRandomValue());
         }
+    }
+
+    public static Line of(int countOfPerson, Random random) {
+        return new Line(countOfPerson, random);
     }
 
     public List<Boolean> points() {
@@ -38,9 +48,5 @@ public class Line {
             return false;
         }
         return random.nextBoolean();
-    }
-
-    public static Line of(int countOfPerson) {
-        return new Line(countOfPerson);
     }
 }

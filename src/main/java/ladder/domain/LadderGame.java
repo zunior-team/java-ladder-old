@@ -5,6 +5,7 @@ import spark.utils.CollectionUtils;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.collectingAndThen;
@@ -21,7 +22,7 @@ public class LadderGame {
         final int countOfPerson = names.size();
 
         this.lines = names.stream()
-                .map(count -> Line.of(countOfPerson))
+                .map(count -> Line.of(countOfPerson, new Random()))
                 .collect(collectingAndThen(toList(),
                         Collections::unmodifiableList));
     }
