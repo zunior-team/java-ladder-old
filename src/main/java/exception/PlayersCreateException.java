@@ -1,6 +1,6 @@
 package exception;
 
-public class PlayersCreateException extends RuntimeException {
+public class PlayersCreateException extends LadderGameException {
     public PlayersCreateException(String message) {
         super(message);
     }
