@@ -4,6 +4,7 @@ import ladder.domain.Line;
 import ladder.domain.Players;
 
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class ResultView {
 
@@ -17,20 +18,18 @@ public class ResultView {
 
         System.out.println(String.join(SPACE_BETWEEN_NAMES, players.names()));
 
-        for (Line line : ladder) {
-            printLine(line);
-        }
-
+        ladder.stream()
+                .map(this::convertToPrintFormat)
+                .forEachOrdered(System.out::println);
     }
 
-    private void printLine(Line line) {
-        final List<Boolean> points = line.points();
+    private String convertToPrintFormat(Line line) {
         final StringBuilder lineStringBuilder = new StringBuilder(ONE_SHORT_LINE);
-        for (Boolean point : points) {
-            lineStringBuilder.append(point ? BAR_LINE : EMPTY_SPACE_BETWEEN_BAR);
-            lineStringBuilder.append(ONE_SHORT_LINE);
-        }
-
-        System.out.println(lineStringBuilder.toString());
+        IntStream.range(0, line.playerCount())
+                .forEach(index -> {
+                    lineStringBuilder.append(line.hasBridge(index) ? BAR_LINE : EMPTY_SPACE_BETWEEN_BAR);
+                    lineStringBuilder.append(ONE_SHORT_LINE);
+                });
+        return lineStringBuilder.toString();
     }
 }

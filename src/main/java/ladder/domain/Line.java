@@ -20,8 +20,15 @@ public class Line {
         return new Line(countOfPerson, pointGenerator);
     }
 
-    public List<Boolean> points() {
-        return Collections.unmodifiableList(points);
+    public boolean hasBridge(int index) {
+        if (index < 0 || index >= points.size()) {
+            throw new IllegalArgumentException("index invalid");
+        }
+        return points.get(index);
+    }
+
+    public int playerCount() {
+        return points.size();
     }
 
     private void validateCountOfPerson(int countOfPerson) {
