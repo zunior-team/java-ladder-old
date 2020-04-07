@@ -15,7 +15,7 @@ public class Block {
         PollCreateStrategy createStrategy = initInfo.getPollCreateStrategy();
 
         polls = IntStream.range(0, initInfo.numOfUsers() - 1)
-                .mapToObj(i -> createStrategy.decideCreateOrNot())
+                .mapToObj(i -> createStrategy.isCreatable())
                 .collect(Collectors.toList());
 
         refinePolls();
@@ -45,13 +45,13 @@ public class Block {
     }
 */
 
-    public BlockDto toDto() {
-        return new BlockDto(polls);
-    }
-
     /* 연속으로 true 가 나오는 것을 방지하기 위한 정제 함수 */
     private void refinePolls() {
         IntStream.range(1, polls.size())
                 .forEach(i -> polls.set(i, polls.get(i - 1) ? false : polls.get(i)));
+    }
+
+    public List<Boolean> getPolls() {
+        return polls;
     }
 }

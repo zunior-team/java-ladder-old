@@ -9,16 +9,16 @@ import java.util.stream.Collectors;
 
 public class InitInfo {
     private List<User> users;
-    private int length;
+    private int height;
     private PollCreateStrategy pollCreateStrategy;
 
-    public InitInfo(final List<String> users, final int length, final PollCreateStrategy pollCreateStrategy) {
-        validate(users, length, pollCreateStrategy);
+    public InitInfo(final List<String> users, final int height, final PollCreateStrategy pollCreateStrategy) {
+        validate(users, height, pollCreateStrategy);
 
         this.users = users.stream()
                 .map(User::new)
                 .collect(Collectors.toList());
-        this.length = length;
+        this.height = height;
         this.pollCreateStrategy = pollCreateStrategy;
     }
 
@@ -54,8 +54,8 @@ public class InitInfo {
         return pollCreateStrategy;
     }
 
-    public int getLength() {
-        return length;
+    public int getHeight() {
+        return height;
     }
 
     public List<User> getUsers() {

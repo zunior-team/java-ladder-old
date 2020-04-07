@@ -14,7 +14,7 @@ public class Ladder {
 
     public Ladder(InitInfo initInfo) {
         this.users = initInfo.getUsers();
-        this.blocks = IntStream.rangeClosed(0, initInfo.getLength())
+        this.blocks = IntStream.rangeClosed(0, initInfo.getHeight())
                 .mapToObj(i -> new Block(initInfo))
                 .collect(Collectors.toList());
     }

@@ -16,7 +16,7 @@ public class LadderResult {
                 .collect(Collectors.toList());
 
         this.blockDto = blocks.stream()
-                .map(Block::toDto)
+                .map(BlockDto::of)
                 .collect(Collectors.toList());
     }
 

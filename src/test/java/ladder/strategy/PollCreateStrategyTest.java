@@ -13,9 +13,9 @@ class PollCreateStrategyTest {
     @ParameterizedTest
     @ValueSource(booleans = {true, false})
     void pollCreateStrategyTest(boolean bool) {
-        when(pollCreateStrategy.decideCreateOrNot())
+        when(pollCreateStrategy.isCreatable())
                 .thenReturn(bool);
 
-        assertThat(pollCreateStrategy.decideCreateOrNot()).isEqualTo(bool);
+        assertThat(pollCreateStrategy.isCreatable()).isEqualTo(bool);
     }
 }
