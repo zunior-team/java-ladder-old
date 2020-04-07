@@ -1,7 +1,9 @@
 package ladder;
 
 import ladder.init.InitInfo;
+import ladder.init.LadderInitInfo;
 import ladder.strategy.PollCreateStrategy;
+import ladder.user.Users;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -18,7 +20,7 @@ class BlockTest {
     @ParameterizedTest
     @MethodSource
     void constructorTest(List<String> users, PollCreateStrategy pollCreateStrategy, boolean evenExpected, boolean oddExpected) {
-        Block block = new Block(new InitInfo(users, 0, pollCreateStrategy));
+        Block block = new Block(new InitInfo(new Users(users), new LadderInitInfo(0, pollCreateStrategy)));
 
         IntStream.rangeClosed(0, users.size())
                 .forEach(i -> assertThat(block.hasRightLadder(i)).isEqualTo(i % 2 == 0 ? evenExpected : oddExpected));
