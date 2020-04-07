@@ -18,7 +18,7 @@ class LineTest {
         assertDoesNotThrow(() -> new Line(new ArrayList<>()));
     }
 
-    @DisplayName("생성, 실패, points null")
+    @DisplayName("생성, 실패, bridges null")
     @Test
     void testNewInstance02() {
         assertThrows(AssertionError.class, () -> new Line(null));
@@ -26,62 +26,59 @@ class LineTest {
 
     @DisplayName("생성, 실패, 이어지는 bridge가 있는 경우")
     @Test
-    void testNewInstance03(){
+    void testNewInstance03() {
         //given
-        final List<Boolean> points = new ArrayList<>();
-        points.add(true);
-        points.add(true);
-        points.add(true);
-        points.add(false);
+        final List<Boolean> bridges = new ArrayList<>();
+        bridges.add(true);
+        bridges.add(true);
+        bridges.add(true);
+        bridges.add(false);
 
         //when, then
-        assertThrows(IllegalArgumentException.class, () -> new Line(points));
+        assertThrows(IllegalArgumentException.class, () -> new Line(bridges));
     }
 
     @DisplayName("getLength()")
     @Test
-    void testGetLength(){
-        final List<Boolean> points = new ArrayList<>();
-        points.add(true);
-        points.add(false);
-        points.add(false);
+    void testGetLength() {
+        final List<Boolean> bridges = new ArrayList<>();
+        bridges.add(true);
+        bridges.add(false);
+        bridges.add(false);
 
-        final Line line = new Line(points);
+        final Line line = new Line(bridges);
 
-        assertThat(line.getLength()).isEqualTo(points.size());
+        assertThat(line.getLength()).isEqualTo(bridges.size());
     }
 
-    @DisplayName("hasBridge(), index 0 일 때")
+
+    @DisplayName("hasBridge, index 0보다 작을 때")
     @Test
-    void testHasBridge01(){
+    void testHasBridge01() {
         //given
-        final List<Boolean> points = new ArrayList<>();
-        points.add(true);
+        final List<Boolean> bridges = new ArrayList<>();
+        bridges.add(true);
 
         //when
-        final Line line = new Line(points);
+        final Line line = new Line(bridges);
 
-        //then
-        assertThat(line.hasBridge(0)).isFalse();
+        assertThrows(IllegalArgumentException.class, () -> line.hasBridge(-1));
     }
 
-    @DisplayName("hasBridge(), point 가 이어 질 때")
+    @DisplayName("hasBridge")
     @Test
-    void testHasBridge02(){
+    void testHasBridge02() {
         //given
-        final List<Boolean> points = new ArrayList<>();
-        points.add(true);
-        points.add(true);
-        points.add(false);
-        points.add(false);
+        final List<Boolean> bridges = new ArrayList<>();
+        bridges.add(true);
+        bridges.add(false);
 
         //when
-        final Line line = new Line(points);
+        final Line line = new Line(bridges);
 
         //then
-        assertThat(line.hasBridge(1)).isTrue();
-        assertThat(line.hasBridge(2)).isFalse();
-        assertThat(line.hasBridge(3)).isFalse();
+        assertThat(line.hasBridge(0)).isTrue();
+        assertThat(line.hasBridge(1)).isFalse();
     }
 
 }

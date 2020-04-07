@@ -30,17 +30,17 @@ class LadderGeneratorTest {
     @Test
     void testGenerate() {
         //given
-        final int height = 4;
-        final int lineLength = 5;
+        final int height = 2;
+        final int numberOfPoints = 5;
         final LadderGenerator ladderGenerator = new LadderGenerator(new LineGenerator(new Random()));
 
         //when
-        final List<Line> ladder = ladderGenerator.generate(lineLength, height);
+        final List<Line> ladder = ladderGenerator.generate(numberOfPoints, height);
 
         //then
         assertThat(ladder.size()).isEqualTo(height);
         assertThat(ladder)
                 .extracting(Line::getLength)
-                .containsExactly(lineLength, lineLength, lineLength, lineLength);
+                .containsExactly(numberOfPoints - 1, numberOfPoints - 1);
     }
 }
