@@ -28,7 +28,7 @@ public class Block {
 */
 
     public boolean hasRightLadder(int idx) {
-        if(idx >= polls.size()) {
+        if(idx >= polls.size() || idx < 0) {
             return false;
         }
 

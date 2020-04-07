@@ -3,6 +3,8 @@ package ladder.console;
 import ladder.dto.BlockDto;
 import ladder.dto.LadderResult;
 
+import java.util.List;
+
 public class ConsoleOutput {
     public static final String POLL = "-----";
     public static final String FRAME = "|";
@@ -11,35 +13,44 @@ public class ConsoleOutput {
 
     public static void drawResult(LadderResult result) {
         showResult();
-
         StringBuilder stringBuilder = new StringBuilder();
 
-        appendUsers(result, stringBuilder);
-        appendBlocks(result, stringBuilder);
+        stringBuilder.append(drawUser(result.getUserNames()));
+        stringBuilder.append(drawBlocks(result.getBlockDto()));
 
         System.out.println(stringBuilder.toString());
     }
 
-    private static void appendBlocks(LadderResult result, StringBuilder stringBuilder) {
-        result.getBlockDto()
-                .stream()
-                .map(BlockDto::getPolls)
-                .forEachOrdered(booleans -> {
-                    stringBuilder.append(PADDING);
-                    booleans.forEach(bool -> stringBuilder.append(FRAME)
-                            .append(bool ? POLL : PADDING)
-                    );
-                    stringBuilder.append(FRAME)
-                            .append(NEW_LINE);
-                });
+    private static String drawBlocks(List<BlockDto> blockDto) {
+        StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append(NEW_LINE);
+        blockDto.stream()
+                .map(BlockDto::getPolls)
+                .map(ConsoleOutput::drawBlock)
+                .forEach(stringBuilder::append);
+
+        return stringBuilder.toString();
     }
 
-    private static void appendUsers(LadderResult result, StringBuilder stringBuilder) {
-        result.getUserNames()
-                .forEach(userName -> stringBuilder.append(String.format("%6s", userName)));
-        stringBuilder.append('\n');
+    private static String drawUser(List<String> userNames) {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        userNames.forEach(userName -> stringBuilder.append(String.format("%6s", userName)));
+
+        return stringBuilder.toString();
+    }
+
+    private static String drawBlock(List<Boolean> polls) {
+        StringBuilder stringBuilder = new StringBuilder(PADDING);
+
+        polls.forEach(isPollExist -> stringBuilder.append(FRAME)
+                .append(isPollExist ? POLL : PADDING)
+        );
+
+        stringBuilder.append(FRAME)
+                .append(NEW_LINE);
+
+        return stringBuilder.toString();
     }
 
     private static void showResult() {
