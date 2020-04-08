@@ -1,7 +1,9 @@
 package ladder.console;
 
 import ladder.init.InitInfo;
+import ladder.init.LadderInitInfo;
 import ladder.strategy.RandomPollCreateStrategy;
+import ladder.user.Users;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,15 +15,15 @@ public class ConsoleInput {
 
     public static InitInfo getInitInfo() {
         showInputParticipantsStatement();
-        List<String> users = getParticipants();
+        Users users = new Users(getParticipants());
 
-        showInputLengthOfLadder();
-        int length = getLengthOfLadder();
+        showInputHeightOfLadder();
+        int height = getHeightOfLadder();
 
-        return new InitInfo(users, length, new RandomPollCreateStrategy());
+        return new InitInfo(users, new LadderInitInfo(height, new RandomPollCreateStrategy()));
     }
 
-    private static void showInputLengthOfLadder() {
+    private static void showInputHeightOfLadder() {
         System.out.println("최대 사다리 높이는 몇 개인가요?");
     }
 
@@ -37,7 +39,7 @@ public class ConsoleInput {
         return Arrays.asList(split);
     }
 
-    private static int getLengthOfLadder() {
+    private static int getHeightOfLadder() {
         return Integer.parseInt(SCANNER.nextLine().trim());
     }
 }
