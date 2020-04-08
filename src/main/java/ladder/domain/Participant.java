@@ -9,11 +9,10 @@ public class Participant {
     private String name;
 
     private Participant(String name){
+        validateName(name);
         this.name = name;
     }
     public static Participant of(String name){
-        validateName(name);
-
         return new Participant(name);
     }
     private static void validateName(String name){

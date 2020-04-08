@@ -7,23 +7,20 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static ladder.constant.ParticipantConstants.COMMA;
+import static ladder.constant.ParticipantConstants.PARTICIPANT_NAME_SPLIT_TOKEN;
 
 public class Participants {
 
     private List<Participant> participants;
 
-    private Participants(List<Participant> participants){
-        this.participants = participants;
-    }
-    public static Participants of(String participantNames){
+    private Participants(String participantNames){
         validateParticipantNames(participantNames);
-
-        List<Participant> participants = Arrays.stream(participantNames.split(COMMA))
+        this.participants = Arrays.stream(participantNames.split(PARTICIPANT_NAME_SPLIT_TOKEN))
                 .map(Participant::of)
                 .collect(Collectors.toList());
-
-        return new Participants(participants);
+    }
+    public static Participants of(String participantNames){
+        return new Participants(participantNames);
     }
     private static void validateParticipantNames(String participantNames){
         if(StringUtils.isEmpty(participantNames)){

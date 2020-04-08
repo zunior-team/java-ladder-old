@@ -13,19 +13,17 @@ public class Ladder {
 
     private List<Line> lines;
 
-    private Ladder(List<Line> lines){
-        this.lines = lines;
-    }
-
-    public static Ladder of(int countOfParticipant,int maxHeight){
+    private Ladder(int countOfParticipant,int maxHeight){
         validateParticipantAndMaxHeight(countOfParticipant,maxHeight);
 
         int lineWidth = countOfParticipant - 1;
-        List<Line> lines = IntStream.range(0, maxHeight)
+        this.lines = IntStream.range(0, maxHeight)
                 .mapToObj(i -> Line.of(lineWidth))
                 .collect(Collectors.toList());
+    }
 
-        return new Ladder(lines);
+    public static Ladder of(int countOfParticipant,int maxHeight){
+        return new Ladder(countOfParticipant,maxHeight);
     }
 
     public List<Line> getLines() {
