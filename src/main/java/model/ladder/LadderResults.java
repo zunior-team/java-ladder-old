@@ -3,6 +3,7 @@ package model.ladder;
 import exception.LadderResultCreateException;
 import org.apache.commons.collections4.CollectionUtils;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,5 +26,12 @@ public class LadderResults {
         if(CollectionUtils.isEmpty(results)){
             throw new LadderResultCreateException("사다리의 결과를 만들 수 없습니다.");
         }
+    }
+
+    public List<String> getScores(){
+        return Collections.unmodifiableList(
+                scores.stream()
+                        .map(Score::get)
+                        .collect(Collectors.toList()));
     }
 }

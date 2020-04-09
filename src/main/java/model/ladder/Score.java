@@ -17,4 +17,8 @@ public class Score {
             throw new LadderResultCreateException("사다리의 결과가 없기 때문에 사다리를 만들 수 없습니다.");
         }
     }
+
+    public String get(){
+        return scoreType.getMyScore();
+    }
 }

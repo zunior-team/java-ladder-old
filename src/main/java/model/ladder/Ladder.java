@@ -46,4 +46,8 @@ public class Ladder {
                 .map(Line::toDisplays)
                 .collect(Collectors.toList()));
     }
+
+    public List<String> toScores(){
+        return ladderResults.getScores();
+    }
 }
