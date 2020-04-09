@@ -2,7 +2,7 @@ package console;
 
 import dto.LadderResultDto;
 import model.ladder.Ladder;
-import model.ladder.LadderResults;
+import model.ladder.Scores;
 import model.player.Players;
 import util.Preprocessor;
 
@@ -15,12 +15,14 @@ public class LadderGame {
                 .splitLineBySeparator(names, Preprocessor.COMMA));
 
         final String results = InputView.inputLadderResults();
-        final LadderResults ladderResults = LadderResults.create(Preprocessor
+        final Scores scores = Scores.create(Preprocessor
                 .splitLineBySeparator(results, Preprocessor.COMMA));
 
         final int height = InputView.inputLadderHeight();
-        final Ladder ladder = Ladder.of(players, ladderResults, height);
+        final Ladder ladder = Ladder.of(players, scores, height);
 
         ResultView.printLadderResult(new LadderResultDto(players, ladder));
+
+//        LadderGameStarter.run();
     }
 }

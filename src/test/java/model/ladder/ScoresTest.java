@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @DisplayName("사다리 타기 결과는")
-class LadderResultsTest {
+class ScoresTest {
 
     @DisplayName("생성된다.")
     @MethodSource("provideLadderResult")
@@ -20,10 +20,10 @@ class LadderResultsTest {
     void createTest(List<String> results) {
 
         // when
-        LadderResults ladderResults = LadderResults.create(results);
+        Scores scores = Scores.create(results);
 
         // then
-        assertNotNull(ladderResults);
+        assertNotNull(scores);
     }
 
     private static Stream<Arguments> provideLadderResult(){

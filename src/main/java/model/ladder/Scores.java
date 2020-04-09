@@ -7,19 +7,19 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class LadderResults {
+public class Scores {
 
     private List<Score> scores;
 
-    private LadderResults(List<String> results) {
+    private Scores(List<String> results) {
         validate(results);
         this.scores = results.stream()
                 .map(Score::new)
                 .collect(Collectors.toList());
     }
 
-    public static LadderResults create(List<String> results) {
-        return new LadderResults(results);
+    public static Scores create(List<String> results) {
+        return new Scores(results);
     }
 
     private void validate(List<String> results) {

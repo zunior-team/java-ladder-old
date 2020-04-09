@@ -20,4 +20,9 @@ public class InputView {
         System.out.println("\n최대 사다리 높이는 몇 개인가요?");
         return SCANNER.nextInt();
     }
+
+    public static String inputOnWhoWantToShowingName(){
+        System.out.println("\n결과를 보고 싶은 사람은?");
+        return SCANNER.nextLine();
+    }
 }
