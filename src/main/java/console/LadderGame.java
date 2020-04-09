@@ -19,7 +19,7 @@ public class LadderGame {
                 .splitLineBySeparator(results, Preprocessor.COMMA));
 
         final int height = InputView.inputLadderHeight();
-        final Ladder ladder = Ladder.of(players, height);
+        final Ladder ladder = Ladder.of(players, ladderResults, height);
 
         ResultView.printLadderResult(new LadderResultDto(players, ladder));
     }

@@ -8,12 +8,12 @@ import java.util.stream.Collectors;
 
 public class LadderResults {
 
-    private List<Result> results;
+    private List<Score> scores;
 
     private LadderResults(List<String> results) {
         validate(results);
-        this.results = results.stream()
-                .map(Result::new)
+        this.scores = results.stream()
+                .map(Score::new)
                 .collect(Collectors.toList());
     }
 

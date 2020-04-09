@@ -19,17 +19,18 @@ class LadderTest {
     @DisplayName("높이가 0 이하라서 에러가 발생합니다.")
     @MethodSource("providePlayerAndHeight")
     @ParameterizedTest
-    void ofExceptionTest(Players players, int height) {
+    void ofExceptionTest(Players players, LadderResults ladderResults, int height) {
         // when & then
-        assertThatThrownBy(() -> Ladder.of(players, height))
+        assertThatThrownBy(() -> Ladder.of(players, ladderResults, height))
                 .isInstanceOf(LadderCreateException.class);
     }
 
     private static Stream<Arguments> providePlayerAndHeight(){
         return Stream.of(
-                arguments(Players.create(Collections.singletonList("KIM")), -1),
-                arguments(Players.create(Collections.singletonList("KIM")), 0),
-                arguments(null, 5)
+                arguments(Players.create(Collections.singletonList("KIM")), null,  -1),
+                arguments(Players.create(Collections.singletonList("KIM")), null, 0),
+                arguments(Players.create(Collections.singletonList("KIM")), null, 10),
+                arguments(null, null, 5)
         );
     }
 }
