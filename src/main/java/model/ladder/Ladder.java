@@ -38,6 +38,10 @@ public class Ladder {
         if(ladderResults == null) {
             throw new LadderCreateException("사디리게임의 결과가 없기 때문에 사다리를 만들 수 없습니다.");
         }
+
+        if(players.getPlayerCount() != ladderResults.getScoreCount()){
+            throw new LadderCreateException("플레이어의 수와 결과의 개수가 서로 다르기 때문에 사다리를 만들 수 없습니다.");
+        }
     }
 
     public List<List<String>> toLines(){

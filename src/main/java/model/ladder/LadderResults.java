@@ -34,4 +34,8 @@ public class LadderResults {
                         .map(Score::get)
                         .collect(Collectors.toList()));
     }
+
+    public int getScoreCount(){
+        return scores.size();
+    }
 }
