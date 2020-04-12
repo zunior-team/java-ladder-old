@@ -1,11 +1,18 @@
 package model.player;
 
 import exception.PlayersCreateException;
+import model.ladder.Line;
+import model.ladder.Point;
+import model.ladder.Score;
+import model.ladder.Scores;
+import model.result.PlayerResult;
 import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Players {
 
@@ -37,5 +44,23 @@ public class Players {
                 players.stream()
                 .map(Player::name)
                 .collect(Collectors.toList()));
+    }
+
+    public List<PlayerResult> getLadderGameResults(List<Line> lines, Scores scores){
+        return IntStream.range(0, getPlayerCount())
+                .mapToObj(playerIndex -> {
+                    Player player = players.get(playerIndex);
+                    Score score = scores.getScoreByIndex(getResultIndexByOnePlayer(lines, playerIndex));
+                    return new PlayerResult(player, score);
+                }).collect(Collectors.toList());
+    }
+
+    private int getResultIndexByOnePlayer(List<Line> lines, int playerIndex){
+        int currentPosition = lines.get(0).convertPlayerIndexToPosition(playerIndex);
+        for(Line line : lines){
+            currentPosition = line.getPosition(currentPosition);
+        }
+        return lines.get(lines.size() - 1)
+                .convertPositionToPlayerIndex(currentPosition);
     }
 }

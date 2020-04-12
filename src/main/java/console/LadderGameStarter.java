@@ -1,5 +1,6 @@
 package console;
 
+import dto.LadderResultDto;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Scanner;
@@ -7,16 +8,17 @@ import java.util.Scanner;
 public class LadderGameStarter {
 
     private static final Scanner SCANNER = new Scanner(System.in);
+    private static final String ALL_NAMES = "all";
     private static final String EXIT = "exit";
 
-    public static void run(){
+    public static void run(LadderResultDto ladderResultDto){
         String myAnswer = StringUtils.EMPTY;
 
         while(isExit(myAnswer)){
-
             final String name = InputView.inputOnWhoWantToShowingName();
+            if(name.equalsIgnoreCase(ALL_NAMES)){
 
-
+            }
         }
     }
 

@@ -38,4 +38,8 @@ public class Scores {
     public int getScoreCount(){
         return scores.size();
     }
+
+    public Score getScoreByIndex(int index){
+        return scores.get(index);
+    }
 }

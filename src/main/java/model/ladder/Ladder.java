@@ -1,9 +1,8 @@
 package model.ladder;
 
 import exception.LadderCreateException;
-import model.player.Player;
 import model.player.Players;
-import model.result.LadderResult;
+import model.result.PlayerResult;
 
 import java.util.Collections;
 import java.util.List;
@@ -59,9 +58,7 @@ public class Ladder {
         return scores.getScores();
     }
 
-    public LadderResult getLadderResult() {
-
-
-        return null;
+    public List<PlayerResult> getResults(){
+        return players.getLadderGameResults(lines, scores);
     }
 }

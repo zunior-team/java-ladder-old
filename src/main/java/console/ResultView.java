@@ -1,6 +1,6 @@
 package console;
 
-import dto.LadderResultDto;
+import dto.LadderDrawDto;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
@@ -9,7 +9,7 @@ public class ResultView {
 
     private static final String WHITE_SPACE = "  ";
 
-    public static void printLadderResult(final LadderResultDto resultDto){
+    public static void printLadderResult(final LadderDrawDto resultDto){
         System.out.println("\n실행결과");
         printNames(resultDto.getNames());
         printLadder(resultDto.getLines());

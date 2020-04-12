@@ -26,6 +26,8 @@ class LadderTest {
                 .isInstanceOf(LadderCreateException.class);
     }
 
+
+
     private static Stream<Arguments> providePlayerAndHeight(){
         return Stream.of(
                 arguments(Players.create(Collections.singletonList("KIM")), Scores.create(Collections.singletonList("1000")),  -1),

@@ -1,30 +1,17 @@
 package dto;
 
-import model.ladder.Ladder;
-import model.player.Players;
+import model.result.PlayerResult;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LadderResultDto {
-    private final List<String> names;
-    private final List<List<String>> lines;
-    private final List<String> scores;
 
-    public LadderResultDto(Players players, Ladder ladder) {
-        names = players.toNames();
-        lines = ladder.toLines();
-        scores = ladder.toScores();
-    }
+    List<PlayerResultDto> playerResultDtos;
 
-    public List<String> getNames() {
-        return names;
-    }
-
-    public List<List<String>> getLines(){
-        return lines;
-    }
-
-    public List<String> getScores() {
-        return scores;
+    public LadderResultDto(List<PlayerResult> playerResults){
+        this.playerResultDtos = playerResults.stream()
+                .map(PlayerResultDto::new)
+                .collect(Collectors.toList());
     }
 }
