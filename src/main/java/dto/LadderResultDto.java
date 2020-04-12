@@ -1,5 +1,6 @@
 package dto;
 
+import exception.LadderConsoleException;
 import model.result.PlayerResult;
 
 import java.util.List;
@@ -13,5 +14,13 @@ public class LadderResultDto {
         this.playerResultDtos = playerResults.stream()
                 .map(PlayerResultDto::new)
                 .collect(Collectors.toList());
+    }
+
+    public String getScoreByName(String name){
+        return playerResultDtos.stream()
+                .filter(playerResultDto -> playerResultDto.getName().equalsIgnoreCase(name))
+                .findFirst()
+                .map(PlayerResultDto::getScore)
+                .orElseGet(() -> "해당 플레이어는 사다리 게임을 수행하지 않았습니다.");
     }
 }

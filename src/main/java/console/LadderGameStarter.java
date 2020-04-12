@@ -15,9 +15,11 @@ public class LadderGameStarter {
         String myAnswer = StringUtils.EMPTY;
 
         while(isExit(myAnswer)){
-            final String name = InputView.inputOnWhoWantToShowingName();
+            final String name = InputView.inputToShowingName();
             if(name.equalsIgnoreCase(ALL_NAMES)){
 
+            } else {
+                ladderResultDto.getScoreByName(name);
             }
         }
     }
