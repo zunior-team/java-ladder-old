@@ -1,5 +1,6 @@
 package com.zuniorteam.ladder.core.generator;
 
+import com.zuniorteam.ladder.core.Ladder;
 import com.zuniorteam.ladder.core.Line;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -35,11 +36,12 @@ class LadderGeneratorTest {
         final LadderGenerator ladderGenerator = new LadderGenerator(new LineGenerator(new Random()));
 
         //when
-        final List<Line> ladder = ladderGenerator.generate(numberOfPoints, height);
+        final Ladder ladder = ladderGenerator.generate(numberOfPoints, height);
 
         //then
-        assertThat(ladder.size()).isEqualTo(height);
-        assertThat(ladder)
+        final List<Line> lines = ladder.getLines();
+        assertThat(lines.size()).isEqualTo(height);
+        assertThat(lines)
                 .extracting(Line::getLength)
                 .containsExactly(numberOfPoints - 1, numberOfPoints - 1);
     }

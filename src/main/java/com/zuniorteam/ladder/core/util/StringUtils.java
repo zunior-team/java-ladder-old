@@ -4,7 +4,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class StringUtils {
+public final class StringUtils {
 
     private static final String EMPTY = "";
 
