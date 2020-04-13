@@ -22,7 +22,7 @@ public class Line {
 
     public boolean hasBridge(int index) {
         if (index < 0 || index >= points.size()) {
-            throw new IllegalArgumentException("index invalid");
+            throw new IllegalArgumentException("index " + index + " invalid");
         }
         return points.get(index);
     }

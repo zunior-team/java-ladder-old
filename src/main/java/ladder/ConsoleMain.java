@@ -14,10 +14,12 @@ public class ConsoleMain {
         final ResultView resultView = new ResultView();
 
         final List<String> names = inputView.inputNames();
+        final List<String> resultNames = inputView.inputResults();
         final int maxHeight = inputView.inputMaxHeight();
 
         final Players players = Players.of(names);
-        final LadderGame ladderGame = LadderGame.of(players, maxHeight);
+        final Results results = Results.of(resultNames, players);
+        final LadderGame ladderGame = LadderGame.of(players, maxHeight, results);
 
         resultView.printLadder(players, ladderGame.lines());
 
