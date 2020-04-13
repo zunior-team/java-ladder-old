@@ -1,6 +1,5 @@
 package model.ladder;
 
-import exception.LadderResultCreateException;
 import model.player.Players;
 
 import java.util.ArrayList;

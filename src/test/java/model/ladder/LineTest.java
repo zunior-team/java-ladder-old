@@ -52,8 +52,8 @@ class LineTest {
 
         // then
         for(int index = 0; index < players.getPlayerCount(); index++){
-            int pos = line.convertPlayerIndexToPosition(index);
-            assertThat(pos).isEqualTo(index * 5);
+            int position = line.convertPlayerIndexToPosition(index);
+            assertThat(position).isEqualTo(index * 5);
         }
     }
 
