@@ -33,18 +33,20 @@ public class GameBoard {
         outputConsole.writeRadder(drawUsers, drawLadder, drawResults);
 
         final Map<User, String> userToResult = ladder.play(users, results);
+
         checkResults(userToResult, users);
     }
 
     private void checkResults(Map<User, String> userToResult, List<User> users) {
-        final User userForCheck = InputRender.getUserForCheck(inputConsole.readUsernameForCheck(), users);
+        final User checkUser = InputRender.getCheckUser(inputConsole.readCheckUsername(), users);
 
-        if (userForCheck.equals(User.ALL_USERS)) {
+        if(checkUser.equals(User.ALL_USERS)){
             outputConsole.writeAllUserToResults(OutputDrawer.drawAllUserToResults(users, userToResult));
             return;
         }
 
-        outputConsole.writeUserToResult(OutputDrawer.drawUserToResult(userForCheck, userToResult.get(userForCheck)));
+        outputConsole.writeUserToResult(OutputDrawer.drawUserToResult(checkUser, userToResult.get(checkUser)));
+
         checkResults(userToResult, users);
     }
 }

@@ -8,6 +8,8 @@ import java.util.stream.IntStream;
 
 public class Ladder {
 
+    public static final int MIN_LADDER_HEIGHT = 1;
+
     private final List<Line> lines;
 
     public Ladder(List<Line> lines) {
@@ -19,8 +21,8 @@ public class Ladder {
     private void validate(List<Line> lines) {
         assert lines != null;
 
-        if(lines.isEmpty()){
-            throw new IllegalArgumentException("사다리는 최소 1개의 라인을 가져야 합니다");
+        if (lines.size() < MIN_LADDER_HEIGHT) {
+            throw new IllegalArgumentException("사다리 최소 높이는 " + MIN_LADDER_HEIGHT + " 입니다");
         }
     }
 
@@ -39,11 +41,13 @@ public class Ladder {
     }
 
     private int followLadder(int pointIndex) {
+        int nextPointIndex = pointIndex;
+
         for (Line line : lines) {
-            pointIndex = getNextPointIndex(pointIndex, line);
+            nextPointIndex = getNextPointIndex(nextPointIndex, line);
         }
 
-        return pointIndex;
+        return nextPointIndex;
     }
 
     private int getNextPointIndex(int pointIndex, Line line) {
@@ -51,11 +55,11 @@ public class Ladder {
         final int nextBridgeIndex = pointIndex;
 
         if (beforeBridgeIndex >= 0 && line.hasBridge(beforeBridgeIndex)) {
-            return --pointIndex;
+            return pointIndex - 1;
         }
 
         if (nextBridgeIndex < line.getLength() && line.hasBridge(nextBridgeIndex)) {
-            return ++pointIndex;
+            return pointIndex + 1;
         }
 
         return pointIndex;

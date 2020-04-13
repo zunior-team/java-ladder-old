@@ -17,9 +17,8 @@ public class OutputConsole {
         System.out.println(drawUserToResult);
     }
 
-    public void writeAllUserToResults(List<String> drawAllUserToResult) {
+    public void writeAllUserToResults(List<String> drawAllUserToResults) {
         System.out.println("실행 결과");
-        drawAllUserToResult
-                .forEach(System.out::println);
+        drawAllUserToResults.forEach(System.out::println);
     }
 }

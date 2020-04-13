@@ -27,7 +27,7 @@ public class InputConsole {
         return height;
     }
 
-    public String readUsernameForCheck() {
+    public String readCheckUsername() {
         System.out.println("결과를 보고싶은 사람은?");
 
         return SCANNER.nextLine();

@@ -1,11 +1,8 @@
 package com.zuniorteam.ladder.core.util;
 
 import java.util.List;
-import java.util.function.Function;
 
-import static java.util.stream.Collectors.toList;
-
-public class CollectionUtils {
+public final class CollectionUtils {
 
     private static final int FIRST_INDEX = 0;
 
@@ -22,12 +19,6 @@ public class CollectionUtils {
         }
 
         return collection.get(index - 1);
-    }
-
-    public static <T,V> List<V> simpleMap(List<T> collection, Function<? super T, ? extends V> mapper){
-        return collection.stream()
-                .map(mapper)
-                .collect(toList());
     }
 
 }

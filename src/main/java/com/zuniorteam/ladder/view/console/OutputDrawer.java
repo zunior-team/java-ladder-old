@@ -12,13 +12,14 @@ import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.joining;
 
-public class OutputDrawer {
+public final class OutputDrawer {
 
     private static final String NEW_LINE = "\n";
-
     private static final Character BRIDGE_TOKEN = '-';
     private static final Character BLANK_TOKEN = ' ';
     private static final Character BORDER_TOKEN = '|';
+
+    private OutputDrawer() {}
 
     public static String drawUsers(List<User> users, int bridgeLength) {
         final String drawUsers = users.stream()
@@ -44,7 +45,7 @@ public class OutputDrawer {
     }
 
     public static String drawUserToResult(User checkUser, String result) {
-        return checkUser.getUsername() + ":" + result;
+        return String.format("%s : %s", checkUser.getUsername(), result);
     }
 
     public static String drawLadder(Ladder ladder, int bridgeLength) {
@@ -68,7 +69,6 @@ public class OutputDrawer {
 
         return StringUtils.fill(BLANK_TOKEN, bridgeLength);
     }
-
 
 
 }
