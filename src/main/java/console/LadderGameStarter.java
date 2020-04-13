@@ -11,9 +11,8 @@ public class LadderGameStarter {
     private static final String EXIT = "exit";
 
     public static void run(LadderResultDto ladderResultDto){
-        while(!isExit()){
 
-            SCANNER.nextLine();
+        while(!isExit()){
 
             final String name = InputView.inputToShowingName();
 
@@ -26,7 +25,7 @@ public class LadderGameStarter {
     }
 
     private static boolean isExit(){
-        System.out.println("사다리 게임을 결과를 보시겠습니까? ( 진행시 무작위 키, 종료시 `exit` 입력 )");
+        System.out.println("\n사다리 게임을 결과를 보시겠습니까? ( 진행시 무작위 키, 종료시 `exit` 입력 )");
         return  SCANNER.next().equalsIgnoreCase(EXIT);
     }
 }

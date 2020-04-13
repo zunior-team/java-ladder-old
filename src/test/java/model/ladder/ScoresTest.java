@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Stream;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @DisplayName("사다리 타기 결과는")
@@ -24,6 +25,19 @@ class ScoresTest {
 
         // then
         assertNotNull(scores);
+    }
+
+    @DisplayName("결과값을 반환한다.")
+    @MethodSource("provideLadderResult")
+    @ParameterizedTest
+    void getScoresTest(List<String> results){
+
+        // when
+        Scores scores = Scores.create(results);
+
+        // then
+        List<String> scoreList = scores.getScores();
+        assertThat(scoreList).isEqualTo(results);
     }
 
     private static Stream<Arguments> provideLadderResult(){

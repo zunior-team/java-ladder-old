@@ -22,9 +22,7 @@ public enum ScoreType {
         validateHangul(result);
         validateNegative(result);
 
-        ScoreType myScoreType = ScoreType.POINT;
-        myScoreType.name = result;
-        return myScoreType;
+        return POINT;
     }
 
     private static void validateHangul(String result){
@@ -45,7 +43,7 @@ public enum ScoreType {
         return result.equals(FAIL.name);
     }
 
-    public String getMyScore(){
-        return name;
+    public String getType(){
+        return this.name;
     }
 }

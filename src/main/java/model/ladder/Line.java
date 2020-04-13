@@ -82,13 +82,10 @@ public class Line {
     }
 
     public int convertPlayerIndexToPosition(int playerIndex) {
-        return IntStream.range(START_POINT, points.size())
-                .filter(currentPos -> points.get(currentPos).isMyStartPoint(playerIndex))
-                .findFirst()
-                .orElseThrow(() -> new LadderResultCreateException("플레이어의 사다리 출발점을 찾을 수 없습니다."));
+        return (playerIndex * DEFAULT_INTERVAL);
     }
 
     public int convertPositionToPlayerIndex(int position) {
-        return position / DEFAULT_INTERVAL;
+        return (position / DEFAULT_INTERVAL);
     }
 }

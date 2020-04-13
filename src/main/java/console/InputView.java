@@ -23,6 +23,7 @@ public class InputView {
 
     public static String inputToShowingName(){
         System.out.println("\n결과를 보고 싶은 사람은?");
+        SCANNER.nextLine();
         return SCANNER.nextLine();
     }
 }

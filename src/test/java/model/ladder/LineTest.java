@@ -52,8 +52,8 @@ class LineTest {
 
         // then
         for(int index = 0; index < players.getPlayerCount(); index++){
-            Point point = line.move(index);
-            assertThat(point.isBar()).isTrue();
+            int pos = line.convertPlayerIndexToPosition(index);
+            assertThat(pos).isEqualTo(index * 5);
         }
     }
 

@@ -3,15 +3,16 @@ package model.ladder;
 import exception.LadderResultCreateException;
 import org.apache.commons.collections4.CollectionUtils;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class Scores {
 
-    private List<Score> scores;
+    private List<Score> scores = new ArrayList<>();
 
-    private Scores(List<String> results) {
+    private Scores(final List<String> results) {
         validate(results);
         this.scores = results.stream()
                 .map(Score::new)
@@ -31,7 +32,7 @@ public class Scores {
     public List<String> getScores(){
         return Collections.unmodifiableList(
                 scores.stream()
-                        .map(Score::get)
+                        .map(Score::getValue)
                         .collect(Collectors.toList()));
     }
 

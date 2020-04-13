@@ -17,6 +17,6 @@ public class PlayerResult {
     }
 
     public String getPlayerScore(){
-        return score.get();
+        return score.getValue();
     }
 }

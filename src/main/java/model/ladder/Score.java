@@ -4,12 +4,12 @@ import exception.LadderResultCreateException;
 import org.apache.commons.lang3.StringUtils;
 
 public class Score {
-
+    private String value;
     private ScoreType scoreType;
-
-    public Score(String result) {
+    public Score(final String result) {
         validate(result);
         this.scoreType = ScoreType.getMyScoreType(result);
+        this.value = result;
     }
 
     private void validate(String result) {
@@ -18,7 +18,11 @@ public class Score {
         }
     }
 
-    public String get(){
-        return scoreType.getMyScore();
+    public String getMyType(){
+        return scoreType.getType();
+    }
+
+    public String getValue() {
+        return value;
     }
 }
