@@ -1,6 +1,5 @@
 package dto;
 
-import exception.LadderConsoleException;
 import model.result.PlayerResult;
 
 import java.util.List;
@@ -22,5 +21,9 @@ public class LadderResultDto {
                 .findFirst()
                 .map(PlayerResultDto::getScore)
                 .orElseGet(() -> "해당 플레이어는 사다리 게임을 수행하지 않았습니다.");
+    }
+
+    public List<PlayerResultDto> getPlayerResultDtos(){
+        return this.playerResultDtos;
     }
 }
