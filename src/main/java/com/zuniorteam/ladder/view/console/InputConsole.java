@@ -12,6 +12,12 @@ public class InputConsole {
         return SCANNER.nextLine();
     }
 
+    public String readResults() {
+        System.out.println("실행 결과를 입력하세요. (결과는 쉼표(,)로 구분하세요)");
+
+        return SCANNER.nextLine();
+    }
+
     public int readLadderHeight() {
         System.out.println("최대 사다리 높이는 몇 개인가요?");
 
@@ -19,5 +25,11 @@ public class InputConsole {
         SCANNER.nextLine();
 
         return height;
+    }
+
+    public String readUsernameForCheck() {
+        System.out.println("결과를 보고싶은 사람은?");
+
+        return SCANNER.nextLine();
     }
 }

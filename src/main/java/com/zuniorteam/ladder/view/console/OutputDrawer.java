@@ -1,10 +1,13 @@
 package com.zuniorteam.ladder.view.console;
 
+import com.zuniorteam.ladder.core.Ladder;
 import com.zuniorteam.ladder.core.Line;
 import com.zuniorteam.ladder.core.User;
 import com.zuniorteam.ladder.core.util.StringUtils;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.joining;
@@ -26,8 +29,26 @@ public class OutputDrawer {
         return StringUtils.fill(BLANK_TOKEN, bridgeLength) + drawUsers;
     }
 
-    public static String drawLadder(List<Line> ladder, int bridgeLength) {
-        return ladder.stream()
+    public static String drawResults(List<String> results, int bridgeLength) {
+        final String drawResults = results.stream()
+                .map(result -> StringUtils.fill(result, BLANK_TOKEN, bridgeLength))
+                .collect(joining(BLANK_TOKEN.toString()));
+
+        return StringUtils.fill(BLANK_TOKEN, bridgeLength) + drawResults;
+    }
+
+    public static List<String> drawAllUserToResults(List<User> users, Map<User, String> userToResult) {
+        return users.stream()
+                .map(user -> drawUserToResult(user, userToResult.get(user)))
+                .collect(Collectors.toList());
+    }
+
+    public static String drawUserToResult(User checkUser, String result) {
+        return checkUser.getUsername() + ":" + result;
+    }
+
+    public static String drawLadder(Ladder ladder, int bridgeLength) {
+        return ladder.getLines().stream()
                 .map(line -> drawLine(line, bridgeLength))
                 .collect(joining(NEW_LINE));
     }
@@ -47,4 +68,7 @@ public class OutputDrawer {
 
         return StringUtils.fill(BLANK_TOKEN, bridgeLength);
     }
+
+
+
 }

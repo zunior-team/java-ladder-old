@@ -29,7 +29,7 @@ public class Line {
         }
 
         if (bridges.get(index) && CollectionUtils.getBefore(bridges, index)) {
-            throw new IllegalArgumentException("이어지는 bridge를 만들 수 없습니다.");
+            throw new IllegalArgumentException("이어지는 bridge 를 만들 수 없습니다.");
         }
     }
 
