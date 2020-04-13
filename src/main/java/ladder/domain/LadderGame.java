@@ -1,13 +1,8 @@
 package ladder.domain;
 
-import spark.utils.CollectionUtils;
-
-import java.awt.*;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.collectingAndThen;
