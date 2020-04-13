@@ -13,7 +13,7 @@ public class ResultView {
     private static final String BAR_LINE = "--------";
     private static final String EMPTY_SPACE_BETWEEN_BAR = "        ";
 
-    public void printResult(Players players, List<Line> ladder) {
+    public void printLadder(Players players, List<Line> ladder) {
         System.out.println("실행 결과");
 
         System.out.println(String.join(SPACE_BETWEEN_NAMES, players.names()));

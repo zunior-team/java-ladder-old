@@ -30,4 +30,8 @@ public class InputView {
         return line.split(COMMA);
     }
 
+    public String inputPlayerWhoWantResult() {
+        System.out.println("결과를 보고 싶은 사람은?");
+        return inputLine().trim();
+    }
 }
