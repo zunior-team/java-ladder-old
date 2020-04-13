@@ -1,8 +1,9 @@
 package ladder;
 
 import ladder.domain.LadderGame;
-import ladder.domain.Player;
 import ladder.domain.Players;
+import ladder.domain.ResultPlayer;
+import ladder.domain.Results;
 import ladder.view.InputView;
 import ladder.view.ResultView;
 
@@ -21,9 +22,10 @@ public class ConsoleMain {
         final Results results = Results.of(resultNames, players);
         final LadderGame ladderGame = LadderGame.of(players, maxHeight, results);
 
-        resultView.printLadder(players, ladderGame.lines());
+        resultView.printLadder(ladderGame);
 
-        Player player = players.findByName(inputView.inputPlayerWhoWantResult());
+        ResultPlayer playerToPrintResults = new ResultPlayer(players, inputView.inputPlayerWhoWantResult());
+        resultView.printResultOfEachPlayer(ladderGame, playerToPrintResults);
 
     }
 }

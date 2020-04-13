@@ -56,4 +56,30 @@ class PlayersTest {
                 //when
                 () -> players.findByName("junwoo123"));
     }
+
+    @Test
+    @DisplayName("Players 에서 참여자로 참여자의 인덱스를 찾을 수 있다")
+    void testIndexOf() {
+        //given
+        final Players players = Players.of(Lists.newArrayList("junwoo", "hello"));
+
+        //when
+        final int indexOf = players.indexOf(new Player("junwoo"));
+
+        //then
+        assertThat(indexOf).isNotNull()
+                .isEqualTo(0);
+    }
+
+    @Test
+    @DisplayName("Players 에서 index를 찾을 때 null 이 들어오면 Exception을 던진다")
+    void testIndexOfNull() {
+        //given
+        final Players players = Players.of(Lists.newArrayList("junwoo", "hello"));
+
+        //then
+        assertThrows(NullPointerException.class,
+                //when
+                () -> players.indexOf(null));
+    }
 }

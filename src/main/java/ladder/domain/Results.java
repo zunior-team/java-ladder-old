@@ -1,6 +1,5 @@
-package ladder;
+package ladder.domain;
 
-import ladder.domain.Players;
 import spark.utils.CollectionUtils;
 
 import java.util.Collections;
@@ -23,5 +22,16 @@ public class Results {
 
     public static Results of(List<String> resultNames, Players players) {
         return new Results(resultNames, players);
+    }
+
+    public String findByIndex(int index) {
+        if (index < 0 || index >= results.size()) {
+            throw new IllegalArgumentException("유효하지 않은 index : [" + index + "] 입니다. ");
+        }
+        return results.get(index);
+    }
+
+    public List<String> names() {
+        return Collections.unmodifiableList(results);
     }
 }

@@ -1,7 +1,5 @@
 package ladder.domain;
 
-import ladder.Results;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -13,9 +11,9 @@ import static java.util.stream.Collectors.toList;
 
 public class LadderGame {
     public static final int MINIMUM_MAX_HEIGHT = 1;
-    private List<Line> lines;
-    private Players players;
-    private Results results;
+    private final List<Line> lines;
+    private final Players players;
+    private final Results results;
 
     private LadderGame(Players players, int maxHeight, Results results) {
         Objects.requireNonNull(players);
@@ -34,9 +32,6 @@ public class LadderGame {
                         Collections::unmodifiableList));
     }
 
-    public List<Line> lines() {
-        return Collections.unmodifiableList(lines);
-    }
 
     private void validateMaxHeight(int maxHeight) {
         if (maxHeight < MINIMUM_MAX_HEIGHT) {
@@ -48,4 +43,38 @@ public class LadderGame {
         return new LadderGame(players, maxHeight, results);
     }
 
+
+    public List<Line> lines() {
+        return Collections.unmodifiableList(lines);
+    }
+
+    public Players players() {
+        return players;
+    }
+
+
+    public Results results() {
+        return results;
+    }
+
+    public String findResult(Player player) {
+        int currentPoint = players.indexOf(player);
+        final int maxLineSize = players.size() - 1;
+        for (Line line : lines) {
+            currentPoint = checkNextPoint(currentPoint, maxLineSize, line);
+        }
+        return results.findByIndex(currentPoint);
+    }
+
+    private int checkNextPoint(int currentPosition, int maxLineSize, Line line) {
+        if (currentPosition < maxLineSize && line.hasBridge(currentPosition)) {
+            return currentPosition + 1;
+        }
+
+        final int leftPoint = currentPosition - 1;
+        if (leftPoint >= 0 && line.hasBridge(leftPoint)) {
+            return currentPosition - 1;
+        }
+        return currentPosition;
+    }
 }
