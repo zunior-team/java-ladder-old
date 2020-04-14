@@ -8,6 +8,7 @@ import model.result.PlayerResult;
 import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -30,6 +31,10 @@ public class Players {
     private static void validate(final List<String> names){
         if(CollectionUtils.isEmpty(names)) {
             throw new PlayersCreateException("플레이어를 생성하지 못합니다.");
+        }
+
+        if(new HashSet<>(names).size() != names.size()){
+            throw new PlayersCreateException("동일한 플레이어가 있기 때문에 생성하지 못합니다.");
         }
     }
 
