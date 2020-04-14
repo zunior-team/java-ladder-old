@@ -7,7 +7,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static ladder.constant.ParticipantConstants.PARTICIPANT_NAME_SPLIT_TOKEN;
+import static ladder.constant.ParticipantConstants.INPUT_SPLIT_TOKEN;
+import static ladder.constant.ParticipantConstants.RESULT_ALL;
 
 public class Participants {
 
@@ -15,7 +16,7 @@ public class Participants {
 
     private Participants(String participantNames){
         validateParticipantNames(participantNames);
-        this.participants = Arrays.stream(participantNames.split(PARTICIPANT_NAME_SPLIT_TOKEN))
+        this.participants = Arrays.stream(participantNames.split(INPUT_SPLIT_TOKEN))
                 .map(Participant::of)
                 .collect(Collectors.toList());
     }
@@ -28,6 +29,15 @@ public class Participants {
         }
     }
 
+    public Participant getParticipantByName(String name){
+        if(name.equals(RESULT_ALL)){
+            return null;
+        }
+        return participants.stream()
+                .filter(participant -> participant.toString().equals(name))
+                .findAny()
+                .orElseThrow(IllegalArgumentException::new);
+    }
     public List<Participant> getParticipants() {
         return Collections.unmodifiableList(participants);
     }
