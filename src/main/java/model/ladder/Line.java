@@ -95,6 +95,8 @@ public class Line {
     }
 
     public int convertPositionToPlayerIndex(int position) {
-        return (position / DEFAULT_INTERVAL);
+        return (position % DEFAULT_INTERVAL == 0)
+                ? (position - 1) / DEFAULT_INTERVAL
+                : position / DEFAULT_INTERVAL;
     }
 }

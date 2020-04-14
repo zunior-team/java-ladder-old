@@ -30,6 +30,6 @@ public class LadderGameStarter {
 
     private static boolean isExit(){
         System.out.println("\n사다리 게임을 결과를 계속 보시겠습니까? ( 진행시 무작위 키, 종료시 `exit` 입력 )");
-        return  SCANNER.nextLine().equalsIgnoreCase(EXIT);
+        return SCANNER.nextLine().equalsIgnoreCase(EXIT);
     }
 }

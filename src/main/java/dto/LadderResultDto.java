@@ -20,7 +20,7 @@ public class LadderResultDto {
                 .filter(playerResultDto -> playerResultDto.getName().equalsIgnoreCase(name))
                 .findFirst()
                 .map(PlayerResultDto::getScore)
-                .orElseGet(() -> "해당 플레이어는 사다리 게임을 수행하지 않았습니다.");
+                .orElse("[warning] : 해당 플레이어는 사다리 게임을 수행하지 않았습니다.");
     }
 
     public List<PlayerResultDto> getPlayerResultDtos(){

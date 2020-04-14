@@ -48,7 +48,8 @@ public class Players {
         return IntStream.range(0, getPlayerCount())
                 .mapToObj(playerIndex -> {
                     Player player = players.get(playerIndex);
-                    Score score = scores.getScoreByIndex(getResultIndexByOnePlayer(lines, playerIndex));
+                    int scoreIndex = getResultIndexByOnePlayer(lines, playerIndex);
+                    Score score = scores.getScoreByIndex(scoreIndex);
                     return new PlayerResult(player, score);
                 }).collect(Collectors.toList());
     }
