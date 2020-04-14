@@ -1,5 +1,7 @@
 package model.player;
 
+import model.ladder.Line;
+import model.ladder.Scores;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -30,6 +32,12 @@ class PlayersTest {
         return Stream.of(
             arguments(Arrays.asList("PARK", "KIM", "JUN", "HO")),
             arguments(Arrays.asList("PARK", "JIN", "OH"))
+        );
+    }
+
+    private static Stream<Arguments> provideLineAndScores(){
+        return Stream.of(
+            arguments(Arrays.asList("PARK", "SUNG", "DONG"), Scores.create(Arrays.asList("10", "20", "30")))
         );
     }
 }

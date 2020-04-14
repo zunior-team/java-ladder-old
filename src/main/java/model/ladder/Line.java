@@ -1,5 +1,6 @@
 package model.ladder;
 
+import model.moving.MovingType;
 import model.player.Players;
 
 import java.util.ArrayList;
@@ -58,30 +59,39 @@ public class Line {
     }
 
     private int leftOnePosition(int currentPos){ return currentPos - 1; }
-    private boolean isMovableLeft(int currentPos){ return (currentPos - 1 >= 0); }
     private int rightOnePosition(int currentPos){ return currentPos + 1; }
-    private boolean isMovableRight(int currentPos){ return (currentPos + 1 < points.size()); }
+    private boolean isMovableLeft(int position){
+        return (position >= 0) && points.get(position).isDash();
+    }
+
+    private boolean isMovableRight(int position) {
+        return (position < points.size()) && points.get(position).isDash();
+    }
 
     public int getPosition(int colIndex){
-        if(isMovableLeft(colIndex) && points.get(leftOnePosition(colIndex)).isDash()){
-            return moveSideIfPossibleElseNot(colIndex - 1, -1);
+        if(isMovableLeft(leftOnePosition(colIndex))){
+            return moveSideIfPossibleElseNot(MovingType.LEFT, colIndex);
         }
-        if(isMovableRight(colIndex) && points.get(rightOnePosition(colIndex)).isDash()){
-            return moveSideIfPossibleElseNot(colIndex + 1, 1);
+        if(isMovableRight(rightOnePosition(colIndex))){
+            return moveSideIfPossibleElseNot(MovingType.RIGHT, colIndex);
         }
         return colIndex;
     }
 
-    private int moveSideIfPossibleElseNot(int colIndex, int movingValue){
-        if(isMovableLeft(colIndex) && isMovableRight(colIndex)){
-            return moveSideIfPossibleElseNot(colIndex + movingValue, movingValue);
+    private int moveSideIfPossibleElseNot(MovingType movingType, int colIndex){
+
+        int newPosition = movingType.move(colIndex);
+
+        if(isMovableLeft(newPosition) && isMovableRight(newPosition)){
+            return moveSideIfPossibleElseNot(movingType, newPosition);
         }
 
-        return colIndex;
+        return newPosition;
     }
+
 
     public int convertPlayerIndexToPosition(int playerIndex) {
-        return (playerIndex * DEFAULT_INTERVAL);
+        return (playerIndex * DEFAULT_INTERVAL + playerIndex);
     }
 
     public int convertPositionToPlayerIndex(int position) {

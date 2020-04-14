@@ -12,7 +12,7 @@ public class LadderGameStarter {
 
     public static void run(LadderResultDto ladderResultDto){
 
-        while(!isExit()){
+        while(true){
 
             final String name = InputView.inputToShowingName();
 
@@ -21,11 +21,15 @@ public class LadderGameStarter {
             } else {
                 ResultView.printScore(ladderResultDto.getScoreByName(name));
             }
+
+            if(isExit()){
+                break;
+            }
         }
     }
 
     private static boolean isExit(){
-        System.out.println("\n사다리 게임을 결과를 보시겠습니까? ( 진행시 무작위 키, 종료시 `exit` 입력 )");
-        return  SCANNER.next().equalsIgnoreCase(EXIT);
+        System.out.println("\n사다리 게임을 결과를 계속 보시겠습니까? ( 진행시 무작위 키, 종료시 `exit` 입력 )");
+        return  SCANNER.nextLine().equalsIgnoreCase(EXIT);
     }
 }

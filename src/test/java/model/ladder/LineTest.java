@@ -46,14 +46,16 @@ class LineTest {
     @MethodSource("provideOnePlayers")
     @ParameterizedTest
     void moveTest(Players players){
-
         // when
         final Line line = Line.of(players);
+        int count = players.getPlayerCount();
+
+        List<String> displays = line.toDisplays();
 
         // then
-        for(int index = 0; index < players.getPlayerCount(); index++){
-            int position = line.convertPlayerIndexToPosition(index);
-            assertThat(position).isEqualTo(index * 5);
+        for(int index = 0; index < count; index++){
+            int colIndex = line.getPosition(line.convertPlayerIndexToPosition(index));
+            assertThat(displays.get(colIndex)).isEqualTo("|");
         }
     }
 
