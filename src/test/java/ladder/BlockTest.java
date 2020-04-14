@@ -22,8 +22,10 @@ class BlockTest {
     void constructorTest(List<String> users, PollCreateStrategy pollCreateStrategy, boolean evenExpected, boolean oddExpected) {
         Block block = new Block(new InitInfo(new Users(users), new LadderInitInfo(0, pollCreateStrategy)));
 
+/*
         IntStream.rangeClosed(0, users.size())
                 .forEach(i -> assertThat(block.hasRightLadder(i)).isEqualTo(i % 2 == 0 ? evenExpected : oddExpected));
+*/
     }
 
     private static Stream constructorTest() {

@@ -1,16 +1,21 @@
 package ladder.console;
 
 import ladder.Ladder;
-import ladder.dto.LadderResult;
+import ladder.UserAndPrize;
 import ladder.init.InitInfo;
+
+import java.util.Map;
 
 public class ConsoleMain {
     public static void main(String[] args) {
-        InitInfo initInfo = ConsoleInput.getInitInfo();
+        UserAndPrize usersAndPrizes = ConsoleInput.getUsersAndPrizes();
+
+        InitInfo initInfo = ConsoleInput.getInitInfo(usersAndPrizes);
 
         Ladder ladder = new Ladder(initInfo);
-        LadderResult result = ladder.getResult();
+        //draw : userAndPrize, Ladder
 
-        ConsoleOutput.drawResult(result);
+        Map<String, String> stringStringMap = usersAndPrizes.matchUserAndPrize(ladder);
+        //draw result stringStringMap;
     }
 }

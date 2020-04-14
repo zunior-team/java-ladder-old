@@ -1,31 +1,23 @@
 package ladder.init;
 
-import ladder.strategy.PollCreateStrategy;
+import java.util.Arrays;
 
 public class LadderInitInfo {
-    private int height;
-    private PollCreateStrategy pollCreateStrategy;
+    private static final int LOWEST_LIMIT = 1;
+    private final int height;
+    private final int width;
 
-    public LadderInitInfo(final int height, final PollCreateStrategy pollCreateStrategy) {
-        validate(height, pollCreateStrategy);
+    public LadderInitInfo(final int height, final int width) {
+        validateSize(height, width);
+
         this.height = height;
-        this.pollCreateStrategy = pollCreateStrategy;
+        this.width = width;
     }
 
-    private void validate(final int length, final PollCreateStrategy pollCreateStrategy) {
-        validateLength(length);
-        validateStrategy(pollCreateStrategy);
-    }
-
-    private void validateStrategy(PollCreateStrategy pollCreateStrategy) {
-        if(pollCreateStrategy == null) {
-            throw new IllegalArgumentException("PollCreateStrategy can't be a null");
-        }
-    }
-
-    private void validateLength(int length) {
-        if(length < 1) {
-            throw new IllegalArgumentException("Ladder can't be created with length : " + length);
+    private void validateSize(int... sizes) {
+        if(Arrays.stream(sizes)
+                .anyMatch(size -> size < LOWEST_LIMIT)) {
+            throw new IllegalArgumentException("Ladder size can't smaller than " + LOWEST_LIMIT);
         }
     }
 
@@ -33,7 +25,7 @@ public class LadderInitInfo {
         return height;
     }
 
-    public PollCreateStrategy getPollCreateStrategy() {
-        return pollCreateStrategy;
+    public int getWidth() {
+        return width;
     }
 }

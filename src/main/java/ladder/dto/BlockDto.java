@@ -13,7 +13,7 @@ public class BlockDto {
     public static BlockDto of(Block block) {
         BlockDto blockDto = new BlockDto();
 
-        blockDto.polls = block.getPolls();
+//        blockDto.polls = block.getPolls();
 
         return blockDto;
     }
