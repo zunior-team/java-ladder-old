@@ -9,6 +9,7 @@ public class User {
 
     public User(final String name, final int order) {
         validate(name);
+
         this.name = name;
         this.order = order;
     }
@@ -17,7 +18,7 @@ public class User {
         return name;
     }
 
-    public int getOrder() {
+    public int getPosition() {
         return order;
     }
 

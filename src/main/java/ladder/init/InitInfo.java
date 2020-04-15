@@ -4,8 +4,8 @@ import ladder.strategy.PollCreateStrategy;
 import ladder.user.Users;
 
 public class InitInfo {
-    private LadderInitInfo ladderInitInfo;
-    private PollCreateStrategy pollCreateStrategy;
+    private final LadderInitInfo ladderInitInfo;
+    private final PollCreateStrategy pollCreateStrategy;
 
     public InitInfo(final LadderInitInfo ladderInitInfo, final PollCreateStrategy pollCreateStrategy) {
         assert ladderInitInfo != null;
@@ -20,5 +20,9 @@ public class InitInfo {
 
     public int getHeight() {
         return ladderInitInfo.getHeight();
+    }
+
+    public int getWidth() {
+        return ladderInitInfo.getWidth();
     }
 }

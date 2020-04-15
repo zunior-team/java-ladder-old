@@ -20,24 +20,19 @@ public class UserAndPrize {
         this.prizes = prizes;
     }
 
-    public Map<String, String> matchUserAndPrize(Ladder ladder) {
-        List<Integer> ladderResults = ladder.takeLadders();
-
-        // atomic integer를 이용하는 방법도 있지만 가독성이 떨어진다.
-        return users.getUsers()
-                .stream()
-                .collect(Collectors.toMap(User::getName, user -> getPrize(user, ladderResults)));
-    }
-
-    private String getPrize(User user, List<Integer> ladderResults) {
-        // 사다리 타기를 했을때 마지막 줄에서의 user 위치
-        int usersResultPosition = ladderResults.get(user.getOrder());
-
-        // 해당 위치에서의 당첨 결과
-        return prizes.getPrize(usersResultPosition);
-    }
-
     public int width() {
         return users.numOfUsers();
+    }
+
+    public List<User> getUsers() {
+        return users.getUsers();
+    }
+
+    public String getPrize(int position) {
+        return prizes.getPrize(position);
+    }
+
+    public List<String> getPrizes() {
+        return prizes.getPrizes();
     }
 }

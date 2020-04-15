@@ -1,11 +1,15 @@
 package ladder.dto;
 
-import ladder.Block;
-import ladder.user.User;
-
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Map;
 
 public class LadderResult {
-    private List<Integer> positionResult; // x번째 유저의 결과는 해당 위치의 값
+    private Map<String, String> prizeMatch;
+
+    public LadderResult(Map<String, String> prizeMatch) {
+        this.prizeMatch = prizeMatch;
+    }
+
+    public Map<String, String> getPrizeMatch() {
+        return prizeMatch;
+    }
 }
