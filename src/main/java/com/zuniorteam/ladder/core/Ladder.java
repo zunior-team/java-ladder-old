@@ -1,7 +1,9 @@
 package com.zuniorteam.ladder.core;
 
-import java.util.*;
-import java.util.stream.IntStream;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Ladder {
 
@@ -41,18 +43,19 @@ public class Ladder {
 
     private int followLadder(int pointIndex) {
         return lines.stream()
-                .reduce(pointIndex, this::getNextPointIndex, (x,y) -> {throw new RuntimeException("병렬처리르 지원하지 않습니다");} );
+                .reduce(
+                        pointIndex,
+                        this::getNextPointIndex,
+                        (x, y) -> {throw new RuntimeException("병렬처리를 지원하지 않습니다");}
+                );
     }
 
     private int getNextPointIndex(int pointIndex, Line line) {
-        final int beforeBridgeIndex = pointIndex - 1;
-        final int nextBridgeIndex = pointIndex;
-
-        if (beforeBridgeIndex >= 0 && line.hasBridge(beforeBridgeIndex)) {
+        if (line.hasLeftBridge(pointIndex)) {
             return pointIndex - 1;
         }
 
-        if (nextBridgeIndex < line.getLength() && line.hasBridge(nextBridgeIndex)) {
+        if (line.hasRightBridge(pointIndex)) {
             return pointIndex + 1;
         }
 
