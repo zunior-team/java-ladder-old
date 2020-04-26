@@ -22,7 +22,7 @@ public class Ladder {
         assert lines != null;
 
         if (lines.size() < MIN_LADDER_HEIGHT) {
-            throw new IllegalArgumentException("사다리 최소 높이는 " + MIN_LADDER_HEIGHT + " 입니다");
+            throw new IllegalArgumentException("사다리 최소 높이는 " + MIN_LADDER_HEIGHT + " 입니다. 현재 높이 : " + lines);
         }
     }
 
