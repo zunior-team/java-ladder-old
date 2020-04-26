@@ -72,9 +72,10 @@ public class ConsoleOutput {
         System.out.println("실행 결과");
         if("all".equalsIgnoreCase(target)) {
             showTarget(prizeMatch, new ArrayList<>(prizeMatch.values()));
-        } else {
-            showTarget(prizeMatch, Collections.singletonList(target));
+            return;
         }
+
+        showTarget(prizeMatch, Collections.singletonList(target));
     }
 
     public static void showTarget(Map<String, String> ladderResult, List<String> targets) {
