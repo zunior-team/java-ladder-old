@@ -55,11 +55,11 @@ class LadderGameTest {
         final LadderGame ladderGame = LadderGame.of(players, maxHeight, results);
 
         //when
-        final List<Line> lines = ladderGame.lines();
+        final Lines lines = ladderGame.lines();
 
         //then
-        assertThat(lines).isNotNull()
-                .hasSize(maxHeight - 1);
+        assertThat(lines).isNotNull();
+        assertThat(lines.stream()).hasSize(maxHeight - 1);
     }
 
     @Test

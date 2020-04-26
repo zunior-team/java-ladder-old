@@ -1,10 +1,6 @@
 package ladder.view;
 
-import ladder.domain.ResultPlayer;
-import ladder.domain.Results;
-import ladder.domain.LadderGame;
-import ladder.domain.Line;
-import ladder.domain.Players;
+import ladder.domain.*;
 
 import java.util.List;
 import java.util.stream.IntStream;
@@ -19,7 +15,7 @@ public class ResultView {
     public void printLadder(LadderGame ladderGame) {
         System.out.println("실행 결과");
         final Players players = ladderGame.players();
-        final List<Line> lines = ladderGame.lines();
+        final Lines lines =ladderGame.lines();
 
         System.out.println(String.join(SPACE_BETWEEN_NAMES, players.names()));
 
