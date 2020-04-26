@@ -29,10 +29,6 @@ public class Block {
                 .move();
     }
 
-    public BlockDto toDto() {
-        return BlockDto.of(this);
-    }
-
     public List<Boolean> getPollInfos() {
         return points.stream()
                 .map(Point::hasPoll)

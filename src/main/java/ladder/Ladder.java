@@ -36,7 +36,7 @@ public class Ladder {
 
     public List<BlockDto> toBlockDtos() {
         return blocks.stream()
-                .map(Block::toDto)
+                .map(BlockDto::of)
                 .collect(Collectors.toList());
     }
 }
