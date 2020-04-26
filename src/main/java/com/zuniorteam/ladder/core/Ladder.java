@@ -40,13 +40,8 @@ public class Ladder {
     }
 
     private int followLadder(int pointIndex) {
-        int nextPointIndex = pointIndex;
-
-        for (Line line : lines) {
-            nextPointIndex = getNextPointIndex(nextPointIndex, line);
-        }
-
-        return nextPointIndex;
+        return lines.stream()
+                .reduce(pointIndex, this::getNextPointIndex, (x,y) -> {throw new RuntimeException("병렬처리르 지원하지 않습니다");} );
     }
 
     private int getNextPointIndex(int pointIndex, Line line) {
