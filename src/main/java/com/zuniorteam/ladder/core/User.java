@@ -5,10 +5,12 @@ import com.zuniorteam.ladder.core.util.StringUtils;
 public class User {
 
     public static final String ALL_USERS_KEYWORD = "all";
-    public static final User ALL_USERS = new User(ALL_USERS_KEYWORD);
+    public static final User ALL_USERS = new User();
     public static final int MAX_USERNAME_LENGTH = 5;
 
     private final String username;
+
+    private User(){this.username = "";}
 
     public User(String username) {
         validate(username);
