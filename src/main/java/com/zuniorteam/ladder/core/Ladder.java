@@ -1,9 +1,6 @@
 package com.zuniorteam.ladder.core;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.IntStream;
 
 public class Ladder {
@@ -27,7 +24,7 @@ public class Ladder {
     }
 
     public List<Line> getLines() {
-        return new ArrayList<>(lines);
+        return Collections.unmodifiableList(lines);
     }
 
     public Map<User, String> play(List<User> users, List<String> results) {
