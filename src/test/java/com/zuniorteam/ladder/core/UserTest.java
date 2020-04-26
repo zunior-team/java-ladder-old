@@ -1,15 +1,16 @@
 package com.zuniorteam.ladder.core;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import static com.zuniorteam.ladder.core.User.ALL_USERS_KEYWORD;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("사용자 테스트")
 class UserTest {
-
 
     @DisplayName("사용자 이름이 null 이거나, empty 일때")
     @NullAndEmptySource
@@ -23,6 +24,12 @@ class UserTest {
     @ParameterizedTest
     void testNewInstance02(String username){
         assertThrows(IllegalArgumentException.class, () -> new User(username));
+    }
+
+    @DisplayName("사용자 이름이 예약어 일때 (ex . `all`)")
+    @Test
+    void testNewInstance03(){
+        assertThrows(IllegalArgumentException.class, () -> new User(ALL_USERS_KEYWORD));
     }
 
 }
