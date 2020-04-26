@@ -33,9 +33,11 @@ public class Ladder {
     public Map<User, String> play(List<User> users, List<String> results) {
         final Map<User, String> userToResult = new HashMap<>();
 
-        final int numberOfPoints = users.size();
-        IntStream.range(0, numberOfPoints)
-                .forEach(pointIndex -> userToResult.put(users.get(pointIndex), results.get(followLadder(pointIndex))));
+        for (int i = 0; i < users.size(); i++) {
+            final User user = users.get(i);
+            final String result = results.get(followLadder(i));
+            userToResult.put(user, result);
+        }
 
         return userToResult;
     }
