@@ -1,5 +1,6 @@
 package com.zuniorteam.ladder.core.util;
 
+import java.util.HashSet;
 import java.util.List;
 
 public final class CollectionUtils {
@@ -21,4 +22,7 @@ public final class CollectionUtils {
         return collection.get(index - 1);
     }
 
+    public static boolean isUnique(List<String> collection) {
+        return new HashSet<>(collection).size() == collection.size();
+    }
 }

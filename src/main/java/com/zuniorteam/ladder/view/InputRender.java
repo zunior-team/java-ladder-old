@@ -1,25 +1,31 @@
 package com.zuniorteam.ladder.view;
 
 import com.zuniorteam.ladder.core.User;
+import com.zuniorteam.ladder.core.util.CollectionUtils;
 import com.zuniorteam.ladder.core.util.StringUtils;
-import com.zuniorteam.ladder.view.console.OutputDrawer;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static com.zuniorteam.ladder.core.Ladder.MIN_LADDER_HEIGHT;
 import static java.util.stream.Collectors.toList;
-import static java.util.stream.Collectors.toMap;
 
 public final class InputRender {
 
     private static final String USERNAME_SPLIT_TOKEN = ",";
     private static final String RESULTS_SPLIT_TOKEN = ",";
 
-    private InputRender() {}
+    private InputRender() {
+    }
 
-    public static List<User> getUsers(String usernames) {
-        return Arrays.stream(usernames.split(USERNAME_SPLIT_TOKEN))
+    public static List<User> getUsers(String usernamesLine) {
+        final List<String> usernames = Arrays.asList(usernamesLine.split(USERNAME_SPLIT_TOKEN));
+
+        if (!CollectionUtils.isUnique(usernames)){
+            throw new IllegalArgumentException(" 사용자 이름이 중복됩니다" + usernames);
+        }
+
+        return usernames.stream()
                 .map(User::new)
                 .collect(toList());
     }

@@ -1,10 +1,9 @@
 package com.zuniorteam.ladder.core;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.IntStream;
 
 public class Ladder {
 
@@ -22,43 +21,41 @@ public class Ladder {
         assert lines != null;
 
         if (lines.size() < MIN_LADDER_HEIGHT) {
-            throw new IllegalArgumentException("사다리 최소 높이는 " + MIN_LADDER_HEIGHT + " 입니다");
+            throw new IllegalArgumentException("사다리 최소 높이는 " + MIN_LADDER_HEIGHT + " 입니다. 현재 높이 : " + lines);
         }
     }
 
     public List<Line> getLines() {
-        return new ArrayList<>(lines);
+        return Collections.unmodifiableList(lines);
     }
 
     public Map<User, String> play(List<User> users, List<String> results) {
         final Map<User, String> userToResult = new HashMap<>();
 
-        final int numberOfPoints = users.size();
-        IntStream.range(0, numberOfPoints)
-                .forEach(pointIndex -> userToResult.put(users.get(pointIndex), results.get(followLadder(pointIndex))));
+        for (int i = 0; i < users.size(); i++) {
+            final User user = users.get(i);
+            final String result = results.get(followLadder(i));
+            userToResult.put(user, result);
+        }
 
         return userToResult;
     }
 
     private int followLadder(int pointIndex) {
-        int nextPointIndex = pointIndex;
-
-        for (Line line : lines) {
-            nextPointIndex = getNextPointIndex(nextPointIndex, line);
-        }
-
-        return nextPointIndex;
+        return lines.stream()
+                .reduce(
+                        pointIndex,
+                        this::getNextPointIndex,
+                        (x, y) -> {throw new RuntimeException("병렬처리를 지원하지 않습니다");}
+                );
     }
 
     private int getNextPointIndex(int pointIndex, Line line) {
-        final int beforeBridgeIndex = pointIndex - 1;
-        final int nextBridgeIndex = pointIndex;
-
-        if (beforeBridgeIndex >= 0 && line.hasBridge(beforeBridgeIndex)) {
+        if (line.hasLeftBridge(pointIndex)) {
             return pointIndex - 1;
         }
 
-        if (nextBridgeIndex < line.getLength() && line.hasBridge(nextBridgeIndex)) {
+        if (line.hasRightBridge(pointIndex)) {
             return pointIndex + 1;
         }
 
