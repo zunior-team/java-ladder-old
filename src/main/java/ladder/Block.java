@@ -18,7 +18,9 @@ public class Block {
 
         points.add(Point.start(createStrategy));
         IntStream.range(1, initInfo.getWidth() - 1)
-                .forEachOrdered(i -> points.add(Point.of(points.get(points.size() - 1), createStrategy)));
+                .mapToObj(i -> createNextPoint(createStrategy))
+                .forEach(points::add);
+
         points.add(Point.end(points.get(points.size() - 1)));
     }
 
@@ -35,5 +37,9 @@ public class Block {
         return points.stream()
                 .map(Point::hasPoll)
                 .collect(Collectors.toList());
+    }
+
+    private Point createNextPoint(PollCreateStrategy createStrategy) {
+        return Point.of(points.get(points.size() - 1), createStrategy);
     }
 }
