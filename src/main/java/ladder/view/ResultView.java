@@ -3,7 +3,6 @@ package ladder.view;
 import ladder.domain.*;
 import ladder.dto.LadderGameResultDto;
 
-import java.util.List;
 import java.util.Map;
 import java.util.stream.IntStream;
 
@@ -33,7 +32,7 @@ public class ResultView {
         final StringBuilder lineStringBuilder = new StringBuilder(ONE_SHORT_LINE);
         IntStream.range(0, line.playerCount())
                 .forEach(index -> {
-                    lineStringBuilder.append(line.hasBridge(index) ? BAR_LINE : EMPTY_SPACE_BETWEEN_BAR);
+                    lineStringBuilder.append(line.hasRightBridge(index) ? BAR_LINE : EMPTY_SPACE_BETWEEN_BAR);
                     lineStringBuilder.append(ONE_SHORT_LINE);
                 });
         return lineStringBuilder.toString();

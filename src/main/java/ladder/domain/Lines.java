@@ -26,19 +26,18 @@ public class Lines {
 
     public int findEndPoint(int startPoint, int maxLineSize) {
         return lines.stream()
-                .reduce(startPoint, (currentPoint, line) -> checkNextPoint(currentPoint, maxLineSize, line),
+                .reduce(startPoint, this::checkNextPoint,
                         (x, y) -> {
                             throw new RuntimeException("병렬처리를 지원하지 않습니다");
                         });
     }
 
-    private int checkNextPoint(int currentPosition, int maxLineSize, Line line) {
-        if (currentPosition < maxLineSize && line.hasBridge(currentPosition)) {
+    private int checkNextPoint(int currentPosition, Line line) {
+        if (line.hasRightBridge(currentPosition)) {
             return currentPosition + 1;
         }
 
-        final int leftPoint = currentPosition - 1;
-        if (leftPoint >= 0 && line.hasBridge(leftPoint)) {
+        if (line.hasLeftBridge(currentPosition)) {
             return currentPosition - 1;
         }
         return currentPosition;

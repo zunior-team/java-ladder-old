@@ -20,11 +20,21 @@ public class Line {
         return new Line(countOfPerson, pointGenerator);
     }
 
-    public boolean hasBridge(int index) {
+    public boolean hasRightBridge(int index) {
+        validateIndex(index);
+        return points.get(index);
+    }
+
+    public boolean hasLeftBridge(int index) {
+        final int leftIndex = index - 1;
+        validateIndex(leftIndex);
+        return points.get(leftIndex);
+    }
+
+    private void validateIndex(int index) {
         if (index < 0 || index >= points.size()) {
             throw new IllegalArgumentException("index " + index + " invalid");
         }
-        return points.get(index);
     }
 
     public int playerCount() {
