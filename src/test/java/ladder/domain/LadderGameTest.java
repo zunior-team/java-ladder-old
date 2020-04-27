@@ -1,11 +1,11 @@
 package ladder.domain;
 
+import ladder.dto.LadderInfo;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -22,7 +22,7 @@ class LadderGameTest {
         int maxHeight = 5;
 
         //when
-        final LadderGame ladderGame = LadderGame.of(players, maxHeight, results);
+        final LadderGame ladderGame = LadderGame.of(new LadderInfo(players, maxHeight, results));
 
         //then
         assertThat(ladderGame).isNotNull();
@@ -41,7 +41,7 @@ class LadderGameTest {
         //then
         assertThrows(IllegalArgumentException.class,
                 //when
-                () -> LadderGame.of(players, maxHeight, results));
+                () -> LadderGame.of(new LadderInfo(players, maxHeight, results)));
     }
 
     @Test
@@ -52,7 +52,7 @@ class LadderGameTest {
         final Results results = Results.of(Lists.newArrayList("꽝", "꽝", "3000", "꽝"), players.size());
 
         int maxHeight = 5;
-        final LadderGame ladderGame = LadderGame.of(players, maxHeight, results);
+        final LadderGame ladderGame = LadderGame.of(new LadderInfo(players, maxHeight, results));
 
         //when
         final Lines lines = ladderGame.lines();
@@ -72,7 +72,7 @@ class LadderGameTest {
         int maxHeight = 5;
 
         //when
-        final LadderGame ladderGame = LadderGame.of(players, maxHeight, results);
+        final LadderGame ladderGame = LadderGame.of(new LadderInfo(players, maxHeight, results));
         final String result = ladderGame.findResult(new Player("junwoo"));
 
         //then

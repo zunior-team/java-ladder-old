@@ -1,5 +1,7 @@
 package ladder.domain;
 
+import ladder.dto.LadderInfo;
+
 import java.util.Objects;
 import java.util.Random;
 
@@ -9,7 +11,11 @@ public class LadderGame {
     private final Players players;
     private final Results results;
 
-    private LadderGame(Players players, int maxHeight, Results results) {
+    private LadderGame(LadderInfo ladderInfo) {
+        final int maxHeight = ladderInfo.getMaxHeight();
+        final Players players = ladderInfo.getPlayers();
+        final Results results = ladderInfo.getResults();
+
         Objects.requireNonNull(players);
         Objects.requireNonNull(results);
         validateMaxHeight(maxHeight);
@@ -17,7 +23,7 @@ public class LadderGame {
         this.players = players;
         this.results = results;
 
-        final int countOfPerson = players.size();
+        final int countOfPerson = this.players.size();
         final PointGenerator pointGenerator = new RandomPointGenerator(new Random());
 
         this.lines = Lines.of(countOfPerson, pointGenerator);
@@ -30,8 +36,8 @@ public class LadderGame {
         }
     }
 
-    public static LadderGame of(Players players, int maxHeight, Results results) {
-        return new LadderGame(players, maxHeight, results);
+    public static LadderGame of(LadderInfo ladderInfo) {
+        return new LadderGame(ladderInfo);
     }
 
 

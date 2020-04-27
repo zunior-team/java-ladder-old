@@ -2,14 +2,13 @@ package ladder;
 
 import ladder.domain.*;
 import ladder.dto.LadderGameResultDto;
+import ladder.dto.LadderInfo;
 import ladder.view.InputView;
 import ladder.view.ResultView;
 
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
-import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toMap;
 
 public class ConsoleMain {
@@ -23,7 +22,7 @@ public class ConsoleMain {
 
         final Players players = Players.of(names);
         final Results results = Results.of(resultNames, players.size());
-        final LadderGame ladderGame = LadderGame.of(players, maxHeight, results);
+        final LadderGame ladderGame = LadderGame.of(new LadderInfo(players, maxHeight, results));
 
         resultView.printLadder(new LadderGameResultDto(ladderGame));
 
