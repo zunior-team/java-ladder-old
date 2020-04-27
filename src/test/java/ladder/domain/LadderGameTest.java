@@ -18,7 +18,7 @@ class LadderGameTest {
     void constructTest() {
         //given
         final Players players = Players.of(Lists.newArrayList("junwoo", "wonoh", "changoo", "sungdong"));
-        final Results results = Results.of(Lists.newArrayList("꽝", "꽝", "3000", "꽝"), players);
+        final Results results = Results.of(Lists.newArrayList("꽝", "꽝", "3000", "꽝"), players.size());
         int maxHeight = 5;
 
         //when
@@ -34,7 +34,7 @@ class LadderGameTest {
     void constructMaxHeightTest() {
         //given
         final Players players = Players.of(Lists.newArrayList("junwoo", "wonoh", "changoo", "sungdong"));
-        final Results results = Results.of(Lists.newArrayList("꽝", "꽝", "3000", "꽝"), players);
+        final Results results = Results.of(Lists.newArrayList("꽝", "꽝", "3000", "꽝"), players.size());
         int maxHeight = 0;
 
 
@@ -49,7 +49,7 @@ class LadderGameTest {
     void getLadderTest() {
         //given
         final Players players = Players.of(Lists.newArrayList("junwoo", "wonoh", "changoo", "sungdong"));
-        final Results results = Results.of(Lists.newArrayList("꽝", "꽝", "3000", "꽝"), players);
+        final Results results = Results.of(Lists.newArrayList("꽝", "꽝", "3000", "꽝"), players.size());
 
         int maxHeight = 5;
         final LadderGame ladderGame = LadderGame.of(players, maxHeight, results);
@@ -68,7 +68,7 @@ class LadderGameTest {
         //given
         final Players players = Players.of(Lists.newArrayList("junwoo", "wonoh", "changoo", "sungdong"));
         final ArrayList<String> resultNames = Lists.newArrayList("꽝", "꽝", "3000", "꽝");
-        final Results results = Results.of(resultNames, players);
+        final Results results = Results.of(resultNames, players.size());
         int maxHeight = 5;
 
         //when

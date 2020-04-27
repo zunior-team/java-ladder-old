@@ -22,7 +22,7 @@ public class ConsoleMain {
         final int maxHeight = inputView.inputMaxHeight();
 
         final Players players = Players.of(names);
-        final Results results = Results.of(resultNames, players);
+        final Results results = Results.of(resultNames, players.size());
         final LadderGame ladderGame = LadderGame.of(players, maxHeight, results);
 
         resultView.printLadder(new LadderGameResultDto(ladderGame));

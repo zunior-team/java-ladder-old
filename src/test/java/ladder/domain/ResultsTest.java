@@ -22,23 +22,12 @@ class ResultsTest {
         final ArrayList<String> resultNames = Lists.newArrayList("꽝", "3000", "꽝", "꽝");
 
         //when
-        final Results results = Results.of(resultNames, players);
+        final Results results = Results.of(resultNames, players.size());
 
         //then
         assertThat(results).isNotNull();
     }
 
-    @Test
-    @DisplayName("Players 객체가 NULL 이면 NPE를 던진다.")
-    void testNullPlayers() {
-        //given
-        final ArrayList<String> resultNames = Lists.newArrayList("꽝", "3000", "꽝", "꽝");
-
-        //then
-        assertThrows(NullPointerException.class, () ->
-                //when
-                Results.of(resultNames, null));
-    }
 
     @Test
     @DisplayName("Players의 사이즈가 입력받은 결과의 수랑 다르면 Exception을 던진다.")
@@ -50,7 +39,7 @@ class ResultsTest {
         //then
         assertThrows(IllegalArgumentException.class, () ->
                 //when
-                Results.of(resultNames, players));
+                Results.of(resultNames, players.size()));
     }
 
     @ParameterizedTest
@@ -63,7 +52,7 @@ class ResultsTest {
         //then
         assertThrows(IllegalArgumentException.class, () ->
                 //when
-                Results.of(inputResults, players));
+                Results.of(inputResults, players.size()));
     }
 
     @Test
@@ -74,7 +63,7 @@ class ResultsTest {
         final ArrayList<String> resultNames = Lists.newArrayList("꽝", "3000", "꽝", "꽝");
 
         //when
-        final Results results = Results.of(resultNames, players);
+        final Results results = Results.of(resultNames, players.size());
         final List<String> names = results.names();
 
         //then
@@ -91,7 +80,7 @@ class ResultsTest {
         final ArrayList<String> resultNames = Lists.newArrayList("꽝", "3000", "꽝", "꽝");
 
         //when
-        final Results results = Results.of(resultNames, players);
+        final Results results = Results.of(resultNames, players.size());
         final String byIndex = results.findByIndex(0);
 
         //then
