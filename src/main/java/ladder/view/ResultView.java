@@ -40,7 +40,7 @@ public class ResultView {
 
     public void printResultOfEachPlayer(Map<Player, String> resultOfPlayers, ResultPlayer resultPlayer) {
         if (resultPlayer.isAll()) {
-            resultOfPlayers.forEach((player, result) -> System.out.println(player + " : " + "result"));
+            resultOfPlayers.forEach((player, result) -> System.out.println(player + " : " + result));
             return;
         }
 
