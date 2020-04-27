@@ -2,9 +2,8 @@ package ladder.domain;
 
 import spark.utils.StringUtils;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static ladder.constant.ParticipantConstants.INPUT_SPLIT_TOKEN;
@@ -19,7 +18,19 @@ public class Participants {
         this.participants = Arrays.stream(participantNames.split(INPUT_SPLIT_TOKEN))
                 .map(Participant::of)
                 .collect(Collectors.toList());
+        validateParticipants();
     }
+
+    private void validateParticipants() {
+        try {
+            participants.stream()
+                    .collect(Collectors.toMap(Participant::getName, Participant::getName))
+                    .size();
+        } catch (Exception e) {
+            throw new IllegalArgumentException("중복되는 이름은 입력할 수 없습니다.");
+        }
+    }
+
     public static Participants of(String participantNames){
         return new Participants(participantNames);
     }
@@ -30,11 +41,11 @@ public class Participants {
     }
 
     public Participant getParticipantByName(String name){
-        if(name.equals(RESULT_ALL)){
+        if(RESULT_ALL.equals(name)){
             return null;
         }
         return participants.stream()
-                .filter(participant -> participant.toString().equals(name))
+                .filter(participant -> participant.getName().equals(name))
                 .findAny()
                 .orElseThrow(IllegalArgumentException::new);
     }

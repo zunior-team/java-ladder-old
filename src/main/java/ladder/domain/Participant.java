@@ -7,8 +7,8 @@ import static ladder.constant.ParticipantConstants.PARTICIPANT_NAME_MAX_LENGTH;
 public class Participant {
 
     private String name;
-    private int x;
-    private int y;
+    private int widthIndex;
+    private int heightIndex;
 
     private Participant(String name){
         validateName(name);
@@ -26,22 +26,29 @@ public class Participant {
         }
     }
     public void initPosition(int y){
-        this.y = y;
-        this.x = 0;
+        this.heightIndex = y;
+        this.widthIndex = 0;
     }
     public void moveRight(){
-        this.y += 1;
+        this.heightIndex += 1;
         down();
     }
     public void moveLeft(){
-        this.y -= 1;
+        this.heightIndex -= 1;
         down();
     }
     public void down(){
-        this.x += 1;
+        this.widthIndex += 1;
     }
     public int getPosition(){
-        return this.y;
+        return this.heightIndex;
+    }
+    public boolean eqName(String name){
+        return this.name.equals(name);
+    }
+
+    public String getName() {
+        return name;
     }
 
     @Override

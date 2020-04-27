@@ -27,6 +27,9 @@ public class Line {
         }
         return new Line(points);
     }
+    public boolean hasBridge(int position){
+        return points.get(position);
+    }
 
     private static void validateWidth(int width){
         if(width < LADDER_LINE_MIN_WIDTH){

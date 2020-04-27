@@ -17,7 +17,7 @@ public class LadderGame {
     }
     public LadderResult play(){
 
-        int order = 0;
+        //int order = 0;
         List<Participant> participants = this.participants.getParticipants();
 
         int lineWidth = ladder.getLineWidth();
@@ -25,26 +25,26 @@ public class LadderGame {
 
         Map<Participant,Result> ladderResult = new HashMap<>();
 
-        for (Participant participant : participants) {
+        for (int order = 0; order < participants.size(); ++order) {
+            Participant participant = participants.get(order);
             participant.initPosition(order);
 
             for (Line line : lines) {
                 int position = participant.getPosition();
 
-                if (position < lineWidth && line.getPoints().get(position)) {
+                if (position < lineWidth && line.hasBridge(position)) {
                     participant.moveRight();
                     continue;
                 }
-                if (position > 0 && line.getPoints().get(position - 1)) {
+                if (position > 0 && line.hasBridge(position - 1)) {
                     participant.moveLeft();
                     continue;
                 }
                 participant.down();
             }
             int position = participant.getPosition();
-            ladderResult.put(participant,results.getResults().get(position));
+            ladderResult.put(participant, results.getResults().get(position));
 
-            order++;
         }
         return new LadderResult(ladderResult);
     }
