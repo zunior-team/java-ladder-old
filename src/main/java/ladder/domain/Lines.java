@@ -24,7 +24,7 @@ public class Lines {
         return new Lines(countOfPerson, pointGenerator);
     }
 
-    public int findEndPoint(int startPoint, int maxLineSize) {
+    public int findEndPoint(int startPoint) {
         return lines.stream()
                 .reduce(startPoint, this::checkNextPoint,
                         (x, y) -> {

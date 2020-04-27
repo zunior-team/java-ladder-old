@@ -50,7 +50,7 @@ public class LadderGame {
 
     public String findResult(Player player) {
         int startPoint = players.indexOf(player);
-        int endPoint = lines.findEndPoint(startPoint, players.size() - 1);
+        int endPoint = lines.findEndPoint(startPoint);
 
         return results.findByIndex(endPoint);
     }
