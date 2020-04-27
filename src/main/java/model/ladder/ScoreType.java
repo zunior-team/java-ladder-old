@@ -42,8 +42,4 @@ public enum ScoreType {
     private static boolean isSameToFail(String result){
         return result.equals(FAIL.name);
     }
-
-    public String getType(){
-        return this.name;
-    }
 }

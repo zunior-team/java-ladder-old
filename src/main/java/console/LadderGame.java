@@ -1,5 +1,6 @@
 package console;
 
+import dto.LadderCreateDto;
 import dto.LadderDrawDto;
 import dto.LadderResultDto;
 import model.ladder.Ladder;
@@ -20,7 +21,7 @@ public class LadderGame {
                 .splitLineBySeparator(results, Preprocessor.COMMA));
 
         final int height = InputView.inputLadderHeight();
-        final Ladder ladder = Ladder.of(players, scores, height);
+        final Ladder ladder = Ladder.of(new LadderCreateDto(players, scores, height));
 
         ResultView.printLadderResult(new LadderDrawDto(players, ladder));
 

@@ -13,4 +13,8 @@ public enum PointState {
     String display(){
         return display;
     }
+
+    boolean isDash(){
+        return this.display.equals(DASH.display);
+    }
 }

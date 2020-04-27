@@ -21,7 +21,7 @@ public class Line {
     }
 
     private void createStartBarByPlayers(final int totalPoint, final int currentPoint){
-        points.add(new Point(PointState.BAR, currentPoint));
+        points.add(new Point(PointState.BAR));
 
         if(totalPoint == currentPoint){
             return;

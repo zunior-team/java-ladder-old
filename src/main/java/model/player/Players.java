@@ -51,24 +51,26 @@ public class Players {
 
     public List<PlayerResult> getLadderGameResults(List<Line> lines, Scores scores){
         return IntStream.range(0, getPlayerCount())
-                .mapToObj(playerIndex -> getPlayerResultByplayerIndex(playerIndex, lines, scores))
+                .mapToObj(playerIndex -> getPlayerResultByPlayerIndex(playerIndex, lines, scores))
                 .collect(Collectors.toList());
+    }
+
+    private PlayerResult getPlayerResultByPlayerIndex(int playerIndex, List<Line> lines, Scores scores){
+        final Player player = players.get(playerIndex);
+        final int scoreIndex = getResultIndexByOnePlayer(lines, playerIndex);
+        final Score score = scores.getScoreByIndex(scoreIndex);
+
+        return new PlayerResult(player, score);
     }
 
     private int getResultIndexByOnePlayer(List<Line> lines, int playerIndex){
         int currentPosition = lines.get(0).convertPlayerIndexToPosition(playerIndex);
+
         for(Line line : lines){
             currentPosition = line.getPosition(currentPosition);
         }
+
         return lines.get(lines.size() - 1)
                 .convertPositionToPlayerIndex(currentPosition);
-    }
-
-    private PlayerResult getPlayerResultByplayerIndex(final int playerIndex, List<Line> lines, Scores scores){
-        final Player player = players.get(playerIndex);
-        final int scoreIndex = getResultIndexByOnePlayer(lines, playerIndex);
-        final Score score = scores.getScoreByIndex(scoreIndex);
-        
-        return new PlayerResult(player, score);
     }
 }
