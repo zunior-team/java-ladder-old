@@ -4,6 +4,7 @@ import exception.PlayersCreateException;
 import model.ladder.Line;
 import model.ladder.Score;
 import model.ladder.Scores;
+import model.moving.MovingType;
 import model.result.PlayerResult;
 import org.apache.commons.collections4.CollectionUtils;
 
@@ -65,12 +66,12 @@ public class Players {
 
     private int getResultIndexByOnePlayer(List<Line> lines, int playerIndex){
         int currentPosition = lines.get(0).convertPlayerIndexToPosition(playerIndex);
-
-        for(Line line : lines){
-            currentPosition = line.getPosition(currentPosition);
-        }
+        int resultPosition = lines.stream()
+                .reduce(currentPosition,
+                        (position, line) -> line.getPosition(position),
+                        (startPos, endPos) -> endPos);
 
         return lines.get(lines.size() - 1)
-                .convertPositionToPlayerIndex(currentPosition);
+                .convertPositionToPlayerIndex(resultPosition);
     }
 }
