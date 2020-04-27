@@ -1,8 +1,10 @@
 package ladder.view;
 
 import ladder.domain.*;
+import ladder.dto.LadderGameResultDto;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.IntStream;
 
 public class ResultView {
@@ -12,10 +14,10 @@ public class ResultView {
     protected static final String BAR_LINE = "--------";
     protected static final String EMPTY_SPACE_BETWEEN_BAR = "        ";
 
-    public void printLadder(LadderGame ladderGame) {
+    public void printLadder(LadderGameResultDto ladderGame) {
         System.out.println("실행 결과");
-        final Players players = ladderGame.players();
-        final Lines lines =ladderGame.lines();
+        final Players players = ladderGame.getPlayers();
+        final Lines lines = ladderGame.getLines();
 
         System.out.println(String.join(SPACE_BETWEEN_NAMES, players.names()));
 
@@ -23,7 +25,7 @@ public class ResultView {
                 .map(this::convertToPrintFormat)
                 .forEachOrdered(System.out::println);
 
-        final Results resultNames = ladderGame.results();
+        final Results resultNames = ladderGame.getResults();
         System.out.println(String.join(SPACE_BETWEEN_NAMES, resultNames.names()));
     }
 
@@ -37,15 +39,13 @@ public class ResultView {
         return lineStringBuilder.toString();
     }
 
-    public void printResultOfEachPlayer(LadderGame ladderGame, ResultPlayer resultPlayer) {
+    public void printResultOfEachPlayer(Map<Player, String> resultOfPlayers, ResultPlayer resultPlayer) {
         if (resultPlayer.isAll()) {
-            ladderGame.players().stream()
-                    .map(player -> player + ":" + ladderGame.findResult(player))
-                    .forEachOrdered(System.out::println);
+            resultOfPlayers.forEach((player, result) -> System.out.println(player + " : " + "result"));
             return;
         }
 
-        System.out.println(ladderGame.findResult(resultPlayer.getPlayer()));
+        System.out.println(resultOfPlayers.getOrDefault(resultPlayer.getPlayer(), "응답이 존재하지 않습니다"));
     }
 
 }
