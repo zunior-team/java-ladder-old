@@ -47,18 +47,18 @@ public class Ladder {
         }
     }
 
-    public List<List<String>> toLines(){
+    public List<List<String>> getLines(){
         return Collections.unmodifiableList(
                 lines.stream()
                 .map(Line::toDisplays)
                 .collect(Collectors.toList()));
     }
 
-    public List<String> toScores(){
-        return scores.getScores();
+    public List<String> getScores(){
+        return Collections.unmodifiableList(scores.getScores());
     }
 
     public List<PlayerResult> getResults(){
-        return players.getLadderGameResults(lines, scores);
+        return Collections.unmodifiableList(players.getLadderGameResults(lines, scores));
     }
 }

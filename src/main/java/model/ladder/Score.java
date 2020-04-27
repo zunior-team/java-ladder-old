@@ -18,10 +18,6 @@ public class Score {
         }
     }
 
-    public String getMyType(){
-        return scoreType.getType();
-    }
-
     public String getValue() {
         return value;
     }

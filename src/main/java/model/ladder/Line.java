@@ -58,16 +58,6 @@ public class Line {
                 .collect(Collectors.toList());
     }
 
-    private int leftOnePosition(int currentPos){ return currentPos - 1; }
-    private int rightOnePosition(int currentPos){ return currentPos + 1; }
-    private boolean isMovableLeft(int position){
-        return (position >= 0) && points.get(position).isDash();
-    }
-
-    private boolean isMovableRight(int position) {
-        return (position < points.size()) && points.get(position).isDash();
-    }
-
     public int getPosition(int colIndex){
         if(isMovableLeft(leftOnePosition(colIndex))){
             return moveSideIfPossibleElseNot(MovingType.LEFT, colIndex);
@@ -89,7 +79,6 @@ public class Line {
         return newPosition;
     }
 
-
     public int convertPlayerIndexToPosition(int playerIndex) {
         return (playerIndex * DEFAULT_INTERVAL + playerIndex);
     }
@@ -98,5 +87,15 @@ public class Line {
         return (position % DEFAULT_INTERVAL == 0)
                 ? (position - 1) / DEFAULT_INTERVAL
                 : position / DEFAULT_INTERVAL;
+    }
+
+    private int leftOnePosition(int currentPos){ return currentPos - 1; }
+    private int rightOnePosition(int currentPos){ return currentPos + 1; }
+    private boolean isMovableLeft(int position){
+        return (position >= 0) && points.get(position).isDash();
+    }
+
+    private boolean isMovableRight(int position) {
+        return (position < points.size()) && points.get(position).isDash();
     }
 }

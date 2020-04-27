@@ -22,14 +22,6 @@ public class Point {
         return (state == PointState.DASH);
     }
 
-    public boolean isBar(){
-        return (state == PointState.BAR);
-    }
-
-    public boolean isMyStartPoint(int currentPoint){
-        return (this.currentPoint == currentPoint);
-    }
-
     public String getDisplay(){
         return state.display();
     }

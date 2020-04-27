@@ -29,7 +29,7 @@ public enum ScoreType {
         try {
             Integer.parseInt(result);
         } catch(NumberFormatException e){
-            throw new LadderResultCreateException("꽝 대신 다른 한글이 들어왔기 때문에 점수를 확인할 수 없습니다.");
+            throw new LadderResultCreateException("꽝 대신 다른 예약어가 들어왔기 때문에 점수를 확인할 수 없습니다.");
         }
     }
 

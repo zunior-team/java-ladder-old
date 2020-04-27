@@ -11,9 +11,9 @@ public class LadderDrawDto {
     private final List<String> scores;
 
     public LadderDrawDto(Players players, Ladder ladder) {
-        names = players.toNames();
-        lines = ladder.toLines();
-        scores = ladder.toScores();
+        names = players.getNames();
+        lines = ladder.getLines();
+        scores = ladder.getScores();
     }
 
     public List<String> getNames() {

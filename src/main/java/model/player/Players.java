@@ -42,7 +42,7 @@ public class Players {
         return this.players.size();
     }
 
-    public List<String> toNames(){
+    public List<String> getNames(){
         return Collections.unmodifiableList(
                 players.stream()
                 .map(Player::name)
@@ -51,12 +51,8 @@ public class Players {
 
     public List<PlayerResult> getLadderGameResults(List<Line> lines, Scores scores){
         return IntStream.range(0, getPlayerCount())
-                .mapToObj(playerIndex -> {
-                    Player player = players.get(playerIndex);
-                    int scoreIndex = getResultIndexByOnePlayer(lines, playerIndex);
-                    Score score = scores.getScoreByIndex(scoreIndex);
-                    return new PlayerResult(player, score);
-                }).collect(Collectors.toList());
+                .mapToObj(playerIndex -> getPlayerResultByplayerIndex(playerIndex, lines, scores))
+                .collect(Collectors.toList());
     }
 
     private int getResultIndexByOnePlayer(List<Line> lines, int playerIndex){
@@ -66,5 +62,13 @@ public class Players {
         }
         return lines.get(lines.size() - 1)
                 .convertPositionToPlayerIndex(currentPosition);
+    }
+
+    private PlayerResult getPlayerResultByplayerIndex(final int playerIndex, List<Line> lines, Scores scores){
+        final Player player = players.get(playerIndex);
+        final int scoreIndex = getResultIndexByOnePlayer(lines, playerIndex);
+        final Score score = scores.getScoreByIndex(scoreIndex);
+        
+        return new PlayerResult(player, score);
     }
 }

@@ -14,17 +14,19 @@ public class LadderGameStarter {
 
         while(true){
 
-            final String name = InputView.inputToShowingName();
-
-            if(name.equalsIgnoreCase(ALL_NAMES)){
-                ResultView.printScoreByNames(ladderResultDto);
-            } else {
-                ResultView.printScore(ladderResultDto.getScoreByName(name));
-            }
+            showLadderResultByInput(InputView.inputToShowingName(), ladderResultDto);
 
             if(isExit()){
                 break;
             }
+        }
+    }
+
+    private static void showLadderResultByInput(final String name, final LadderResultDto ladderResultDto){
+        if(name.equalsIgnoreCase(ALL_NAMES)){
+            ResultView.printScoreByNames(ladderResultDto);
+        } else {
+            ResultView.printScore(ladderResultDto.getScoreByName(name));
         }
     }
 
