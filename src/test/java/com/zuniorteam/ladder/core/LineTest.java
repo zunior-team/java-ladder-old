@@ -81,4 +81,36 @@ class LineTest {
         assertThat(line.hasBridge(1)).isFalse();
     }
 
+    @DisplayName("hasLeftBridge")
+    @Test
+    void testHasLeftBridge01() {
+        //given
+        final List<Boolean> bridges = new ArrayList<>();
+        bridges.add(true);
+        bridges.add(false);
+
+        //when
+        final Line line = new Line(bridges);
+
+        //then
+        assertThat(line.hasLeftBridge(0)).isFalse();
+        assertThat(line.hasLeftBridge(1)).isTrue();
+    }
+    @DisplayName("hasRightBridge")
+    @Test
+    void testHasLeftBridge02() {
+        //given
+        final List<Boolean> bridges = new ArrayList<>();
+        bridges.add(true);
+        bridges.add(false);
+
+        //when
+        final Line line = new Line(bridges);
+
+        //then
+        assertThat(line.hasRightBridge(0)).isTrue();
+        assertThat(line.hasRightBridge(1)).isFalse();
+    }
+
+
 }

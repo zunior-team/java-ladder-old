@@ -29,7 +29,7 @@ public class Line {
         }
 
         if (bridges.get(index) && CollectionUtils.getBefore(bridges, index)) {
-            throw new IllegalArgumentException("이어지는 bridge를 만들 수 없습니다.");
+            throw new IllegalArgumentException("이어지는 bridge 를 만들 수 없습니다.");
         }
     }
 
@@ -37,11 +37,31 @@ public class Line {
         return bridges.size();
     }
 
-    public Boolean hasBridge(int index) {
-        if(index < 0){
+    public boolean hasBridge(int index) {
+        if (index < 0) {
             throw new IllegalArgumentException("bridge 위치는 0보다 작을 수 없습니다.");
         }
 
         return this.bridges.get(index);
+    }
+
+    public boolean hasLeftBridge(int index) {
+        int leftIndex = index - 1;
+
+        if (leftIndex < 0) {
+            return false;
+        }
+
+        return this.bridges.get(leftIndex);
+    }
+
+    public boolean hasRightBridge(int index) {
+        int rightIndex = index;
+
+        if(rightIndex < this.bridges.size()){
+            return this.bridges.get(rightIndex);
+        }
+
+        return false;
     }
 }
