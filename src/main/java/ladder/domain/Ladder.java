@@ -1,6 +1,5 @@
 package ladder.domain;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,11 +11,12 @@ import static ladder.constant.ParticipantConstants.PARTICIPANT_MIN_COUNT;
 public class Ladder {
 
     private List<Line> lines;
+    private int lineWidth;
 
-    private Ladder(int countOfParticipant,int maxHeight){
+    private Ladder(int countOfParticipant, int maxHeight){
         validateParticipantAndMaxHeight(countOfParticipant,maxHeight);
 
-        int lineWidth = countOfParticipant - 1;
+        this.lineWidth = countOfParticipant - 1;
         this.lines = IntStream.range(0, maxHeight)
                 .mapToObj(i -> Line.of(lineWidth))
                 .collect(Collectors.toList());
@@ -24,10 +24,6 @@ public class Ladder {
 
     public static Ladder of(int countOfParticipant,int maxHeight){
         return new Ladder(countOfParticipant,maxHeight);
-    }
-
-    public List<Line> getLines() {
-        return Collections.unmodifiableList(lines);
     }
 
     private static void validateParticipantAndMaxHeight(int countOfParticipant,int maxHeight){
@@ -39,7 +35,12 @@ public class Ladder {
         }
 
     }
-
+    public List<Line> getLines() {
+        return Collections.unmodifiableList(lines);
+    }
+    public int getLineWidth() {
+        return lineWidth;
+    }
     @Override
     public String toString() {
         return "Ladder{" +

@@ -2,12 +2,12 @@ package ladder.domain;
 
 import spark.utils.StringUtils;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import static ladder.constant.ParticipantConstants.PARTICIPANT_NAME_SPLIT_TOKEN;
+import static ladder.constant.ParticipantConstants.INPUT_SPLIT_TOKEN;
+import static ladder.constant.ParticipantConstants.RESULT_ALL;
 
 public class Participants {
 
@@ -15,10 +15,22 @@ public class Participants {
 
     private Participants(String participantNames){
         validateParticipantNames(participantNames);
-        this.participants = Arrays.stream(participantNames.split(PARTICIPANT_NAME_SPLIT_TOKEN))
+        this.participants = Arrays.stream(participantNames.split(INPUT_SPLIT_TOKEN))
                 .map(Participant::of)
                 .collect(Collectors.toList());
+        validateParticipants();
     }
+
+    private void validateParticipants() {
+        try {
+            participants.stream()
+                    .collect(Collectors.toMap(Participant::getName, Participant::getName))
+                    .size();
+        } catch (Exception e) {
+            throw new IllegalArgumentException("중복되는 이름은 입력할 수 없습니다.");
+        }
+    }
+
     public static Participants of(String participantNames){
         return new Participants(participantNames);
     }
@@ -28,6 +40,15 @@ public class Participants {
         }
     }
 
+    public Participant getParticipantByName(String name){
+        if(RESULT_ALL.equals(name)){
+            return null;
+        }
+        return participants.stream()
+                .filter(participant -> participant.getName().equals(name))
+                .findAny()
+                .orElseThrow(IllegalArgumentException::new);
+    }
     public List<Participant> getParticipants() {
         return Collections.unmodifiableList(participants);
     }

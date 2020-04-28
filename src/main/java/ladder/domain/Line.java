@@ -20,14 +20,17 @@ public class Line {
         List<Boolean> points = new ArrayList<>();
         for (int i = 0; i < width; i++) {
             boolean randomPoint = PointCreator.createRandomPoint();
-            randomPoint = checkContinuous(i,points.get(i-1),randomPoint);
+            if(i>0 && points.get(i-1) && randomPoint){
+                randomPoint = false;
+            }
             points.add(randomPoint);
         }
         return new Line(points);
     }
-    private static boolean checkContinuous(int index,boolean previousPoint,boolean randomPoint){
-        return index > 0 && previousPoint && randomPoint;
+    public boolean hasBridge(int position){
+        return points.get(position);
     }
+
     private static void validateWidth(int width){
         if(width < LADDER_LINE_MIN_WIDTH){
             throw new IllegalArgumentException("라인의 길이는"+LADDER_LINE_MIN_WIDTH+"를 초과해야 합니다.");
@@ -40,8 +43,6 @@ public class Line {
 
     @Override
     public String toString() {
-        return "Line{" +
-                "points=" + points +
-                '}';
+        return points.toString();
     }
 }
