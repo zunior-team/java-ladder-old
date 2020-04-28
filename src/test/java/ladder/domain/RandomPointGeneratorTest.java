@@ -5,7 +5,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -16,7 +16,12 @@ class RandomPointGeneratorTest {
     @ValueSource(ints = {3, 4, 5})
     void testPoint(int countOfPerson) {
         //when
-        RandomPointGenerator randomPointGenerator = new RandomPointGenerator(new Random());
+        RandomPointGenerator randomPointGenerator = new RandomPointGenerator() {
+            @Override
+            protected Boolean randomValue() {
+                return ThreadLocalRandom.current().nextBoolean();
+            }
+        };
 
         //when
         final List<Boolean> points = randomPointGenerator.generate(countOfPerson);

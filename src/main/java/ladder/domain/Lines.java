@@ -12,16 +12,16 @@ import static java.util.stream.Collectors.toList;
 public class Lines {
     private final List<Line> lines;
 
-    private Lines(int countOfPerson, PointGenerator pointGenerator) {
+    private Lines(int countOfPerson, int maxHeight, PointGenerator pointGenerator) {
         Objects.requireNonNull(pointGenerator, "pointGenerator can not be null");
-        this.lines = IntStream.range(0, countOfPerson)
+        this.lines = IntStream.range(0, maxHeight)
                 .mapToObj(index -> Line.of(countOfPerson, pointGenerator))
                 .collect(collectingAndThen(toList(),
                         Collections::unmodifiableList));
     }
 
-    public static Lines of(int countOfPerson, PointGenerator pointGenerator) {
-        return new Lines(countOfPerson, pointGenerator);
+    public static Lines of(int countOfPerson, int maxHeight, PointGenerator pointGenerator) {
+        return new Lines(countOfPerson, maxHeight, pointGenerator);
     }
 
     public int findEndPoint(int startPoint) {

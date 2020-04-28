@@ -18,11 +18,13 @@ public class ConsoleMain {
 
         final List<String> names = inputView.inputNames();
         final List<String> resultNames = inputView.inputResults();
-        final int maxHeight = inputView.inputMaxHeight();
+        final String inputDifficulty = inputView.inputDifficulty();
 
+
+        final LadderDifficulty ladderDifficulty = LadderDifficulty.findByInput(inputDifficulty);
         final Players players = Players.of(names);
         final Results results = Results.of(resultNames, players.size());
-        final LadderGame ladderGame = LadderGame.of(new LadderInfo(players, maxHeight, results));
+        final LadderGame ladderGame = LadderGame.of(new LadderInfo(players, ladderDifficulty, results));
 
         resultView.printLadder(new LadderGameResultDto(ladderGame));
 

@@ -3,27 +3,24 @@ package ladder.domain;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Random;
 
-public class RandomPointGenerator implements PointGenerator {
+public abstract class RandomPointGenerator implements PointGenerator {
 
-    private final Random random;
-
-    public RandomPointGenerator(Random random) {
-        Objects.requireNonNull(random, "random can not be null");
-        this.random = random;
+    public RandomPointGenerator() {
     }
 
     @Override
     public List<Boolean> generate(int playerCount) {
         final List<Boolean> points = new ArrayList<>();
 
-        points.add(random.nextBoolean());
+        points.add(randomValue());
         while (points.size() != playerCount - 1) {
             points.add(nextRandomValue(points));
         }
         return points;
     }
+
+    protected abstract Boolean randomValue();
 
     private boolean nextRandomValue(List<Boolean> points) {
         if (Objects.isNull(points) || points.isEmpty()) {
@@ -34,6 +31,6 @@ public class RandomPointGenerator implements PointGenerator {
         if (points.get(lastIndex)) {
             return false;
         }
-        return random.nextBoolean();
+        return randomValue();
     }
 }
