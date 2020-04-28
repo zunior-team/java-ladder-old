@@ -1,7 +1,7 @@
 package com.zuniorteam.ladder.core.generator;
 
 import com.zuniorteam.ladder.core.Line;
-import com.zuniorteam.ladder.core.util.CollectionUtils;
+import com.zuniorteam.ladder.core.util.CollectionUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +32,7 @@ public class LineGenerator {
                 .collect(toList());
 
         return IntStream.range(1, randomPoints.size())
-                .mapToObj(i -> CollectionUtils.getBefore(randomPoints, i) && randomPoints.get(i))
+                .mapToObj(i -> CollectionUtil.getBefore(randomPoints, i) && randomPoints.get(i))
                 .collect(toList());
     }
 
@@ -46,11 +46,11 @@ public class LineGenerator {
     }
 
     private boolean fixBridge(List<Boolean> bridges, int index) {
-        if (CollectionUtils.isFirstIndex(index)) {
+        if (CollectionUtil.isFirstIndex(index)) {
             return bridges.get(index);
         }
 
-        if (bridges.get(index) && CollectionUtils.getBefore(bridges, index)) {
+        if (bridges.get(index) && CollectionUtil.getBefore(bridges, index)) {
             return false;
         }
 

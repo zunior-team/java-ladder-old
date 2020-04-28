@@ -1,6 +1,6 @@
 package com.zuniorteam.ladder.core;
 
-import com.zuniorteam.ladder.core.util.CollectionUtils;
+import com.zuniorteam.ladder.core.util.CollectionUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,11 +24,11 @@ public class Line {
     }
 
     private void validateContinuesBridge(List<Boolean> bridges, int index) {
-        if (CollectionUtils.isFirstIndex(index)) {
+        if (CollectionUtil.isFirstIndex(index)) {
             return;
         }
 
-        if (bridges.get(index) && CollectionUtils.getBefore(bridges, index)) {
+        if (bridges.get(index) && CollectionUtil.getBefore(bridges, index)) {
             throw new IllegalArgumentException("이어지는 bridge 를 만들 수 없습니다.");
         }
     }

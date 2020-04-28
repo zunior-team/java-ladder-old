@@ -30,7 +30,7 @@ class LadderGeneratorTest {
 
     @DisplayName("Ladder Generate")
     @Test
-    void testGenerate() {
+    void testGenerate01() {
         //given
         final int numberOfPoints = 5;
         final LadderLevel ladderLevel = LadderLevel.HIGH;
@@ -45,5 +45,16 @@ class LadderGeneratorTest {
         assertThat(lines.get(0))
                 .extracting(Line::getLength)
                 .isEqualTo(numberOfPoints - 1);
+    }
+
+    @DisplayName("Ladder Generate, Ladder Level, null 일 때")
+    @Test
+    void testGenerate02() {
+        //given
+        final int numberOfPoints = 5;
+        final LadderGenerator ladderGenerator = new LadderGenerator(new LineGenerator(new Random()));
+
+        //when
+        assertThrows(IllegalArgumentException.class, () -> ladderGenerator.generate(numberOfPoints, null));
     }
 }

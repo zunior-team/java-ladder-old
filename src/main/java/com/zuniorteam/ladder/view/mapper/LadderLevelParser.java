@@ -1,7 +1,7 @@
 package com.zuniorteam.ladder.view.mapper;
 
 import com.zuniorteam.ladder.core.LadderLevel;
-import com.zuniorteam.ladder.core.util.StringUtils;
+import com.zuniorteam.ladder.core.util.StringUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,7 +23,7 @@ public final class LadderLevelParser {
     }
 
     public static LadderLevel parse(String keyword) {
-        if (StringUtils.isEmpty(keyword)) {
+        if (StringUtil.isEmpty(keyword)) {
             throw new IllegalArgumentException("사다리 난이도를 입력해주세요");
         }
 

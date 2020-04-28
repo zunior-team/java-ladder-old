@@ -26,6 +26,7 @@ public class InputConsole {
 
     public String readLadderLevel(){
         System.out.println("실행할 사다리의 난이도는? (상/중/하)");
+
         return SCANNER.nextLine();
     }
 }

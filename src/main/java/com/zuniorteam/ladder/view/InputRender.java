@@ -2,8 +2,8 @@ package com.zuniorteam.ladder.view;
 
 import com.zuniorteam.ladder.core.LadderLevel;
 import com.zuniorteam.ladder.core.User;
-import com.zuniorteam.ladder.core.util.CollectionUtils;
-import com.zuniorteam.ladder.core.util.StringUtils;
+import com.zuniorteam.ladder.core.util.CollectionUtil;
+import com.zuniorteam.ladder.core.util.StringUtil;
 import com.zuniorteam.ladder.view.mapper.LadderLevelParser;
 
 import java.util.Arrays;
@@ -22,7 +22,7 @@ public final class InputRender {
     public static List<User> getUsers(String usernamesLine) {
         final List<String> usernames = Arrays.asList(usernamesLine.split(USERNAME_SPLIT_TOKEN));
 
-        if (!CollectionUtils.isUnique(usernames)) {
+        if (!CollectionUtil.isUnique(usernames)) {
             throw new IllegalArgumentException(" 사용자 이름이 중복됩니다" + usernames);
         }
 
@@ -43,7 +43,7 @@ public final class InputRender {
     }
 
     public static User getCheckUser(String inputUsername, List<User> users) {
-        if (StringUtils.isEmpty(inputUsername)) {
+        if (StringUtil.isEmpty(inputUsername)) {
             throw new IllegalArgumentException("사용자이름을 입력해주세요");
         }
 
