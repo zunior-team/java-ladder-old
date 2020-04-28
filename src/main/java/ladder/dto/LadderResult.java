@@ -1,30 +1,15 @@
 package ladder.dto;
 
-import ladder.Block;
-import ladder.user.User;
-
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Map;
 
 public class LadderResult {
-    private List<String> userNames;
-    private List<BlockDto> blockDto;
+    private Map<String, String> prizeMatch;
 
-    public LadderResult(List<User> users, List<Block> blocks) {
-        this.userNames = users.stream()
-                .map(User::getName)
-                .collect(Collectors.toList());
-
-        this.blockDto = blocks.stream()
-                .map(BlockDto::of)
-                .collect(Collectors.toList());
+    public LadderResult(Map<String, String> prizeMatch) {
+        this.prizeMatch = prizeMatch;
     }
 
-    public List<String> getUserNames() {
-        return userNames;
-    }
-
-    public List<BlockDto> getBlockDto() {
-        return blockDto;
+    public Map<String, String> getPrizeMatch() {
+        return prizeMatch;
     }
 }

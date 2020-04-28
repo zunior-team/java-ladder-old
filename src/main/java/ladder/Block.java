@@ -4,54 +4,38 @@ import ladder.dto.BlockDto;
 import ladder.init.InitInfo;
 import ladder.strategy.PollCreateStrategy;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Block {
-    private List<Boolean> polls;
+    private final List<Point> points;
 
     public Block(InitInfo initInfo) {
         PollCreateStrategy createStrategy = initInfo.getPollCreateStrategy();
+        points = new ArrayList<>();
 
-        polls = IntStream.range(0, initInfo.numOfUsers() - 1)
-                .mapToObj(i -> createStrategy.isCreatable())
+        points.add(Point.start(createStrategy));
+        IntStream.range(1, initInfo.getWidth() - 1)
+                .mapToObj(i -> createNextPoint(createStrategy))
+                .forEach(points::add);
+
+        points.add(Point.end(points.get(points.size() - 1)));
+    }
+
+    public int takeLadder(int position) {
+        return points.get(position)
+                .move();
+    }
+
+    public List<Boolean> getPollInfos() {
+        return points.stream()
+                .map(Point::hasPoll)
                 .collect(Collectors.toList());
-
-        refinePolls();
     }
 
-/*
-    public boolean hasLadder(int idx) {
-        return hasRightLadder(idx) || hasLeftLadder(idx);
-    }
-*/
-
-    public boolean hasRightLadder(int idx) {
-        if(idx >= polls.size() || idx < 0) {
-            return false;
-        }
-
-        return polls.get(idx);
-    }
-/*
-
-    public boolean hasLeftLadder(int idx) {
-        if(idx < 1) {
-            return false;
-        }
-
-        return polls.get(idx - 1);
-    }
-*/
-
-    /* 연속으로 true 가 나오는 것을 방지하기 위한 정제 함수 */
-    private void refinePolls() {
-        IntStream.range(1, polls.size())
-                .forEach(i -> polls.set(i, polls.get(i - 1) ? false : polls.get(i)));
-    }
-
-    public List<Boolean> getPolls() {
-        return polls;
+    private Point createNextPoint(PollCreateStrategy createStrategy) {
+        return Point.of(points.get(points.size() - 1), createStrategy);
     }
 }

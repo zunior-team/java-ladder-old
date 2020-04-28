@@ -4,15 +4,22 @@ import spark.utils.StringUtils;
 
 public class User {
     private static final int LIMIT_OF_NAME = 5;
-    private String name;
+    private final String name;
+    private final int order;
 
-    public User(final String name) {
+    public User(final String name, final int order) {
         validate(name);
+
         this.name = name;
+        this.order = order;
     }
 
     public String getName() {
-        return this.name;
+        return name;
+    }
+
+    public int getPosition() {
+        return order;
     }
 
     private void validate(String name) {

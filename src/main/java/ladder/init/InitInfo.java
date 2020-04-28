@@ -4,30 +4,25 @@ import ladder.strategy.PollCreateStrategy;
 import ladder.user.Users;
 
 public class InitInfo {
-    private Users users;
-    private LadderInitInfo ladderInitInfo;
+    private final LadderInitInfo ladderInitInfo;
+    private final PollCreateStrategy pollCreateStrategy;
 
-    public InitInfo(final Users users, final LadderInitInfo ladderInitInfo) {
-        assert users != null;
+    public InitInfo(final LadderInitInfo ladderInitInfo, final PollCreateStrategy pollCreateStrategy) {
         assert ladderInitInfo != null;
 
-        this.users = users;
         this.ladderInitInfo = ladderInitInfo;
-    }
-
-    public int numOfUsers() {
-        return users.numOfUsers();
+        this.pollCreateStrategy = pollCreateStrategy;
     }
 
     public PollCreateStrategy getPollCreateStrategy() {
-        return ladderInitInfo.getPollCreateStrategy();
+        return pollCreateStrategy;
     }
 
     public int getHeight() {
         return ladderInitInfo.getHeight();
     }
 
-    public Users getUsers() {
-        return users;
+    public int getWidth() {
+        return ladderInitInfo.getWidth();
     }
 }

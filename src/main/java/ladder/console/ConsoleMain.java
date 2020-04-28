@@ -1,16 +1,28 @@
 package ladder.console;
 
 import ladder.Ladder;
+import ladder.UserAndPrize;
 import ladder.dto.LadderResult;
 import ladder.init.InitInfo;
 
+import java.util.Map;
+
 public class ConsoleMain {
+    public static final String EXIT = "exit";
+
     public static void main(String[] args) {
-        InitInfo initInfo = ConsoleInput.getInitInfo();
+        UserAndPrize usersAndPrizes = ConsoleInput.getUsersAndPrizes();
+        Ladder ladder = new Ladder(ConsoleInput.getInitInfo(usersAndPrizes));
 
-        Ladder ladder = new Ladder(initInfo);
-        LadderResult result = ladder.getResult();
+        //draw : userAndPrize, Ladder
+        ConsoleOutput.drawLadder(usersAndPrizes, ladder);
 
-        ConsoleOutput.drawResult(result);
+
+        //draw result stringStringMap;
+        LadderResult ladderResult = ladder.takeLadders(usersAndPrizes);
+        String target;
+        while(!(target = ConsoleInput.getTargetToShowResult()).equalsIgnoreCase(EXIT)) {
+            ConsoleOutput.showTargetPrize(ladderResult, target);
+        }
     }
 }
