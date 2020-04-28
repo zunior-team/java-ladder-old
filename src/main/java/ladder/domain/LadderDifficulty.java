@@ -1,35 +1,16 @@
-package ladder;
-
-import ladder.domain.PointGenerator;
-import ladder.domain.RandomPointGenerator;
+package ladder.domain;
 
 import java.util.Collections;
 import java.util.Map;
 import java.util.Objects;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public enum LadderDifficulty {
-    HIGH("상", LadderHeight.HIGH, new RandomPointGenerator() {
-        @Override
-        protected Boolean randomValue() {
-            return ThreadLocalRandom.current().nextInt(10) > 3;
-        }
-    }),
-    MEDIUM("중", LadderHeight.MEDIUM, new RandomPointGenerator() {
-        @Override
-        protected Boolean randomValue() {
-            return ThreadLocalRandom.current().nextInt(10) > 5;
-        }
-    }),
-    LOW("하", LadderHeight.LOW, new RandomPointGenerator() {
-        @Override
-        protected Boolean randomValue() {
-            return ThreadLocalRandom.current().nextInt(10) > 7;
-        }
-    });
+    HIGH("상", LadderHeight.HIGH, new RandomPointGenerator(RandomPercentage.HIGH)),
+    MEDIUM("중", LadderHeight.MEDIUM, new RandomPointGenerator(RandomPercentage.MEDIUM)),
+    LOW("하", LadderHeight.LOW, new RandomPointGenerator(RandomPercentage.LOW));
 
     private static final Map<String, LadderDifficulty> inputs = Collections.unmodifiableMap(
             Stream.of(values())
@@ -73,5 +54,11 @@ public enum LadderDifficulty {
         public static final int HIGH = 20;
         public static final int MEDIUM = 10;
         public static final int LOW = 5;
+    }
+
+    private static class RandomPercentage {
+        public static final int HIGH = 75;
+        public static final int MEDIUM = 50;
+        public static final int LOW = 30;
     }
 }

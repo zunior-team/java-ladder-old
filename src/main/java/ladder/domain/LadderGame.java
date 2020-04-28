@@ -1,6 +1,5 @@
 package ladder.domain;
 
-import ladder.LadderDifficulty;
 import ladder.dto.LadderInfo;
 
 import java.util.Objects;

@@ -1,6 +1,6 @@
 package ladder.dto;
 
-import ladder.LadderDifficulty;
+import ladder.domain.LadderDifficulty;
 import ladder.domain.Players;
 import ladder.domain.Results;
 
