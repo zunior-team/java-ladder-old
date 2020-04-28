@@ -1,6 +1,7 @@
 package com.zuniorteam.ladder;
 
 import com.zuniorteam.ladder.core.Ladder;
+import com.zuniorteam.ladder.core.LadderLevel;
 import com.zuniorteam.ladder.core.User;
 import com.zuniorteam.ladder.core.generator.LadderGenerator;
 import com.zuniorteam.ladder.core.generator.LineGenerator;
@@ -21,10 +22,10 @@ public class GameBoard {
     public void playGame() {
         final List<User> users = InputRender.getUsers(inputConsole.readUsernames());
         final List<String> results = InputRender.getResults(inputConsole.readResults(), users.size());
-        final int ladderHeight = InputRender.getLadderHeight(inputConsole.readLadderHeight());
+        final LadderLevel ladderLevel = InputRender.getLadderLevel(inputConsole.readLadderLevel());
 
         final LadderGenerator ladderGenerator = new LadderGenerator(new LineGenerator(new Random()));
-        final Ladder ladder = ladderGenerator.generate(users.size(), ladderHeight);
+        final Ladder ladder = ladderGenerator.generate(users.size(), ladderLevel);
 
         final String drawUsers = OutputDrawer.drawUsers(users, User.MAX_USERNAME_LENGTH);
         final String drawLadder = OutputDrawer.drawLadder(ladder, User.MAX_USERNAME_LENGTH);
@@ -40,7 +41,7 @@ public class GameBoard {
     private void checkResults(Map<User, String> userToResult, List<User> users) {
         final User checkUser = InputRender.getCheckUser(inputConsole.readCheckUsername(), users);
 
-        if(checkUser.equals(User.ALL_USERS)){
+        if (checkUser.equals(User.ALL_USERS)) {
             outputConsole.writeAllUserToResults(OutputDrawer.drawAllUserToResults(users, userToResult));
             return;
         }

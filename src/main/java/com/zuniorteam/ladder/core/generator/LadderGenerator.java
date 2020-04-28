@@ -1,6 +1,7 @@
 package com.zuniorteam.ladder.core.generator;
 
 import com.zuniorteam.ladder.core.Ladder;
+import com.zuniorteam.ladder.core.LadderLevel;
 import com.zuniorteam.ladder.core.Line;
 
 import java.util.List;
@@ -17,9 +18,11 @@ public class LadderGenerator {
         this.lineGenerator = lineGenerator;
     }
 
-    public Ladder generate(int numberOfPoints, int height) {
-        List<Line> lines = IntStream.range(0, height)
-                .mapToObj(i -> lineGenerator.generate(numberOfPoints))
+    public Ladder generate(int numberOfPoints, LadderLevel ladderLevel) {
+        assert ladderLevel != null;
+
+        List<Line> lines = IntStream.range(0, ladderLevel.getLadderHeight())
+                .mapToObj(i -> lineGenerator.generate(numberOfPoints, ladderLevel.getPercentOfBuildBridge()))
                 .collect(Collectors.toList());
 
         return new Ladder(lines);

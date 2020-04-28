@@ -1,13 +1,14 @@
 package com.zuniorteam.ladder.view;
 
+import com.zuniorteam.ladder.core.LadderLevel;
 import com.zuniorteam.ladder.core.User;
 import com.zuniorteam.ladder.core.util.CollectionUtils;
 import com.zuniorteam.ladder.core.util.StringUtils;
+import com.zuniorteam.ladder.view.mapper.LadderLevelParser;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static com.zuniorteam.ladder.core.Ladder.MIN_LADDER_HEIGHT;
 import static java.util.stream.Collectors.toList;
 
 public final class InputRender {
@@ -21,7 +22,7 @@ public final class InputRender {
     public static List<User> getUsers(String usernamesLine) {
         final List<String> usernames = Arrays.asList(usernamesLine.split(USERNAME_SPLIT_TOKEN));
 
-        if (!CollectionUtils.isUnique(usernames)){
+        if (!CollectionUtils.isUnique(usernames)) {
             throw new IllegalArgumentException(" 사용자 이름이 중복됩니다" + usernames);
         }
 
@@ -41,14 +42,6 @@ public final class InputRender {
         return results;
     }
 
-    public static int getLadderHeight(int ladderHeight) {
-        if (ladderHeight < MIN_LADDER_HEIGHT) {
-            throw new IllegalArgumentException("사다리 높이는" + MIN_LADDER_HEIGHT + "보다 작을 수 없습니다.");
-        }
-
-        return ladderHeight;
-    }
-
     public static User getCheckUser(String inputUsername, List<User> users) {
         if (StringUtils.isEmpty(inputUsername)) {
             throw new IllegalArgumentException("사용자이름을 입력해주세요");
@@ -62,6 +55,9 @@ public final class InputRender {
                 .filter(user -> user.eqUsername(inputUsername))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("찾을 수 없는 사용자 입니다 : " + inputUsername));
+    }
 
+    public static LadderLevel getLadderLevel(String ladderLevelKeyword) {
+        return LadderLevelParser.parse(ladderLevelKeyword);
     }
 }

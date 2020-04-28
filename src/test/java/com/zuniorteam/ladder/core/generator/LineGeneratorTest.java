@@ -30,7 +30,7 @@ class LineGeneratorTest {
 
     @DisplayName("Line generate")
     @Test
-    void testGenerate() {
+    void testGenerate01() {
         //given
         final Random random = Mockito.mock(Random.class);
         given(random.nextBoolean()).willReturn(true);
@@ -38,6 +38,47 @@ class LineGeneratorTest {
         final LineGenerator lineGenerator = new LineGenerator(random);
 
         //when, then
-        assertDoesNotThrow(() -> lineGenerator.generate(100));
+        assertDoesNotThrow(() -> lineGenerator.generate(100, 1));
+    }
+
+    @DisplayName("Line generate, 확률이 100% 일때")
+    @Test
+    void testGenerate02() {
+        //given
+        final int numberOfPoint = 10;
+        final int numberOfBridge = numberOfPoint - 1;
+
+        final LineGenerator lineGenerator = new LineGenerator(new Random());
+
+        //when
+        final Line line = lineGenerator.generate(numberOfPoint, 1);
+
+        //then
+        for (int i = 0; i < numberOfBridge; i += 2) {
+            assertThat(line.hasBridge(i)).isTrue();
+        }
+
+        for (int i = 1; i < numberOfBridge; i += 2) {
+            assertThat(line.hasBridge(i)).isFalse();
+        }
+    }
+
+    @DisplayName("Line generate, 확률이 0% 일때")
+    @Test
+    void testGenerate03() {
+        //given
+        final int numberOfPoint = 10;
+        final int numberOfBridge = numberOfPoint - 1;
+
+        final LineGenerator lineGenerator = new LineGenerator(new Random());
+
+        //when
+        final Line line = lineGenerator.generate(numberOfPoint, 0);
+
+        //then
+        for (int i = 0; i < numberOfBridge; i++) {
+            assertThat(line.hasBridge(i)).isFalse();
+        }
+
     }
 }

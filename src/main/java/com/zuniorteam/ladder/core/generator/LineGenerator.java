@@ -20,15 +20,15 @@ public class LineGenerator {
         this.random = random;
     }
 
-    public Line generate(int numberOfPoints) {
-        final List<Boolean> randomBridge = getRandomBridges(numberOfPoints);
+    public Line generate(int numberOfPoints, double percentOfBuildBridge) {
+        final List<Boolean> randomBridge = getRandomBridges(numberOfPoints, percentOfBuildBridge);
 
         return new Line(fixBridges(randomBridge));
     }
 
-    private List<Boolean> getRandomBridges(int numberOfPoints) {
+    private List<Boolean> getRandomBridges(int numberOfPoints, double percentOfBuildBridge) {
         final List<Boolean> randomPoints = IntStream.range(0, numberOfPoints)
-                .mapToObj(i -> random.nextBoolean())
+                .mapToObj(i -> random.nextDouble() < percentOfBuildBridge)
                 .collect(toList());
 
         return IntStream.range(1, randomPoints.size())
