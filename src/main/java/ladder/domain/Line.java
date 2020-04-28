@@ -1,6 +1,7 @@
 package ladder.domain;
 
-import java.util.*;
+import java.util.List;
+import java.util.Objects;
 
 import static ladder.domain.Players.MINIMUM_PARTICIPANTS;
 
@@ -20,11 +21,23 @@ public class Line {
         return new Line(countOfPerson, pointGenerator);
     }
 
-    public boolean hasBridge(int index) {
-        if (index < 0 || index >= points.size()) {
-            throw new IllegalArgumentException("index invalid");
+    public boolean hasRightBridge(int index) {
+        if (!isValid(index)) {
+            return false;
         }
         return points.get(index);
+    }
+
+    public boolean hasLeftBridge(int index) {
+        final int leftIndex = index - 1;
+        if (!isValid(leftIndex)) {
+            return false;
+        }
+        return points.get(leftIndex);
+    }
+
+    private boolean isValid(int index) {
+        return index >= 0 && index < points.size();
     }
 
     public int playerCount() {

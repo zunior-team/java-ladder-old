@@ -1,15 +1,16 @@
 package ladder.domain;
 
+import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 
@@ -29,4 +30,56 @@ class PlayersTest {
                 () -> Players.of(names));
     }
 
+    @Test
+    @DisplayName("Players 에서 참여자 이름으로 Player객체를 찾을 수 있다")
+    void testFindByName() {
+        //given
+        final Players players = Players.of(Lists.newArrayList("junwoo", "hello"));
+
+        //when
+        final Player playerByName = players.findByName("junwoo");
+
+        //then
+        assertThat(playerByName).isNotNull();
+        assertThat(playerByName.getName())
+                .isEqualTo("junwoo");
+    }
+
+    @Test
+    @DisplayName("Players 에서 존재하지 않는 참여자 이름으로 Player객체를 찾으려 하면 Exception을 던진다")
+    void testFindByNameNotExists() {
+        //given
+        final Players players = Players.of(Lists.newArrayList("junwoo", "hello"));
+
+        //then
+        assertThrows(IllegalArgumentException.class,
+                //when
+                () -> players.findByName("junwoo123"));
+    }
+
+    @Test
+    @DisplayName("Players 에서 참여자로 참여자의 인덱스를 찾을 수 있다")
+    void testIndexOf() {
+        //given
+        final Players players = Players.of(Lists.newArrayList("junwoo", "hello"));
+
+        //when
+        final int indexOf = players.indexOf(new Player("junwoo"));
+
+        //then
+        assertThat(indexOf).isNotNull()
+                .isEqualTo(0);
+    }
+
+    @Test
+    @DisplayName("Players 에서 index를 찾을 때 null 이 들어오면 Exception을 던진다")
+    void testIndexOfNull() {
+        //given
+        final Players players = Players.of(Lists.newArrayList("junwoo", "hello"));
+
+        //then
+        assertThrows(NullPointerException.class,
+                //when
+                () -> players.indexOf(null));
+    }
 }

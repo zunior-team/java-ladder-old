@@ -30,4 +30,13 @@ public class InputView {
         return line.split(COMMA);
     }
 
+    public String inputPlayerWhoWantResult() {
+        System.out.println("결과를 보고 싶은 사람은?");
+        return inputLine().trim();
+    }
+
+    public List<String> inputResults() {
+        System.out.println("실행 결과를 입력하세요. ( 결과는 쉼표(,)로 구분하세요 )");
+        return Lists.newArrayList(split(inputLine().trim()));
+    }
 }

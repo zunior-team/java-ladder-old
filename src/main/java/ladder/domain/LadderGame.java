@@ -1,36 +1,34 @@
 package ladder.domain;
 
-import spark.utils.CollectionUtils;
+import ladder.dto.LadderInfo;
 
-import java.awt.*;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.Objects;
 import java.util.Random;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
-import static java.util.stream.Collectors.collectingAndThen;
-import static java.util.stream.Collectors.toList;
 
 public class LadderGame {
     public static final int MINIMUM_MAX_HEIGHT = 1;
-    private List<Line> lines;
+    private final Lines lines;
+    private final Players players;
+    private final Results results;
 
-    private LadderGame(Players players, int maxHeight) {
+    private LadderGame(LadderInfo ladderInfo) {
+        final int maxHeight = ladderInfo.getMaxHeight();
+        final Players players = ladderInfo.getPlayers();
+        final Results results = ladderInfo.getResults();
+
+        Objects.requireNonNull(players);
+        Objects.requireNonNull(results);
         validateMaxHeight(maxHeight);
 
-        final int countOfPerson = players.size();
+        this.players = players;
+        this.results = results;
+
+        final int countOfPerson = this.players.size();
         final PointGenerator pointGenerator = new RandomPointGenerator(new Random());
-        this.lines = IntStream.range(0, countOfPerson)
-                .mapToObj(index -> Line.of(countOfPerson, pointGenerator))
-                .collect(collectingAndThen(toList(),
-                        Collections::unmodifiableList));
+
+        this.lines = Lines.of(countOfPerson, pointGenerator);
     }
 
-    public List<Line> lines() {
-        return Collections.unmodifiableList(lines);
-    }
 
     private void validateMaxHeight(int maxHeight) {
         if (maxHeight < MINIMUM_MAX_HEIGHT) {
@@ -38,8 +36,30 @@ public class LadderGame {
         }
     }
 
-    public static LadderGame of(Players players, int maxHeight) {
-        return new LadderGame(players, maxHeight);
+    public static LadderGame of(LadderInfo ladderInfo) {
+        return new LadderGame(ladderInfo);
     }
+
+
+    public Lines lines() {
+        return lines;
+    }
+
+    public Players players() {
+        return players;
+    }
+
+
+    public Results results() {
+        return results;
+    }
+
+    public String findResult(Player player) {
+        int startPoint = players.indexOf(player);
+        int endPoint = lines.findEndPoint(startPoint);
+
+        return results.findByIndex(endPoint);
+    }
+
 
 }

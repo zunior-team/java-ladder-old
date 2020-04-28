@@ -1,11 +1,15 @@
 package ladder;
 
-import ladder.domain.LadderGame;
-import ladder.domain.Players;
+import ladder.domain.*;
+import ladder.dto.LadderGameResultDto;
+import ladder.dto.LadderInfo;
 import ladder.view.InputView;
 import ladder.view.ResultView;
 
 import java.util.List;
+import java.util.Map;
+
+import static java.util.stream.Collectors.toMap;
 
 public class ConsoleMain {
     public static void main(String[] args) {
@@ -13,12 +17,19 @@ public class ConsoleMain {
         final ResultView resultView = new ResultView();
 
         final List<String> names = inputView.inputNames();
+        final List<String> resultNames = inputView.inputResults();
         final int maxHeight = inputView.inputMaxHeight();
 
-        final LadderGame ladderGame = LadderGame.of(Players.of(names), maxHeight);
+        final Players players = Players.of(names);
+        final Results results = Results.of(resultNames, players.size());
+        final LadderGame ladderGame = LadderGame.of(new LadderInfo(players, maxHeight, results));
 
-        resultView.printResult(Players.of(names), ladderGame.lines());
+        resultView.printLadder(new LadderGameResultDto(ladderGame));
 
+        ResultPlayer playerToPrintResults = new ResultPlayer(players, inputView.inputPlayerWhoWantResult());
+        final Map<Player, String> matchedResults = players.stream()
+                .collect(toMap(player -> player, ladderGame::findResult));
+        resultView.printResultOfEachPlayer(matchedResults, playerToPrintResults);
 
     }
 }
