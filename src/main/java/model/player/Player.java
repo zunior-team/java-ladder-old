@@ -1,5 +1,9 @@
 package model.player;
 
+import model.ladder.Line;
+
+import java.util.List;
+
 public class Player{
 
     private Name name;

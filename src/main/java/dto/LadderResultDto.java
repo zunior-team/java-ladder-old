@@ -1,24 +1,29 @@
 package dto;
 
-import model.ladder.Ladder;
-import model.player.Players;
+import model.result.PlayerResult;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LadderResultDto {
-    private final List<String> names;
-    private final List<List<String>> lines;
 
-    public LadderResultDto(Players players, Ladder ladder) {
-        names = players.toNames();
-        lines = ladder.toLines();
+    List<PlayerResultDto> playerResultDtos;
+
+    public LadderResultDto(List<PlayerResult> playerResults){
+        this.playerResultDtos = playerResults.stream()
+                .map(PlayerResultDto::new)
+                .collect(Collectors.toList());
     }
 
-    public List<String> getNames() {
-        return names;
+    public String getScoreByName(String name){
+        return playerResultDtos.stream()
+                .filter(playerResultDto -> playerResultDto.getName().equalsIgnoreCase(name))
+                .findFirst()
+                .map(PlayerResultDto::getScore)
+                .orElse("[warning] : 해당 플레이어는 사다리 게임을 수행하지 않았습니다.");
     }
 
-    public List<List<String>> getLines(){
-        return lines;
+    public List<PlayerResultDto> getPlayerResultDtos(){
+        return this.playerResultDtos;
     }
 }

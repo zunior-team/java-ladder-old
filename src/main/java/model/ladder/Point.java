@@ -13,7 +13,7 @@ public class Point {
     }
 
     public boolean isDash(){
-        return (state == PointState.DASH);
+        return (state.isDash());
     }
 
     public String getDisplay(){

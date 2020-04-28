@@ -11,6 +11,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Stream;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
@@ -41,6 +42,23 @@ class LineTest {
         assertTrue(sets.contains(String.join("", displays)));
     }
 
+    @DisplayName("라인을 생성하고 해당 플레이어는 한 라인에서 이동한 뒤 현재 Point 를 반환한다.")
+    @MethodSource("provideOnePlayers")
+    @ParameterizedTest
+    void moveTest(Players players){
+        // when
+        final Line line = Line.of(players);
+        int count = players.getPlayerCount();
+
+        List<String> displays = line.toDisplays();
+
+        // then
+        for(int index = 0; index < count; index++){
+            int colIndex = line.getPosition(line.convertPlayerIndexToPosition(index));
+            assertThat(displays.get(colIndex)).isEqualTo("|");
+        }
+    }
+
     private static Stream<Arguments> providePlayers(){
         return Stream.of(
             arguments(Players.create(Arrays.asList("KIM", "PARK")),
@@ -66,6 +84,12 @@ class LineTest {
                         add("|     |     |-----|");
                         add("|     |     |     |");
                     }})
+        );
+    }
+
+    private static Stream<Arguments> provideOnePlayers() {
+        return Stream.of(
+                arguments(Players.create(Arrays.asList("PARK", "SUNG", "DONG")))
         );
     }
 }
