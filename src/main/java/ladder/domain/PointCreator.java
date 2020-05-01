@@ -11,4 +11,7 @@ public class PointCreator {
     public static boolean createRandomPoint(){
         return random.nextBoolean();
     }
+    public static boolean createRandomPointByPercentage(int percentage){
+        return random.nextInt(100) < percentage;
+    }
 }

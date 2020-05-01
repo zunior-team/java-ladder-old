@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static ladder.constant.LadderConstants.LADDER_LINE_MIN_WIDTH;
+import static ladder.constant.LadderConstants.*;
 
 public class Line {
 
@@ -14,21 +14,24 @@ public class Line {
         this.points = points;
     }
 
-    public static Line of(int width){
+    public static Line of(int width,int percentage){
         validateWidth(width);
 
         List<Boolean> points = new ArrayList<>();
         for (int i = 0; i < width; i++) {
-            boolean randomPoint = PointCreator.createRandomPoint();
-            if(i>0 && points.get(i-1) && randomPoint){
-                randomPoint = false;
-            }
+            boolean randomPoint = PointCreator.createRandomPointByPercentage(percentage);
+            boolean continues = checkContinues(i, points, randomPoint);
+            randomPoint = !continues && randomPoint;
             points.add(randomPoint);
         }
         return new Line(points);
     }
     public boolean hasBridge(int position){
         return points.get(position);
+    }
+
+    private static boolean checkContinues(int index,List<Boolean> points,boolean randomPoint){
+        return (index>0 && points.get(index-1) && randomPoint);
     }
 
     private static void validateWidth(int width){
