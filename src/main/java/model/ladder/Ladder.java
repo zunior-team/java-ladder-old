@@ -20,16 +20,14 @@ public class Ladder {
         validate(createDto);
         this.scores = createDto.getScores();
         this.players = createDto.getPlayers();
-        this.lines = Line.create(players, createDto.getLevel());
-//        this.lines = IntStream.rangeClosed(1, createDto.getHeight())
-//                .mapToObj(i -> Line.of(players))
-//                .collect(Collectors.toList());
+        this.lines = IntStream.rangeClosed(1, createDto.getHeight())
+                .mapToObj(i -> Line.create(players, createDto.getLevel()))
+                .collect(Collectors.toList());
     }
 
     public static Ladder of(LadderCreateDto createDto) {
         return new Ladder(createDto);
     }
-
 
     private static void validate(LadderCreateDto createDto){
         assert createDto != null;

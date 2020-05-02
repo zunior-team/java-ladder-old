@@ -40,4 +40,8 @@ public class LadderCreateDto {
     }
 
     public Level getLevel() { return level; }
+
+    public Integer getHeight() {
+        return level.getHeight();
+    }
 }
