@@ -20,12 +20,6 @@ public class Line {
         this.level = level;
     }
 
-//    public static Line of(Players players) {
-//        final Line line = new Line();
-//        line.createStartBarByPlayers((players.getPlayerCount() - 1), START_POINT);
-//        return line;
-//    }
-
     public static Line create(final Players players, final Level level){
         final Line line = new Line(level);
         line.createStartBarByPlayers((players.getPlayerCount() - 1), START_POINT);
@@ -39,7 +33,9 @@ public class Line {
             return;
         }
 
-        PointState currentPointState = Point.generateStateByRandom();
+        PointState currentPointState = level.isLineGeneratable()
+                ? PointState.DASH
+                : PointState.SPACE;
 
         if(isBeforeLine()){
             currentPointState = PointState.SPACE;

@@ -1,20 +1,22 @@
 package model.level;
 
+import model.ladder.LadderStrategy;
+
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 
 public enum Level {
-    HIGH("상", 20),
-    MEDIUM("중", 10),
-    LOW("하", 5);
+    HIGH("상", LadderStrategy.newInstance(20, 0.7D)),
+    MEDIUM("중", LadderStrategy.newInstance(20, 0.5D)),
+    LOW("하", LadderStrategy.newInstance(20, 0.3D));
 
     private String level;
-    private Integer height;
+    private LadderStrategy ladderStrategy;
 
     Level(final String level,
-          final Integer height){
+          final LadderStrategy ladderStrategy){
         this.level = level;
-        this.height = height;
+        this.ladderStrategy = ladderStrategy;
     }
 
     public static Level getLevelByString(final String currentLevel){
@@ -24,11 +26,15 @@ public enum Level {
                 .orElseThrow(NoSuchElementException::new);
     }
 
-    public boolean eqLevel(final String level){
+    private boolean eqLevel(final String level){
         return this.level.equals(level);
     }
 
-    public int getHeight() {
-        return height;
+    public int getHeight(){
+        return ladderStrategy.getHeight();
+    }
+
+    public boolean isLineGeneratable(){
+        return this.ladderStrategy.isLineCreatable();
     }
 }
