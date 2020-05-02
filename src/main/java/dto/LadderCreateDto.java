@@ -2,6 +2,7 @@ package dto;
 
 import exception.LadderCreateException;
 import model.ladder.Scores;
+import model.level.Level;
 import model.player.Players;
 
 public class LadderCreateDto {
@@ -9,22 +10,18 @@ public class LadderCreateDto {
     private static final int ZERO_HEIGHT = 0;
     private final Scores scores;
     private final Players players;
-    private final int height;
+    private final Level level;
 
     public LadderCreateDto(final Players players,
                            final Scores scores,
-                           final int height){
-        validate(players, scores, height);
+                           final Level level){
+        validate(players, scores);
         this.players = players;
         this.scores = scores;
-        this.height = height;
+        this.level = level;
     }
 
-    private void validate(final Players players, final Scores scores, final int height){
-        if(height <= ZERO_HEIGHT){
-            throw new LadderCreateException("높이가 0 이하이기 때문에 사다리를 만들 수 없습니다.");
-        }
-
+    private void validate(final Players players, final Scores scores){
         if(players == null){
             throw new LadderCreateException("사디리게임을 하기위한 플레이어가 없기 때문에 사다리를 만들 수 없습니다.");
         }
@@ -42,7 +39,5 @@ public class LadderCreateDto {
         return players;
     }
 
-    public int getHeight() {
-        return height;
-    }
+    public Level getLevel() { return level; }
 }

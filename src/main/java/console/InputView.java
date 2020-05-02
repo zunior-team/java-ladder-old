@@ -16,6 +16,11 @@ public class InputView {
         return SCANNER.nextLine();
     }
 
+    public static String inputLevel() {
+        System.out.println("\n실행할 사다리의 난이도는 ?");
+        return SCANNER.nextLine();
+    }
+
     public static int inputLadderHeight(){
         System.out.println("\n최대 사다리 높이는 몇 개인가요?");
         int height = SCANNER.nextInt();

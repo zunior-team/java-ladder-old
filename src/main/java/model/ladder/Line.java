@@ -1,5 +1,6 @@
 package model.ladder;
 
+import model.level.Level;
 import model.moving.MovingType;
 import model.player.Players;
 
@@ -8,14 +9,25 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static constant.PointInterval.DEFAULT_INTERVAL;
+import static constant.PointInterval.START_POINT;
+
 public class Line {
+    private final List<Point> points = new ArrayList<>();
+    private final Level level;
 
-    private static final int START_POINT = 0;
-    private static final int DEFAULT_INTERVAL = 5;
-    private List<Point> points = new ArrayList<>();
+    private Line(Level level){
+        this.level = level;
+    }
 
-    public static Line of(Players players) {
-        final Line line = new Line();
+//    public static Line of(Players players) {
+//        final Line line = new Line();
+//        line.createStartBarByPlayers((players.getPlayerCount() - 1), START_POINT);
+//        return line;
+//    }
+
+    public static Line create(final Players players, final Level level){
+        final Line line = new Line(level);
         line.createStartBarByPlayers((players.getPlayerCount() - 1), START_POINT);
         return line;
     }

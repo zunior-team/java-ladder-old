@@ -21,6 +21,7 @@ public class Point {
     }
 
     public static PointState generateStateByRandom(){
+        // 50 퍼센트의 확률로 만든다.
         return Point.STATES[random.nextInt(STATES.length)];
     }
 }
