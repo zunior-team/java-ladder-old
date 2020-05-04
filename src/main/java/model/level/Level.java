@@ -7,8 +7,8 @@ import java.util.NoSuchElementException;
 
 public enum Level {
     HIGH("상", LadderStrategy.newInstance(20, 0.7D)),
-    MEDIUM("중", LadderStrategy.newInstance(20, 0.5D)),
-    LOW("하", LadderStrategy.newInstance(20, 0.3D));
+    MEDIUM("중", LadderStrategy.newInstance(10, 0.5D)),
+    LOW("하", LadderStrategy.newInstance(5, 0.3D));
 
     private String level;
     private LadderStrategy ladderStrategy;
@@ -34,7 +34,7 @@ public enum Level {
         return ladderStrategy.getHeight();
     }
 
-    public boolean isLineGeneratable(){
+    public boolean isLineCreatable(){
         return this.ladderStrategy.isLineCreatable();
     }
 }

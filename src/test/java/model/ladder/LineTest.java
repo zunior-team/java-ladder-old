@@ -1,5 +1,6 @@
 package model.ladder;
 
+import model.level.Level;
 import model.player.Players;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -24,10 +25,10 @@ class LineTest {
     @ParameterizedTest
     void ofTest(Players players) {
         // when
-//        final Line line = Line.of(players);
-//
-//        // then
-//        assertNotNull(line);
+        final Line line = Line.create(players, Level.HIGH);
+
+        // then
+        assertNotNull(line);
     }
 
     @DisplayName("한 라인에 있는 디스플레이를 반환한다.")
@@ -35,11 +36,11 @@ class LineTest {
     @ParameterizedTest
     void getDisplaysTest(Players players, HashSet<String> sets) {
         // when
-//        final Line line = Line.of(players);
-//
-//        // then
-//        List<String> displays = line.toDisplays();
-//        assertTrue(sets.contains(String.join("", displays)));
+        final Line line = Line.create(players, Level.HIGH);
+
+        // then
+        List<String> displays = line.toDisplays();
+        assertTrue(sets.contains(String.join("", displays)));
     }
 
     @DisplayName("라인을 생성하고 해당 플레이어는 한 라인에서 이동한 뒤 현재 Point 를 반환한다.")
@@ -47,16 +48,16 @@ class LineTest {
     @ParameterizedTest
     void moveTest(Players players){
         // when
-//        final Line line = Line.of(players);
-//        int count = players.getPlayerCount();
-//
-//        List<String> displays = line.toDisplays();
-//
-//        // then
-//        for(int index = 0; index < count; index++){
-//            int colIndex = line.getPosition(line.convertPlayerIndexToPosition(index));
-//            assertThat(displays.get(colIndex)).isEqualTo("|");
-//        }
+        final Line line = Line.create(players, Level.HIGH);
+        int count = players.getPlayerCount();
+
+        List<String> displays = line.toDisplays();
+
+        // then
+        for(int index = 0; index < count; index++){
+            int colIndex = line.getPosition(line.convertPlayerIndexToPosition(index));
+            assertThat(displays.get(colIndex)).isEqualTo("|");
+        }
     }
 
     private static Stream<Arguments> providePlayers(){

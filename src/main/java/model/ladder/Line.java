@@ -33,7 +33,7 @@ public class Line {
             return;
         }
 
-        PointState currentPointState = level.isLineGeneratable()
+        PointState currentPointState = level.isLineCreatable()
                 ? PointState.DASH
                 : PointState.SPACE;
 

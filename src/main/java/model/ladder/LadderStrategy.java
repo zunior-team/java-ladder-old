@@ -1,11 +1,8 @@
 package model.ladder;
 
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class LadderStrategy {
-
-    private static Random RANDOM = new Random();
     private final Integer height;
     private final Double lineProbability;
 
