@@ -71,7 +71,7 @@ public class ConsoleOutput {
         Map<String, String> prizeMatch = ladderResult.getPrizeMatch();
         System.out.println("실행 결과");
         if("all".equalsIgnoreCase(target)) {
-            showTarget(prizeMatch, new ArrayList<>(prizeMatch.values()));
+            showTarget(prizeMatch, new ArrayList<>(prizeMatch.keySet()));
             return;
         }
 
