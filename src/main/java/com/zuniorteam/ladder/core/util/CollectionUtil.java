@@ -3,11 +3,11 @@ package com.zuniorteam.ladder.core.util;
 import java.util.HashSet;
 import java.util.List;
 
-public final class CollectionUtils {
+public final class CollectionUtil {
 
     private static final int FIRST_INDEX = 0;
 
-    private CollectionUtils() {
+    private CollectionUtil() {
     }
 
     public static boolean isFirstIndex(int index) {

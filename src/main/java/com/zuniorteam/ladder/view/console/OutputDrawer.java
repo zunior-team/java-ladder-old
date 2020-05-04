@@ -3,7 +3,7 @@ package com.zuniorteam.ladder.view.console;
 import com.zuniorteam.ladder.core.Ladder;
 import com.zuniorteam.ladder.core.Line;
 import com.zuniorteam.ladder.core.User;
-import com.zuniorteam.ladder.core.util.StringUtils;
+import com.zuniorteam.ladder.core.util.StringUtil;
 
 import java.util.List;
 import java.util.Map;
@@ -24,18 +24,18 @@ public final class OutputDrawer {
     public static String drawUsers(List<User> users, int bridgeLength) {
         final String drawUsers = users.stream()
                 .map(User::getUsername)
-                .map(username -> StringUtils.fill(username, BLANK_TOKEN, bridgeLength))
+                .map(username -> StringUtil.fill(username, BLANK_TOKEN, bridgeLength))
                 .collect(joining(BLANK_TOKEN.toString()));
 
-        return StringUtils.fill(BLANK_TOKEN, bridgeLength) + drawUsers;
+        return StringUtil.fill(BLANK_TOKEN, bridgeLength) + drawUsers;
     }
 
     public static String drawResults(List<String> results, int bridgeLength) {
         final String drawResults = results.stream()
-                .map(result -> StringUtils.fill(result, BLANK_TOKEN, bridgeLength))
+                .map(result -> StringUtil.fill(result, BLANK_TOKEN, bridgeLength))
                 .collect(joining(BLANK_TOKEN.toString()));
 
-        return StringUtils.fill(BLANK_TOKEN, bridgeLength) + drawResults;
+        return StringUtil.fill(BLANK_TOKEN, bridgeLength) + drawResults;
     }
 
     public static List<String> drawAllUserToResults(List<User> users, Map<User, String> userToResult) {
@@ -59,15 +59,15 @@ public final class OutputDrawer {
                 .mapToObj(index -> drawBridge(line, index, bridgeLength))
                 .collect(joining(BORDER_TOKEN.toString(), BORDER_TOKEN.toString(), BORDER_TOKEN.toString()));
 
-        return StringUtils.fill(BLANK_TOKEN, bridgeLength) + drawLine;
+        return StringUtil.fill(BLANK_TOKEN, bridgeLength) + drawLine;
     }
 
     private static String drawBridge(Line line, int index, int bridgeLength) {
         if (line.hasBridge(index)) {
-            return StringUtils.fill(BRIDGE_TOKEN, bridgeLength);
+            return StringUtil.fill(BRIDGE_TOKEN, bridgeLength);
         }
 
-        return StringUtils.fill(BLANK_TOKEN, bridgeLength);
+        return StringUtil.fill(BLANK_TOKEN, bridgeLength);
     }
 
 

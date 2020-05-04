@@ -1,12 +1,12 @@
 package com.zuniorteam.ladder.core;
 
-import com.zuniorteam.ladder.core.util.StringUtils;
+import com.zuniorteam.ladder.core.util.StringUtil;
 
 public class User {
 
+    public static final int MAX_USERNAME_LENGTH = 5;
     public static final String ALL_USERS_KEYWORD = "all";
     public static final User ALL_USERS = new User();
-    public static final int MAX_USERNAME_LENGTH = 5;
 
     private final String username;
 
@@ -19,7 +19,7 @@ public class User {
     }
 
     private void validate(String username) {
-        if (StringUtils.isEmpty(username)) {
+        if (StringUtil.isEmpty(username)) {
             throw new IllegalArgumentException("사용자 명이 없습니다.");
         }
 

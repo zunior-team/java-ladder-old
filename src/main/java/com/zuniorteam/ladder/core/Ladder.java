@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class Ladder {
 
-    public static final int MIN_LADDER_HEIGHT = 1;
+    private static final int MIN_LADDER_HEIGHT = 1;
 
     private final List<Line> lines;
 

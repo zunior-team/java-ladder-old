@@ -4,11 +4,11 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public final class StringUtils {
+public final class StringUtil {
 
     private static final String EMPTY = "";
 
-    private StringUtils() {
+    private StringUtil() {
     }
 
     public static boolean isEmpty(String str) {
@@ -16,7 +16,7 @@ public final class StringUtils {
     }
 
     public static String fill(Character token, int length) {
-        return StringUtils.fill(EMPTY, token, length);
+        return StringUtil.fill(EMPTY, token, length);
     }
 
     public static String fill(String base, Character token, int length) {
