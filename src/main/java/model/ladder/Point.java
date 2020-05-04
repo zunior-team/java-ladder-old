@@ -19,9 +19,4 @@ public class Point {
     public String getDisplay(){
         return state.display();
     }
-
-    public static PointState generateStateByRandom(){
-        // 50 퍼센트의 확률로 만든다.
-        return Point.STATES[random.nextInt(STATES.length)];
-    }
 }

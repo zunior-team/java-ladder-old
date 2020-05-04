@@ -1,9 +1,5 @@
 package model.player;
 
-import model.ladder.Line;
-
-import java.util.List;
-
 public class Player{
 
     private Name name;
@@ -18,9 +14,5 @@ public class Player{
 
     public String name(){
         return name.get();
-    }
-
-    public int nameLength() {
-        return name.length();
     }
 }

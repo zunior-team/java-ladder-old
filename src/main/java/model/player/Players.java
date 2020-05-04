@@ -4,7 +4,6 @@ import exception.PlayersCreateException;
 import model.ladder.Line;
 import model.ladder.Score;
 import model.ladder.Scores;
-import model.moving.MovingType;
 import model.result.PlayerResult;
 import org.apache.commons.collections4.CollectionUtils;
 
