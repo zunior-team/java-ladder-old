@@ -13,9 +13,9 @@ public class LadderMain {
         String inputResults = InputView.inputResult();
         Results results = new Results(inputResults);
 
-        LadderDifficulty ladderDifficulty = LadderDifficulty.of(InputView.inputLadderDifficulty());
+        LadderDifficulty ladderDifficulty = LadderDifficulty.findLadderDifficulty(InputView.inputLadderDifficulty());
 
-        Ladder ladder = Ladder.of(participants.getParticipants().size(),ladderDifficulty);
+        Ladder ladder = Ladder.of(participants.participantsSize(),ladderDifficulty);
 
         ResultView.printLadder(participants,ladder,results);
 

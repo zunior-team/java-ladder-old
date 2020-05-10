@@ -49,6 +49,9 @@ public class Participants {
                 .findAny()
                 .orElseThrow(IllegalArgumentException::new);
     }
+    public int participantsSize(){
+        return participants.size();
+    }
     public List<Participant> getParticipants() {
         return Collections.unmodifiableList(participants);
     }

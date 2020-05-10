@@ -1,6 +1,9 @@
 package ladder.domain;
 
 import java.util.Arrays;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import static ladder.constant.LadderConstants.*;
@@ -15,21 +18,26 @@ public enum LadderDifficulty {
     private final String difficulty;
     private final int height;
 
+    private static final Map<String,LadderDifficulty> ladderDifficulties =
+            Arrays.stream(values())
+            .collect(Collectors.toMap(LadderDifficulty::getDifficulty, Function.identity()));
+
     LadderDifficulty(String difficulty,int height){
         this.difficulty = difficulty;
         this.height = height;
     }
-    public static LadderDifficulty of(String difficulty){
-        return Arrays.stream(values())
-                .filter(ladderDifficulty -> ladderDifficulty.difficulty.equals(difficulty))
-                .findAny()
-                .orElseThrow(()->new IllegalArgumentException("난이도는"+makeExceptionMessage()+"로만 입력해주세요."));
+
+    public static LadderDifficulty findLadderDifficulty(String difficulty){
+        if(!ladderDifficulties.containsKey(difficulty)){
+            throw new IllegalArgumentException("난이도는"+makeExceptionMessage()+"로만 입력해주세요.");
+        }
+        return ladderDifficulties.get(difficulty);
     }
+
     private static String makeExceptionMessage(){
-        return Arrays.stream(values())
-                .map(LadderDifficulty::getDifficulty)
-                .collect(Collectors.joining(INPUT_SPLIT_TOKEN));
+        return String.join(INPUT_SPLIT_TOKEN, ladderDifficulties.keySet());
     }
+
     public int getPercentage(){
         return height * LADDER_HEIGHT_PERCENTAGE_MULTIPLY;
     }
