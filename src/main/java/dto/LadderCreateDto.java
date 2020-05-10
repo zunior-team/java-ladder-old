@@ -15,19 +15,23 @@ public class LadderCreateDto {
     public LadderCreateDto(final Players players,
                            final Scores scores,
                            final Level level){
-        validate(players, scores);
+        validate(players, scores, level);
         this.players = players;
         this.scores = scores;
         this.level = level;
     }
 
-    private void validate(final Players players, final Scores scores){
+    private void validate(final Players players, final Scores scores, final Level level){
         if(players == null){
             throw new LadderCreateException("사디리게임을 하기위한 플레이어가 없기 때문에 사다리를 만들 수 없습니다.");
         }
 
         if(scores == null) {
             throw new LadderCreateException("사디리게임의 결과가 없기 때문에 사다리를 만들 수 없습니다.");
+        }
+
+        if(level == null) {
+            throw new LadderCreateException("사디리게임의 난이도가 없기 때문에 사다리를 만들 수 없습니다.");
         }
     }
 

@@ -14,26 +14,24 @@ import static constant.PointInterval.START_POINT;
 
 public class Line {
     private final List<Point> points = new ArrayList<>();
-    private final Level level;
-
-    private Line(Level level){
-        this.level = level;
-    }
 
     public static Line create(final Players players, final Level level){
-        final Line line = new Line(level);
-        line.createStartBarByPlayers((players.getPlayerCount() - 1), START_POINT);
+        final Line line = new Line();
+        line.createStartBarByPlayers((players.getPlayerCount() - 1), START_POINT, level.getLadderStrategy());
         return line;
     }
 
-    private void createStartBarByPlayers(final int totalPoint, final int currentPoint){
+    private void createStartBarByPlayers(final int totalPoint,
+                                         final int currentPoint,
+                                         final LadderStrategy ladderStrategy){
+
         points.add(new Point(PointState.BAR));
 
         if(totalPoint == currentPoint){
             return;
         }
 
-        PointState currentPointState = level.isLineCreatable()
+        PointState currentPointState = ladderStrategy.isLineCreatable()
                 ? PointState.DASH
                 : PointState.SPACE;
 
@@ -42,7 +40,7 @@ public class Line {
         }
 
         createIntervalByPoint(currentPointState);
-        createStartBarByPlayers(totalPoint, (currentPoint + 1));
+        createStartBarByPlayers(totalPoint, (currentPoint + 1), ladderStrategy);
     }
 
 

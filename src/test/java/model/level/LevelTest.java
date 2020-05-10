@@ -47,9 +47,9 @@ class LevelTest {
 
     private static Stream<Arguments> provideLevelAndHeight(){
         return Stream.of(
-            Arguments.arguments(Level.HIGH, 20),
-            Arguments.arguments(Level.MEDIUM, 10),
-            Arguments.arguments(Level.LOW, 5)
+            Arguments.arguments(Level.HIGH, Level.Height.HIGH),
+            Arguments.arguments(Level.MEDIUM, Level.Height.MEDIUM),
+            Arguments.arguments(Level.LOW, Level.Height.LOW)
         );
     }
 }

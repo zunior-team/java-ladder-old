@@ -2,13 +2,17 @@ package model.level;
 
 import model.ladder.LadderStrategy;
 
-import java.util.Arrays;
-import java.util.NoSuchElementException;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public enum Level {
-    HIGH("상", LadderStrategy.newInstance(20, 0.7D)),
-    MEDIUM("중", LadderStrategy.newInstance(10, 0.5D)),
-    LOW("하", LadderStrategy.newInstance(5, 0.3D));
+    HIGH("상", LadderStrategy.newInstance(Height.HIGH, Rate.HIGH)),
+    MEDIUM("중", LadderStrategy.newInstance(Height.MEDIUM, Rate.MEDIUM)),
+    LOW("하", LadderStrategy.newInstance(Height.LOW, Rate.LOW));
+
+    private static final Map<String, Optional<Level>> LEVEL_SET = Collections.unmodifiableMap(
+            Arrays.stream(Level.values())
+            .collect(Collectors.toMap(Level::getLevel, Optional::of)));
 
     private String level;
     private LadderStrategy ladderStrategy;
@@ -20,21 +24,31 @@ public enum Level {
     }
 
     public static Level getLevelByString(final String currentLevel){
-        return Arrays.stream(Level.values())
-                .filter(level -> level.eqLevel(currentLevel))
-                .findFirst()
-                .orElseThrow(NoSuchElementException::new);
+        return LEVEL_SET.get(currentLevel)
+                .orElseThrow(() -> new NoSuchElementException(currentLevel + "에 해당하는 난이도는 없습니다."));
     }
 
-    private boolean eqLevel(final String level){
-        return this.level.equals(level);
+    private String getLevel(){
+        return level;
     }
 
     public int getHeight(){
         return ladderStrategy.getHeight();
     }
 
-    public boolean isLineCreatable(){
-        return this.ladderStrategy.isLineCreatable();
+    public LadderStrategy getLadderStrategy(){
+        return ladderStrategy;
+    }
+
+    public static class Height {
+        public static final int HIGH = 20;
+        public static final int MEDIUM = 10;
+        public static final int LOW = 5;
+    }
+
+    public static class Rate {
+        public static final double HIGH = 0.7D;
+        public static final double MEDIUM = 0.5D;
+        public static final double LOW = 0.3D;
     }
 }
