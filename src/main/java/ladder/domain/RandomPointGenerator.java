@@ -9,12 +9,18 @@ public class RandomPointGenerator implements PointGenerator {
 
     public static final int HUNDREDS = 100;
     public static final int ZERO = 0;
-    private final int randomPercentage;
 
-    public RandomPointGenerator(int randomPercentage) {
+    private final int randomPercentage;
+    private final ThreadLocalRandom random;
+
+    public RandomPointGenerator(int randomPercentage, ThreadLocalRandom random) {
         if (randomPercentage < ZERO || randomPercentage > HUNDREDS) {
             throw new IllegalArgumentException("입력값 : [" + randomPercentage + "] 이 " + ZERO + "보다 작거나, " + HUNDREDS + "보다 큽니다");
         }
+
+        Objects.requireNonNull(random);
+
+        this.random = random;
         this.randomPercentage = randomPercentage;
     }
 
@@ -22,7 +28,7 @@ public class RandomPointGenerator implements PointGenerator {
     public List<Boolean> generate(int playerCount) {
         final List<Boolean> points = new ArrayList<>();
 
-        points.add(ThreadLocalRandom.current().nextInt(HUNDREDS) < randomPercentage);
+        points.add(random.nextInt(HUNDREDS) < randomPercentage);
         while (points.size() != playerCount - 1) {
             points.add(nextRandomValue(points));
         }
@@ -38,6 +44,6 @@ public class RandomPointGenerator implements PointGenerator {
         if (points.get(lastIndex)) {
             return false;
         }
-        return ThreadLocalRandom.current().nextInt(HUNDREDS) < randomPercentage;
+        return random.nextInt(HUNDREDS) < randomPercentage;
     }
 }

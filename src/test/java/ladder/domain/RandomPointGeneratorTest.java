@@ -1,10 +1,12 @@
 package ladder.domain;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -16,7 +18,7 @@ class RandomPointGeneratorTest {
     @ValueSource(ints = {3, 4, 5})
     void testPoint(int countOfPerson) {
         //when
-        RandomPointGenerator randomPointGenerator = new RandomPointGenerator(50);
+        RandomPointGenerator randomPointGenerator = new RandomPointGenerator(50, ThreadLocalRandom.current());
 
         //when
         final List<Boolean> points = randomPointGenerator.generate(countOfPerson);
@@ -32,6 +34,15 @@ class RandomPointGeneratorTest {
         //then
         assertThrows(IllegalArgumentException.class, () ->
                 //when
-                new RandomPointGenerator(randomPercentage));
+                new RandomPointGenerator(randomPercentage, ThreadLocalRandom.current()));
+    }
+
+    @Test
+    @DisplayName("ThreadLocalRandom 객체는 NULL일 수 없다")
+    void testThreadLocalRandomNull() {
+        //then
+        assertThrows(NullPointerException.class, () ->
+                //when
+                new RandomPointGenerator(50, null));
     }
 }

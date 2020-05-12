@@ -3,14 +3,15 @@ package ladder.domain;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public enum LadderDifficulty {
-    HIGH("상", LadderHeight.HIGH, new RandomPointGenerator(RandomPercentage.HIGH)),
-    MEDIUM("중", LadderHeight.MEDIUM, new RandomPointGenerator(RandomPercentage.MEDIUM)),
-    LOW("하", LadderHeight.LOW, new RandomPointGenerator(RandomPercentage.LOW));
+    HIGH("상", LadderHeight.HIGH, new RandomPointGenerator(RandomPercentage.HIGH, ThreadLocalRandom.current())),
+    MEDIUM("중", LadderHeight.MEDIUM, new RandomPointGenerator(RandomPercentage.MEDIUM, ThreadLocalRandom.current())),
+    LOW("하", LadderHeight.LOW, new RandomPointGenerator(RandomPercentage.LOW, ThreadLocalRandom.current()));
 
     private static final Map<String, LadderDifficulty> inputs = Collections.unmodifiableMap(
             Stream.of(values())
