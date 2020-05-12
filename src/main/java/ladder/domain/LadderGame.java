@@ -11,6 +11,8 @@ public class LadderGame {
     private final Results results;
 
     private LadderGame(LadderInfo ladderInfo) {
+        Objects.requireNonNull(ladderInfo);
+
         final Players players = ladderInfo.getPlayers();
         final Results results = ladderInfo.getResults();
         final LadderDifficulty ladderDifficulty = ladderInfo.getLadderDifficulty();
