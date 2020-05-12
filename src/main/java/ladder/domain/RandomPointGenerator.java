@@ -8,11 +8,12 @@ import java.util.concurrent.ThreadLocalRandom;
 public class RandomPointGenerator implements PointGenerator {
 
     public static final int HUNDREDS = 100;
+    public static final int ZERO = 0;
     private final int randomPercentage;
 
     public RandomPointGenerator(int randomPercentage) {
-        if (randomPercentage < 0 || randomPercentage > 100) {
-            throw new IllegalArgumentException("입력값 : [" + randomPercentage + "] 이 0보다 작거나, 100보다 큽니다");
+        if (randomPercentage < ZERO || randomPercentage > HUNDREDS) {
+            throw new IllegalArgumentException("입력값 : [" + randomPercentage + "] 이 " + ZERO + "보다 작거나, " + HUNDREDS + "보다 큽니다");
         }
         this.randomPercentage = randomPercentage;
     }
