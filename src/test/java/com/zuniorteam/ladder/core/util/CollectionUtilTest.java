@@ -21,7 +21,7 @@ class CollectionUtilTest {
 
     @DisplayName("getBefore, 이전값 가져오기, 0보다 작을 때")
     @Test
-    void testGetBefore01() {
+    void testGetBeforeIfLessZero() {
         final List<Integer> integers = Arrays.asList(1, 2);
 
         assertThrows(IllegalArgumentException.class, () -> CollectionUtil.getBefore(integers, 0));
@@ -29,7 +29,7 @@ class CollectionUtilTest {
 
     @DisplayName("getBefore")
     @Test
-    void testGetBefore02() {
+    void testGetBefore() {
         final List<Integer> integers = Arrays.asList(1, 2);
         assertThat(CollectionUtil.getBefore(integers, 1)).isEqualTo(1);
     }

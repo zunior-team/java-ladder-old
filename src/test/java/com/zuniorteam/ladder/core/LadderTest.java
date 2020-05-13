@@ -61,7 +61,7 @@ class LadderTest {
     @DisplayName("play")
     @ParameterizedTest()
     @MethodSource("givenForTestPlay")
-    void testPlay01(Line lineA, Line lineB, List<Integer> expectResultIndex) {
+    void testPlay(Line lineA, Line lineB, List<Integer> expectResultIndex) {
         //given
         final List<User> users = Stream.of("a", "b", "c", "d")
                 .map(User::new)
