@@ -43,7 +43,7 @@ class LineGeneratorTest {
 
     @DisplayName("Line generate, 확률이 100% 일때")
     @Test
-    void testGenerate02() {
+    void testGenerateIf100Percent() {
         //given
         final int numberOfPoint = 10;
         final int numberOfBridge = numberOfPoint - 1;
@@ -65,7 +65,7 @@ class LineGeneratorTest {
 
     @DisplayName("Line generate, 확률이 0% 일때")
     @Test
-    void testGenerate03() {
+    void testGenerateIfZeroPercent() {
         //given
         final int numberOfPoint = 10;
         final int numberOfBridge = numberOfPoint - 1;

@@ -14,7 +14,7 @@ class LadderLevelParserTest {
 
     @DisplayName("키워드로 파싱")
     @Test
-    void testOfKeyword01(){
+    void testParse(){
         assertThat(LadderLevelParser.parse("상")).isEqualTo(LadderLevel.HIGH);
         assertThat(LadderLevelParser.parse("중")).isEqualTo(LadderLevel.MEDIUM);
         assertThat(LadderLevelParser.parse("하")).isEqualTo(LadderLevel.LOW);
@@ -24,7 +24,7 @@ class LadderLevelParserTest {
     @ParameterizedTest
     @NullAndEmptySource
     @ValueSource(strings = "알수없으으으ㅡ으ㅡㅡㅡㅡㅡㅡㅡ")
-    void testOfKeyword02(String keyword){
+    void testParseByInvalid(String keyword){
         assertThrows(IllegalArgumentException.class, () -> LadderLevelParser.parse(keyword));
     }
 

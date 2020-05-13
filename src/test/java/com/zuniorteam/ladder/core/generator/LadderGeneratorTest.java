@@ -30,7 +30,7 @@ class LadderGeneratorTest {
 
     @DisplayName("Ladder Generate")
     @Test
-    void testGenerate01() {
+    void testGenerate() {
         //given
         final int numberOfPoints = 5;
         final LadderLevel ladderLevel = LadderLevel.HIGH;
@@ -49,7 +49,7 @@ class LadderGeneratorTest {
 
     @DisplayName("Ladder Generate, Ladder Level, null 일 때")
     @Test
-    void testGenerate02() {
+    void testGenerateIfArgsIsNull() {
         //given
         final int numberOfPoints = 5;
         final LadderGenerator ladderGenerator = new LadderGenerator(new LineGenerator(new Random()));

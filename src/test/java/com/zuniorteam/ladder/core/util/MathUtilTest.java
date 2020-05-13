@@ -13,13 +13,13 @@ class MathUtilTest {
     @DisplayName("나누기")
     @ParameterizedTest
     @CsvSource({"1,1,1", "2,1,2", "1,2,0.5", "0,100,0"})
-    void testDivide01(int x, int y, double expect) {
+    void testDivide(int x, int y, double expect) {
         assertThat(MathUtil.divide(x, y)).isEqualTo(expect);
     }
 
     @DisplayName("나누기, 분모가 0일 때")
     @Test
-    void testDivide02() {
+    void testDivideIfByZero() {
         assertThrows(IllegalArgumentException.class, () -> MathUtil.divide(0, 0));
     }
 

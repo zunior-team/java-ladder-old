@@ -14,14 +14,14 @@ class StringUtilTest {
     @NullAndEmptySource
     @ValueSource(strings = {" ",  "  "})
     @ParameterizedTest
-    void testIsEmpty01(String str){
+    void testIsEmptyIfBlank(String str){
         assertThat(StringUtil.isEmpty(str)).isTrue();
     }
 
     @DisplayName("IsEmpty() 테스트, 텍스트가 있을 때")
     @ValueSource(strings = {"A",  "B  "})
     @ParameterizedTest
-    void testIsEmpty02(String str){
+    void testIsEmptyIfNotEmpty(String str){
         assertThat(StringUtil.isEmpty(str)).isFalse();
     }
 
