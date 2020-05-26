@@ -51,23 +51,9 @@ class LineTest {
         assertThat(line.getLength()).isEqualTo(bridges.size());
     }
 
-
-    @DisplayName("hasBridge, index 0보다 작을 때")
-    @Test
-    void testHasBridge01() {
-        //given
-        final List<Boolean> bridges = new ArrayList<>();
-        bridges.add(true);
-
-        //when
-        final Line line = new Line(bridges);
-
-        assertThrows(IllegalArgumentException.class, () -> line.hasBridge(-1));
-    }
-
     @DisplayName("hasBridge")
     @Test
-    void testHasBridge02() {
+    void testHasBridge() {
         //given
         final List<Boolean> bridges = new ArrayList<>();
         bridges.add(true);
@@ -81,9 +67,22 @@ class LineTest {
         assertThat(line.hasBridge(1)).isFalse();
     }
 
+    @DisplayName("hasBridge, index 0보다 작을 때")
+    @Test
+    void testHasBridgeIfLessZeroIndex() {
+        //given
+        final List<Boolean> bridges = new ArrayList<>();
+        bridges.add(true);
+
+        //when
+        final Line line = new Line(bridges);
+
+        assertThrows(IllegalArgumentException.class, () -> line.hasBridge(-1));
+    }
+
     @DisplayName("hasLeftBridge")
     @Test
-    void testHasLeftBridge01() {
+    void testHasLeftBridge() {
         //given
         final List<Boolean> bridges = new ArrayList<>();
         bridges.add(true);
@@ -96,9 +95,10 @@ class LineTest {
         assertThat(line.hasLeftBridge(0)).isFalse();
         assertThat(line.hasLeftBridge(1)).isTrue();
     }
+
     @DisplayName("hasRightBridge")
     @Test
-    void testHasLeftBridge02() {
+    void testHasRightBridge() {
         //given
         final List<Boolean> bridges = new ArrayList<>();
         bridges.add(true);
