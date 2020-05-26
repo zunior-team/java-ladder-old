@@ -14,10 +14,10 @@ class LadderGameTest {
 
     private static Stream<Arguments> ladderGameProvider(){
         return Stream.of(
-                Arguments.of(Ladder.of(5,5),
+                Arguments.of(Ladder.of(5,LadderDifficulty.EASY),
                         Participants.of("a,b,c,d,e"),
                         new Results("1,200,300,꽝,꽝")),
-                Arguments.of(Ladder.of(4,3),
+                Arguments.of(Ladder.of(4,LadderDifficulty.EASY),
                         Participants.of("a,b,c,d"),
                         new Results("1,300,꽝,꽝"))
         );

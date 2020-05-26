@@ -1,5 +1,6 @@
 package ladder.domain;
 
+import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -18,31 +19,29 @@ class LadderTest {
     @ParameterizedTest
     @ValueSource(ints = {-1,0,1})
     void 참여자_1명이하_익셉션(int countOfParticipant){
-        int maxHeight = 2;
-        assertThatThrownBy(()-> Ladder.of(countOfParticipant,maxHeight))
+        assertThatThrownBy(()-> Ladder.of(countOfParticipant,LadderDifficulty.EASY))
                 .isInstanceOf(IllegalArgumentException.class);
     }
     @DisplayName("사다리의 최대 높이가 1이하이면 익셉션이 발생한다.")
-    @ParameterizedTest
-    @ValueSource(ints = {-1,0,1})
-    void 높이_1이하_익셉션(int maxHeight){
+    @Test
+    void 높이_1이하_익셉션(){
         int countOfParticipant = 2;
-        assertThatThrownBy(()-> Ladder.of(countOfParticipant,maxHeight))
+        assertThatThrownBy(()-> Ladder.of(countOfParticipant,LadderDifficulty.EASY))
                 .isInstanceOf(IllegalArgumentException.class);
     }
     private static Stream<Arguments> ladderProvider(){
         return Stream.of(
-                Arguments.of(5,3),
-                Arguments.of(6,4),
-                Arguments.of(7,3),
-                Arguments.of(8,4)
+                Arguments.of(5,LadderDifficulty.EASY),
+                Arguments.of(6,LadderDifficulty.HARD),
+                Arguments.of(7,LadderDifficulty.HARD),
+                Arguments.of(8,LadderDifficulty.HARD)
         );
     }
     @DisplayName("참여자수와 사다리 최대 높이로 사다리를 생성한다.")
     @ParameterizedTest
     @MethodSource(value = "ladderProvider")
-    void of(int countOfParticipant,int maxHeight){
-        Ladder ladder = Ladder.of(countOfParticipant, maxHeight);
+    void of(int countOfParticipant,LadderDifficulty ladderDifficulty){
+        Ladder ladder = Ladder.of(countOfParticipant, ladderDifficulty);
         assertThat(ladder).isNotNull();
     }
 }

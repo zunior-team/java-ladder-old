@@ -13,8 +13,9 @@ public class LadderMain {
         String inputResults = InputView.inputResult();
         Results results = new Results(inputResults);
 
-        int ladderMaxHeight = InputView.inputLadderMaxHeight();
-        Ladder ladder = Ladder.of(participants.getParticipants().size(),ladderMaxHeight);
+        LadderDifficulty ladderDifficulty = LadderDifficulty.findLadderDifficulty(InputView.inputLadderDifficulty());
+
+        Ladder ladder = Ladder.of(participants.participantsSize(),ladderDifficulty);
 
         ResultView.printLadder(participants,ladder,results);
 

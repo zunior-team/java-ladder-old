@@ -17,7 +17,7 @@ class LadderResultTest {
     @BeforeEach
     void initLadderGame(){
         participants = Participants.of("a,b,c,d,e");
-        ladderGame = new LadderGame(Ladder.of(5,5)
+        ladderGame = new LadderGame(Ladder.of(5,LadderDifficulty.EASY)
                 ,participants
                 ,new Results("1,200,300,꽝,꽝"));
     }
