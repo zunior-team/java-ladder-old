@@ -1,5 +1,6 @@
 package model.ladder;
 
+import model.level.Level;
 import model.player.Players;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -24,7 +25,7 @@ class LineTest {
     @ParameterizedTest
     void ofTest(Players players) {
         // when
-        final Line line = Line.of(players);
+        final Line line = Line.create(players, Level.HIGH);
 
         // then
         assertNotNull(line);
@@ -35,7 +36,7 @@ class LineTest {
     @ParameterizedTest
     void getDisplaysTest(Players players, HashSet<String> sets) {
         // when
-        final Line line = Line.of(players);
+        final Line line = Line.create(players, Level.HIGH);
 
         // then
         List<String> displays = line.toDisplays();
@@ -47,7 +48,7 @@ class LineTest {
     @ParameterizedTest
     void moveTest(Players players){
         // when
-        final Line line = Line.of(players);
+        final Line line = Line.create(players, Level.HIGH);
         int count = players.getPlayerCount();
 
         List<String> displays = line.toDisplays();

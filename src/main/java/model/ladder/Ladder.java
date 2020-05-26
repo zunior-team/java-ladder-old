@@ -21,14 +21,13 @@ public class Ladder {
         this.scores = createDto.getScores();
         this.players = createDto.getPlayers();
         this.lines = IntStream.rangeClosed(1, createDto.getHeight())
-                .mapToObj(i -> Line.of(players))
+                .mapToObj(i -> Line.create(players, createDto.getLevel()))
                 .collect(Collectors.toList());
     }
 
     public static Ladder of(LadderCreateDto createDto) {
         return new Ladder(createDto);
     }
-
 
     private static void validate(LadderCreateDto createDto){
         assert createDto != null;

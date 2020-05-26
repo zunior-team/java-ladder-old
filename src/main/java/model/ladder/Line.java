@@ -1,5 +1,6 @@
 package model.ladder;
 
+import model.level.Level;
 import model.moving.MovingType;
 import model.player.Players;
 
@@ -8,33 +9,38 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static constant.PointInterval.DEFAULT_INTERVAL;
+import static constant.PointInterval.START_POINT;
+
 public class Line {
+    private final List<Point> points = new ArrayList<>();
 
-    private static final int START_POINT = 0;
-    private static final int DEFAULT_INTERVAL = 5;
-    private List<Point> points = new ArrayList<>();
-
-    public static Line of(Players players) {
+    public static Line create(final Players players, final Level level){
         final Line line = new Line();
-        line.createStartBarByPlayers((players.getPlayerCount() - 1), START_POINT);
+        line.createStartBarByPlayers((players.getPlayerCount() - 1), START_POINT, level.getLadderStrategy());
         return line;
     }
 
-    private void createStartBarByPlayers(final int totalPoint, final int currentPoint){
+    private void createStartBarByPlayers(final int totalPoint,
+                                         final int currentPoint,
+                                         final LadderStrategy ladderStrategy){
+
         points.add(new Point(PointState.BAR));
 
         if(totalPoint == currentPoint){
             return;
         }
 
-        PointState currentPointState = Point.generateStateByRandom();
+        PointState currentPointState = ladderStrategy.isLineCreatable()
+                ? PointState.DASH
+                : PointState.SPACE;
 
         if(isBeforeLine()){
             currentPointState = PointState.SPACE;
         }
 
         createIntervalByPoint(currentPointState);
-        createStartBarByPlayers(totalPoint, (currentPoint + 1));
+        createStartBarByPlayers(totalPoint, (currentPoint + 1), ladderStrategy);
     }
 
 

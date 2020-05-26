@@ -5,6 +5,7 @@ import dto.LadderDrawDto;
 import dto.LadderResultDto;
 import model.ladder.Ladder;
 import model.ladder.Scores;
+import model.level.Level;
 import model.player.Players;
 import util.Preprocessor;
 
@@ -20,8 +21,9 @@ public class LadderGame {
         final Scores scores = Scores.create(Preprocessor
                 .splitLineBySeparator(results, Preprocessor.COMMA));
 
-        final int height = InputView.inputLadderHeight();
-        final Ladder ladder = Ladder.of(new LadderCreateDto(players, scores, height));
+        final Level level = Level.getLevelByString(InputView.inputLevel());
+
+        final Ladder ladder = Ladder.of(new LadderCreateDto(players, scores, level));
 
         ResultView.printLadderResult(new LadderDrawDto(players, ladder));
 

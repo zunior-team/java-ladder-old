@@ -1,6 +1,8 @@
 package model.ladder;
 
+import dto.LadderCreateDto;
 import exception.LadderCreateException;
+import model.level.Level;
 import model.player.Players;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -12,7 +14,6 @@ import java.util.Collections;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 @DisplayName("사다리는")
 class LadderTest {
@@ -20,19 +21,19 @@ class LadderTest {
     @DisplayName("높이가 0 이하라서 에러가 발생합니다.")
     @MethodSource("providePlayerAndHeight")
     @ParameterizedTest
-    void ofExceptionTest(Players players, Scores scores, int height) {
+    void ofExceptionTest(LadderCreateDto createDto) {
         // when & then
-        assertThatThrownBy(() -> Ladder.of(players, scores, height))
+        assertThatThrownBy(() -> Ladder.of(createDto))
                 .isInstanceOf(LadderCreateException.class);
     }
 
 
 
     private static Stream<Arguments> providePlayerAndHeight(){
-        return Stream.of(
-                arguments(Players.create(Collections.singletonList("KIM")), Scores.create(Collections.singletonList("1000")),  -1),
-                arguments(Players.create(Arrays.asList("KIM", "MIN")), Scores.create(Arrays.asList("1000", "꽝")), 0),
-                arguments(Players.create(Arrays.asList("KIM", "MIN")), Scores.create(Arrays.asList("1000", "꽝", "5000")), 10)
+        return Stream.of(Arguments.of(new LadderCreateDto(
+                Players.create(Collections.singletonList("KIM")),
+                Scores.create(Arrays.asList("1000", "2000")),
+                Level.HIGH))
         );
     }
 }

@@ -19,8 +19,4 @@ public class Point {
     public String getDisplay(){
         return state.display();
     }
-
-    public static PointState generateStateByRandom(){
-        return Point.STATES[random.nextInt(STATES.length)];
-    }
 }
