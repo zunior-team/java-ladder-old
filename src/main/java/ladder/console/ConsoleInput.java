@@ -4,7 +4,8 @@ import ladder.UserAndPrize;
 import ladder.init.InitInfo;
 import ladder.init.LadderInitInfo;
 import ladder.prize.Prizes;
-import ladder.strategy.RandomPollCreateStrategy;
+import ladder.strategy.Complexity;
+import ladder.strategy.ComplexityPollCreateStrategy;
 import ladder.user.Users;
 
 import java.util.Arrays;
@@ -23,26 +24,27 @@ public class ConsoleInput {
         Prizes prizes = new Prizes(getPrizes());
 
         return new UserAndPrize(users, prizes);
-
     }
 
     public static InitInfo getInitInfo(UserAndPrize userAndPrize) {
-        showInputHeightOfLadder();
-        int height = getHeightOfLadder();
+        showInputComplexity();
+        Complexity complexity = Complexity.of(getComplexity());
 
-        return new InitInfo(new LadderInitInfo(height, userAndPrize.width()), new RandomPollCreateStrategy());
+        return new InitInfo(new LadderInitInfo(complexity.getHeight(), userAndPrize.width()),
+                new ComplexityPollCreateStrategy(complexity)
+        );
     }
 
     private static List<String> getPrizes() {
         return getLineAndSplit();
     }
 
-    private static void showInputHeightOfLadder() {
-        System.out.println("최대 사다리 높이는 몇 개인가요?");
-    }
-
     private static void showInputPrize() {
         System.out.println("실행 결과를 입력하세요. (결과는 쉼표(,)로 구분하세요");
+    }
+
+    private static void showInputComplexity() {
+        System.out.println("실행할 사다리의 난이도는?");
     }
 
     private static void showInputParticipantsStatement() {
@@ -62,8 +64,9 @@ public class ConsoleInput {
     }
 
 
-    private static int getHeightOfLadder() {
-        return Integer.parseInt(SCANNER.nextLine().trim());
+    private static String getComplexity() {
+        return SCANNER.nextLine()
+                .trim();
     }
 
     public static String getTargetToShowResult() {

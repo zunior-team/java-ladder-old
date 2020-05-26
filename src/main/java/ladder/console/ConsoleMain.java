@@ -3,9 +3,6 @@ package ladder.console;
 import ladder.Ladder;
 import ladder.UserAndPrize;
 import ladder.dto.LadderResult;
-import ladder.init.InitInfo;
-
-import java.util.Map;
 
 public class ConsoleMain {
     public static final String EXIT = "exit";
