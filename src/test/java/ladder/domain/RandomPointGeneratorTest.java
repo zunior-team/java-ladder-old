@@ -1,13 +1,15 @@
 package ladder.domain;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class RandomPointGeneratorTest {
 
@@ -16,12 +18,31 @@ class RandomPointGeneratorTest {
     @ValueSource(ints = {3, 4, 5})
     void testPoint(int countOfPerson) {
         //when
-        RandomPointGenerator randomPointGenerator = new RandomPointGenerator(new Random());
+        RandomPointGenerator randomPointGenerator = new RandomPointGenerator(50, ThreadLocalRandom.current());
 
         //when
         final List<Boolean> points = randomPointGenerator.generate(countOfPerson);
 
         //then
         assertThat(points).doesNotContainSequence(true, true);
+    }
+
+    @ParameterizedTest
+    @DisplayName("랜덤 포인트 생성자의 확률은 0보다 크고 100보다 작아야 한다.")
+    @ValueSource(ints = {-1, -5, 101, 1000})
+    void testRandomPercentageValidate(int randomPercentage) {
+        //then
+        assertThrows(IllegalArgumentException.class, () ->
+                //when
+                new RandomPointGenerator(randomPercentage, ThreadLocalRandom.current()));
+    }
+
+    @Test
+    @DisplayName("ThreadLocalRandom 객체는 NULL일 수 없다")
+    void testThreadLocalRandomNull() {
+        //then
+        assertThrows(NullPointerException.class, () ->
+                //when
+                new RandomPointGenerator(50, null));
     }
 }

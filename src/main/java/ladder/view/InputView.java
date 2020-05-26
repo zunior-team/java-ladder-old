@@ -5,8 +5,6 @@ import com.google.common.collect.Lists;
 import java.util.List;
 import java.util.Scanner;
 
-import static java.lang.Integer.*;
-
 public class InputView {
 
     public static final String COMMA = ",";
@@ -15,11 +13,6 @@ public class InputView {
     public List<String> inputNames() {
         System.out.println("참여할 사람 이름을 입력하세요. ( 이름은 쉼표(,)로 구분하세요 )");
         return Lists.newArrayList(split(inputLine().trim()));
-    }
-
-    public int inputMaxHeight() {
-        System.out.println("최대 사다리 높이는 몇 개인가요?");
-        return parseInt(inputLine());
     }
 
     private String inputLine() {
@@ -38,5 +31,10 @@ public class InputView {
     public List<String> inputResults() {
         System.out.println("실행 결과를 입력하세요. ( 결과는 쉼표(,)로 구분하세요 )");
         return Lists.newArrayList(split(inputLine().trim()));
+    }
+
+    public String inputDifficulty() {
+        System.out.println("실행할 사다리의 난이도는?");
+        return inputLine().trim();
     }
 }

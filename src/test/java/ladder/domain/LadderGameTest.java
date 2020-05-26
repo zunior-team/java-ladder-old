@@ -8,13 +8,12 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @DisplayName("사다리게임 객체 테스트")
 class LadderGameTest {
 
     @Test
-    @DisplayName("참여자의 이름과 최대높이를 가지고 사다리 게임을 생성한다")
+    @DisplayName("참여자의 이름과 난이도를 가지고 사다리 게임을 생성한다")
     void constructTest() {
         //given
         final Players players = Players.of(Lists.newArrayList("junwoo", "wonoh", "changoo", "sungdong"));
@@ -22,27 +21,12 @@ class LadderGameTest {
         int maxHeight = 5;
 
         //when
-        final LadderGame ladderGame = LadderGame.of(new LadderInfo(players, maxHeight, results));
+        final LadderGame ladderGame = LadderGame.of(new LadderInfo(players, LadderDifficulty.MEDIUM, results));
 
         //then
         assertThat(ladderGame).isNotNull();
     }
 
-
-    @Test
-    @DisplayName("최대 높이는 1이상이어야 한다")
-    void constructMaxHeightTest() {
-        //given
-        final Players players = Players.of(Lists.newArrayList("junwoo", "wonoh", "changoo", "sungdong"));
-        final Results results = Results.of(Lists.newArrayList("꽝", "꽝", "3000", "꽝"), players.size());
-        int maxHeight = 0;
-
-
-        //then
-        assertThrows(IllegalArgumentException.class,
-                //when
-                () -> LadderGame.of(new LadderInfo(players, maxHeight, results)));
-    }
 
     @Test
     @DisplayName("사다리 게임으로부터 사다리를 받아올 수 있다.")
@@ -52,14 +36,14 @@ class LadderGameTest {
         final Results results = Results.of(Lists.newArrayList("꽝", "꽝", "3000", "꽝"), players.size());
 
         int maxHeight = 5;
-        final LadderGame ladderGame = LadderGame.of(new LadderInfo(players, maxHeight, results));
+        final LadderGame ladderGame = LadderGame.of(new LadderInfo(players, LadderDifficulty.MEDIUM, results));
 
         //when
         final Lines lines = ladderGame.lines();
 
         //then
         assertThat(lines).isNotNull();
-        assertThat(lines.stream()).hasSize(maxHeight - 1);
+        assertThat(lines.stream()).hasSize(LadderDifficulty.MEDIUM.getHeight());
     }
 
     @Test
@@ -72,7 +56,7 @@ class LadderGameTest {
         int maxHeight = 5;
 
         //when
-        final LadderGame ladderGame = LadderGame.of(new LadderInfo(players, maxHeight, results));
+        final LadderGame ladderGame = LadderGame.of(new LadderInfo(players, LadderDifficulty.MEDIUM, results));
         final String result = ladderGame.findResult(new Player("junwoo"));
 
         //then

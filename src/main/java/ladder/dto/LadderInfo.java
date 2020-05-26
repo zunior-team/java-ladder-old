@@ -1,16 +1,17 @@
 package ladder.dto;
 
+import ladder.domain.LadderDifficulty;
 import ladder.domain.Players;
 import ladder.domain.Results;
 
 public class LadderInfo {
     private final Players players;
-    private final int maxHeight;
+    private final LadderDifficulty ladderDifficulty;
     private final Results results;
 
-    public LadderInfo(Players players, int maxHeight, Results results) {
+    public LadderInfo(Players players, LadderDifficulty ladderDifficulty, Results results) {
         this.players = players;
-        this.maxHeight = maxHeight;
+        this.ladderDifficulty = ladderDifficulty;
         this.results = results;
     }
 
@@ -18,8 +19,8 @@ public class LadderInfo {
         return players;
     }
 
-    public int getMaxHeight() {
-        return maxHeight;
+    public LadderDifficulty getLadderDifficulty() {
+        return ladderDifficulty;
     }
 
     public Results getResults() {

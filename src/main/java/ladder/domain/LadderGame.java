@@ -3,7 +3,6 @@ package ladder.domain;
 import ladder.dto.LadderInfo;
 
 import java.util.Objects;
-import java.util.Random;
 
 public class LadderGame {
     public static final int MINIMUM_MAX_HEIGHT = 1;
@@ -12,9 +11,12 @@ public class LadderGame {
     private final Results results;
 
     private LadderGame(LadderInfo ladderInfo) {
-        final int maxHeight = ladderInfo.getMaxHeight();
+        Objects.requireNonNull(ladderInfo);
+
         final Players players = ladderInfo.getPlayers();
         final Results results = ladderInfo.getResults();
+        final LadderDifficulty ladderDifficulty = ladderInfo.getLadderDifficulty();
+        final int maxHeight = ladderDifficulty.getHeight();
 
         Objects.requireNonNull(players);
         Objects.requireNonNull(results);
@@ -24,9 +26,9 @@ public class LadderGame {
         this.results = results;
 
         final int countOfPerson = this.players.size();
-        final PointGenerator pointGenerator = new RandomPointGenerator(new Random());
+        final PointGenerator pointGenerator = ladderDifficulty.getPointGenerator();
 
-        this.lines = Lines.of(countOfPerson, pointGenerator);
+        this.lines = Lines.of(countOfPerson,maxHeight, pointGenerator);
     }
 
 
